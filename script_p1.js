@@ -1,15 +1,15 @@
   // ── CERTIFICATE LIGHTBOX DATA & LOGIC ──
   const certImages = {
-    'cert-sabre': 'images/cert-sabre.jpg',
-    'cert-nsda-l2': 'images/cert-nsda-l2.jpg',
-    'cert-visa-processing': 'images/cert-visa-processing.jpg',
-    'cert-hb-ticketing': 'images/cert-hb-ticketing.jpg',
-    'cert-aviation': 'images/cert-aviation.jpg',
-    'cert-ba': 'images/cert-ba.jpg',
-    'cert-hsc': 'images/cert-hsc.jpg',
-    'cert-ssc': 'images/cert-ssc.jpg',
-    'cert-ai-career': 'images/cert-ai-career.jpg',
-    'cert-tesol': 'images/cert-tesol.jpg'
+    'cert-sabre': 'cert-sabre.jpg',
+    'cert-nsda-l2': 'cert-nsda-l2.jpg',
+    'cert-visa-processing': 'cert-visa-processing.jpg',
+    'cert-hb-ticketing': 'cert-hb-ticketing.jpg',
+    'cert-aviation': 'cert-aviation.jpg',
+    'cert-ba': 'cert-ba.jpg',
+    'cert-hsc': 'cert-hsc.jpg',
+    'cert-ssc': 'cert-ssc.jpg',
+    'cert-ai-career': 'cert-ai-career.jpg',
+    'cert-tesol': 'cert-tesol.jpg'
   };
   function openCertLightbox(title, key) {
     const src = certImages[key];
