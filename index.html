@@ -1,19 +1,132 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shaheduj Jaman | Air Ticketing & Visa Executive</title>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style_p1.css" />
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shaheduj Jaman | Air Ticketing & Visa Executive</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style_p1.css" />
+
+<style>
+/* ══════════════════════════════════════
+   নতুন Language Toggle বাটন
+══════════════════════════════════════ */
+.new-lang-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  border-radius: 60px;
+  padding: 5px;
+  width: 178px;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+.new-lang-glider {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  height: calc(100% - 10px);
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%);
+  box-shadow: 0 0 18px rgba(255, 165, 0, 0.55), 0 0 6px rgba(255, 200, 0, 0.35);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.new-lang-glider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 55%);
+}
+
+/* বাংলা active → glider ডানে */
+body.lang-bn .new-lang-glider {
+  transform: translateX(100%);
+}
+
+body.lang-en .new-lang-glider {
+  transform: translateX(0%);
+}
+
+.new-lang-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 0.28s ease, transform 0.18s ease;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+  user-select: none;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', 'Hind Siliguri', sans-serif;
+}
+
+/* English বাটন active */
+body.lang-en .new-lang-btn[data-lang="en"] {
+  color: #1a0a00;
+  font-weight: 700;
+}
+
+/* বাংলা বাটন active */
+body.lang-bn .new-lang-btn[data-lang="bn"] {
+  color: #1a0a00;
+  font-weight: 700;
+}
+
+.new-lang-btn:hover {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body.lang-en .new-lang-btn[data-lang="en"]:hover,
+body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
+  color: #1a0a00;
+}
+
+.new-lang-btn:active {
+  transform: scale(0.95);
+}
+
+/* Ripple */
+.lang-ripple-el {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 190, 0, 0.28);
+  transform: scale(0);
+  animation: newLangRipple 0.55s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes newLangRipple {
+  to { transform: scale(4.5); opacity: 0; }
+}
+</style>
+
 </head>
 <body class="lang-bn">
+
 <div class="page-veil"><span class="page-veil-mark">SHAHEDUJ JAMAN</span></div>
 <div class="grain-overlay"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
-
 
 <!-- NAV -->
 <nav class="lang-bar">
@@ -25,72 +138,78 @@
     <li><a href="#training" class="bn">প্রশিক্ষণ</a><a href="#training" class="en">Training</a></li>
     <li><a href="#contact" class="bn">যোগাযোগ</a><a href="#contact" class="en">Contact</a></li>
   </ul>
-  <button class="lang-btn" onclick="toggleLang()" id="langToggleBtn">English</button>
+
+  <!-- ✅ নতুন Language Toggle -->
+  <div class="new-lang-toggle" id="newLangToggle">
+    <div class="new-lang-glider" id="newLangGlider"></div>
+    <button class="new-lang-btn" data-lang="en" onclick="switchLanguage('en', event)">English</button>
+    <button class="new-lang-btn" data-lang="bn" onclick="switchLanguage('bn', event)">বাংলা</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-flex">
-  <div class="hero-inner">
-    <div class="open-to-work">
-      <span class="bn">💼 চাকরির জন্য প্রস্তুত</span>
-      <span class="en">💼 Open to Work</span>
-    </div>
-    <div class="hero-eyebrow">
-      <span class="bn">✈ এয়ার টিকেটিং ও ভিসা বিশেষজ্ঞ</span>
-      <span class="en">✈ Air Ticketing & Visa Executive</span>
-    </div>
-    <h1 class="hero-name">
-      <span class="line1 bn">সাহেদুজ</span>
-      <span class="line1 en">Shaheduj</span>
-      <span class="line2 bn">জামান</span>
-      <span class="line2 en">Jaman</span>
-    </h1>
-    <div class="hero-role">
-      <span class="role-badge rb1">Sabre GDS Expert</span>
-      <span class="role-badge rb2">Visa Processing</span>
-      <span class="role-badge rb3">NSDA Level-2 Certified</span>
-    </div>
-    <p class="hero-tagline">
-      <span class="bn">একজন দক্ষ টিকেটিং অফিসার যিনি GDS-ভিত্তিক এয়ার টিকেটিং, ভিসা প্রসেসিং ও NDC-তে বিশেষজ্ঞ। Sabre GDS-এ সম্পূর্ণ দক্ষতা — Issue, Void, Refund ও Re-issuance সহ।</span>
-      <span class="en">A detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. NSDA Level-2 certified with advanced Sabre GDS command — including ticket issuance, void, refund, and re-issuance.</span>
-    </p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
-      <a href="#contact" class="btn-primary en">Get In Touch →</a>
-      <a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
-      <a href="#training" class="btn-secondary en">View Training</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num c1 bn">১ বছর+</div>
-        <div class="stat-num c1 en">1 Year+</div>
-        <div class="stat-label bn">পেশাদার অভিজ্ঞতা</div>
-        <div class="stat-label en">Work Experience</div>
+    <div class="hero-inner">
+      <div class="open-to-work">
+        <span class="bn">💼 চাকরির জন্য প্রস্তুত</span>
+        <span class="en">💼 Open to Work</span>
       </div>
-      <div class="stat-item">
-        <div class="stat-num c2 bn">১৫+</div>
-        <div class="stat-num c2 en">15+</div>
-        <div class="stat-label bn">সার্টিফিকেট কোর্স</div>
-        <div class="stat-label en">Certified Courses</div>
+      <div class="hero-eyebrow">
+        <span class="bn">✈ এয়ার টিকেটিং ও ভিসা বিশেষজ্ঞ</span>
+        <span class="en">✈ Air Ticketing & Visa Executive</span>
       </div>
-      <div class="stat-item">
-        <div class="stat-num c3 bn">৩টি</div>
-        <div class="stat-num c3 en">3</div>
-        <div class="stat-label bn">GDS প্ল্যাটফর্ম দক্ষতা</div>
-        <div class="stat-label en">GDS Platforms</div>
+      <h1 class="hero-name">
+        <span class="line1 bn">সাহেদুজ</span>
+        <span class="line1 en">Shaheduj</span>
+        <span class="line2 bn">জামান</span>
+        <span class="line2 en">Jaman</span>
+      </h1>
+      <div class="hero-role">
+        <span class="role-badge rb1">Sabre GDS Expert</span>
+        <span class="role-badge rb2">Visa Processing</span>
+        <span class="role-badge rb3">NSDA Level-2 Certified</span>
+      </div>
+      <p class="hero-tagline">
+        <span class="bn">একজন দক্ষ টিকেটিং অফিসার যিনি GDS-ভিত্তিক এয়ার টিকেটিং, ভিসা প্রসেসিং ও NDC-তে বিশেষজ্ঞ। Sabre GDS-এ সম্পূর্ণ দক্ষতা — Issue, Void, Refund ও Re-issuance সহ।</span>
+        <span class="en">A detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. NSDA Level-2 certified with advanced Sabre GDS command — including ticket issuance, void, refund, and re-issuance.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
+        <a href="#contact" class="btn-primary en">Get In Touch →</a>
+        <a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
+        <a href="#training" class="btn-secondary en">View Training</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num c1 bn">১ বছর+</div>
+          <div class="stat-num c1 en">1 Year+</div>
+          <div class="stat-label bn">পেশাদার অভিজ্ঞতা</div>
+          <div class="stat-label en">Work Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c2 bn">১৫+</div>
+          <div class="stat-num c2 en">15+</div>
+          <div class="stat-label bn">সার্টিফিকেট কোর্স</div>
+          <div class="stat-label en">Certified Courses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c3 bn">৩টি</div>
+          <div class="stat-num c3 en">3</div>
+          <div class="stat-label bn">GDS প্ল্যাটফর্ম দক্ষতা</div>
+          <div class="stat-label en">GDS Platforms</div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="hero-photo-wrap">
-    <div class="hero-photo-glow"></div>
-    <div class="hero-photo-ring"></div>
-    <div class="hero-photo-frame">
-      <img src="photo-1.jpg" alt="Shaheduj Jaman" />
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-glow"></div>
+      <div class="hero-photo-ring"></div>
+      <div class="hero-photo-frame">
+        <img src="photo-1.jpg" alt="Shaheduj Jaman" />
+      </div>
+      <div class="hero-photo-badge">✈️</div>
     </div>
-    <div class="hero-photo-badge">✈️</div>
-  </div>
   </div>
 </section>
 
@@ -178,7 +297,6 @@
   <div class="section-label en">Career Preferences</div>
   <h2 class="section-title bn reveal">যে সেক্টরে আমি <span>কাজ করতে চাই</span></h2>
   <h2 class="section-title en reveal">Where I'm <span>Looking to Work</span></h2>
-
   <div class="pref-grid stagger reveal">
     <div class="pref-card c1">
       <div class="pref-icon-wrap">🏢</div>
@@ -195,7 +313,6 @@
         <span class="pref-tag">Travel Startup</span>
       </div>
     </div>
-
     <div class="pref-card c2">
       <div class="pref-icon-wrap">🎯</div>
       <div class="pref-card-title bn">পছন্দের পদ ও খাত</div>
@@ -211,7 +328,6 @@
         <span class="pref-tag en">Entry Level</span>
       </div>
     </div>
-
     <div class="pref-card c3">
       <div class="pref-icon-wrap">📍</div>
       <div class="pref-card-title bn">কর্মস্থল</div>
@@ -223,7 +339,6 @@
       </div>
     </div>
   </div>
-
   <div class="pref-globe-strip reveal-scale">
     <span class="flying-plane">✈️</span>
     <div class="globe-icon">🌍</div>
@@ -247,7 +362,6 @@
       </div>
     </div>
   </div>
-
   <div class="salary-card reveal-scale">
     <div class="salary-left">
       <div class="salary-icon-wrap">💰</div>
@@ -329,13 +443,11 @@
   <div class="section-label en">Training & Certifications</div>
   <h2 class="section-title bn reveal">আমার <span>প্রশিক্ষণসমূহ</span></h2>
   <h2 class="section-title en reveal">My <span>Training & Courses</span></h2>
-
   <div class="core-badge reveal">
     <span class="dot-live"></span>
     <span class="bn">এয়ার টিকেটিং ও ভিসা সংক্রান্ত মূল প্রশিক্ষণ</span>
     <span class="en">Core Air Ticketing & Visa Training</span>
   </div>
-
   <div class="core-grid stagger reveal">
     <div class="core-card">
       <div class="core-icon-wrap">✈️</div>
@@ -373,14 +485,12 @@
       <button class="cert-btn" onclick="openCertLightbox('Basics of Aviation Ground Operation','cert-aviation')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
     </div>
   </div>
-
   <div class="support-divider reveal">
     <span class="line"></span>
     <span class="label bn">অতিরিক্ত দক্ষতা ও প্রশিক্ষণ</span>
     <span class="label en">Additional Skills & Training</span>
     <span class="line"></span>
   </div>
-
   <div class="training-grid stagger reveal">
     <div class="training-card">
       <div class="tc-year">2025–2026 · 15 Days</div>
@@ -402,7 +512,7 @@
   </div>
 </section>
 
-<!-- CERTIFICATE LIGHTBOX (shared by all cert-btn triggers) -->
+<!-- CERTIFICATE LIGHTBOX -->
 <div class="cert-lightbox" id="certLightbox" onclick="if(event.target===this) closeCertLightbox()">
   <div class="cert-lightbox-inner">
     <div class="cert-lightbox-header">
@@ -559,7 +669,7 @@
 <footer>
   <div class="signature-section">
     <div class="signature-wrapper">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABQCAYAAACj6kh7AAAFEElEQVR4nO3d27KbMAyFYWfPfv9XphedTAjbB9nIWJL/764dApSYFfkAfR3HkbC9cyN4LTsLoOF39QlgKX6t4MrP6hPAUlRTcIXA2tu1wiLAYBqBBcANAgtvVFcwj8DaFwPucIfAQkpUV3CCwNoT1RVcIrD2Q1jBLQILgBusdN8L667gGhUWADcIrH1QXcE9AguAGwTWHqiuEAKBFR/LGBAGgbUfqiu4RWDFRlcQoRBYANwgsOKiukI4BNYeCCuEQGDFxMwgQiKw4qEriLAIrNgIK4RCYMXCf4iK0AisOBi3QngEVkxUVwiJwIqBriC2QGD5R1cQ2yCwfGMJA7bCO93v6a1uZgYKYYXwCKw+d7tf789rhAtdQWyHwGprBcM5fI5UDqNDuN3IOVFdYQsEVlkpqGrhIAmr898RNEAHBt3zcgHzSuMBoxlMVFfYFoH17Uj5QNAIhdw+esehCCtsjcD6mBVU132OYpAd2yOw/nuychnZd6mLCmyFwFrfzaJyAoQIrG9PhVXPcaiubMqNd2IyAmu9WvhwQ9h0XVOHh7AO68NL1eLlPC26+6RBKZw0n2BABYG1huRXmV9uPddrObJot/YKnyOzTW67nWi1369rSGB9WFp5PrLKfifSYMhtdw4XyfWUvGvs+nhW6fit/Xjy1A/q1/dEYH2zEFrXG4RK60PaJesJtFK1dCVtF5L9Sb9TS22xl9bynfffv1JK6XUc3A/p+VK+NOZRC6vVjXe21jhQ6Vr0PJxe2t/I5+/SvvHuzjzPPmaN5HxeKVFhvV1/mWcOovIL8VfrTRa14M5VoZLvrfSolMWlLW+1trOyXc04dvb6UGHlzVr7VLuxolVX0tCvdcEYxP4r0g3b/X0SWG2aA6eSbk2ksDprje2Uxp9yn41I40YMf53oErZJZoC0Hmq22uB6QqQ5cJpkXTyr16IXQaSICmtcb+WVu0lr0+65P9f2P0qyvqiktL32zJtFmjeO5+vwKCqsca3Kq7cRarwvK/eZnkd/SlXQdT+9U/WebkhrM2g4ocKaQzImJam4WvuoHff6+Z5zbH3eUzhRCQXiucKyPDh7DiBpWLX21VI7znVMKLdtT/dz5QzeyvVLWMxrYHl5CDV3Y/csgJQOQJf22XP8nuPlPjuKCghi3gKr1RV5YuFnj7thdd2utX+NbTWvGdUQVHkLrLNSt0RjAPyu0cdFrvuoVUsru28MTGMJT4ElHbPKVS6W1vVoTPn3BpA0ILVYudYIxlNgjVjRTdSYbZOe45MPvBJCWM5LYN252aw82KwRVucAbi2F6LFjGEVezxP2+/SyDktzDGbWdPyMsNo5jFw0TMdctgsvFZamGRWX1qMnvTep9UZnJXSsX6dZatffykx6F4+BpXWBS8HVewxJo+hltRE9FUBW//3e9D4RYZ7HwNKe8cuNBbW6jVGm9Wc33NX/PgTjMbBmqQ1iS2/snuUDs27mWSFE+MTgsiv4tmNgrb6hRxsK66SgwfV37yWwWm8TeJu51mjWO51mBKjrRgmUeAmsqycHs0ffChFlnAsww2JgWViR3aqmCCNggacDy+rT+++Zx9b5aQ6+A+g0I7A0HqORHqP3XVF3tyOIgIVGA+uJUGrtI7fgU2O/AIySBNZIIFiYupcgoABHroHVExhPv2NJenzL73oHcMNvGg+VJ6qhkaAhnICgnpglJEAAqPhN9bVFhA0AM84VFuEEwLSf1ScAAFL/AIoCLtlFYmnUAAAAAElFTkSuQmCC" alt="Signature" class="signature-img" id="signatureImg">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABQCAYAAACj6kh7AAAFEElEQVR4nO3d27KbMAyFYWfPfv9XphedTAjbB9nIWJL/764dApSYFfkAfR3HkbC9cyN4LTsLoOF39QlgKX6t4MrP6hPAUlRTcIXA2tu1wiLAYBqBBcANAgtvVFcwj8DaFwPucIfAQkpUV3CCwNoT1RVcIrD2Q1jBLQILgBusdN8L667gGhUWADcIrH1QXcE9AguAGwTWHqiuEAKBFR/LGBAGgbUfqiu4RWDFRlcQoRBYANwgsOKiukI4BNYeCCuEQGDFxMwgQiKw4qEriLAIrNgIK4RCYMXCf4iK0AisOBi3QngEVkxUVwiJwIqBriC2QGD5R1cQ2yCwfGMJA7bCO93v6a1uZgYKYYXwCKw+d7tf789rhAtdQWyHwGprBcM5fI5UDqNDuN3IOVFdYQsEVlkpqGrhIAmr898RNEAHBt3zcgHzSuMBoxlMVFfYFoH17Uj5QNAIhdw+esehCCtsjcD6mBVU132OYpAd2yOw/nuychnZd6mLCmyFwFrfzaJyAoQIrG9PhVXPcaiubMqNd2IyAmu9WvhwQ9h0XVOHh7AO68NL1eLlPC26+6RBKZw0n2BABYG1huRXmV9uPddrObJot/YKnyOzTW67nWi1269rSGB9WFp5PrLKfifSYMhtdw4XyfWUvGvs+nhW6fit/Xjy1A/q1/dEYH2zEFrXG4RK60PaJesJtFK1dCVtF5L9Sb9TS22xl9bynfffv1JK6XUc3A/p+VK+NOZRC6vVjXe21jhQ6Vr0PJxe2t/I5+/SvvHuzjzPPmaN5HxeKVFhvV1/mWcOovIL8VfrTRa14M5VoZLvrfSolMWlLW+1trOyXc04dvb6UGHlzVr7VLuxolVX0tCvdcEYxP4r0g3b/X0SWG2aA6eSbk2ksDprje2Uxp9yn41I40YMf53oErZJZoC0Hmq22uB6QqQ5cJpkXTyr16IXQaSICmtcb+WVu0lr0+65P9f2P0qyvqiktL32zJtFmjeO5+vwKCqsca3Kq7cRarwvK/eZnkd/SlXQdT+9U/WebkhrM2g4ocKaQzImJam4WvuoHff6+Z5zbH3eUzhRCQXiucKyPDh7DiBpWLX21VI7znVMKLdtT/dz5QzeyvVLWMxrYHl5CDV3Y/csgJQOQJf22XP8nuPlPjuKCghi3gKr1RV5YuFnj7thdd2utX+NbTWvGdUQVHkLrLNSt0RjAPyu0cdFrvuoVUsru28MTGMJT4ElHbPKVS6W1vVoTPn3BpA0ILVYudYIxlNgjVjRTdSYbZOe45MPvBJCWM5LYN252aw82KwRVucAbi2F6LFjGEVezxP2+/SyDktzDGbWdPyMsNo5jFw0TMdctgsvFZamGRWX1qMnvTep9UZnJXSsX6dZatffykx6F4+BpXWBS8HVewxJo+hltRE9FUBW//3e9D4RYZ7HwNKe8cuNBbW6jVGm9Wc33NX/PgTjMbBmqQ1iS2/snuUDs27mWSFE+MTgsiv4tmNgrb6hRxsK66SgwfV37yWwWm8TeJu51mjWO51mBKjrRgmUeAmsqycHs0ffChFlnAsww2JgWViR3aqmCCNggacDy+rT+++Zx9b5aQ6+A+g0I7A0HqORHqP3XVF3tyOIgIVGA+uJUGrtI7fgU2O/AIySBNZIIFiYupcgoABHroHVExhPv2NJenzL73oHcMNvGg+VJ6qhkaAhnICgnpglJEAAqPhN9bVFhA0AM84VFuEEwLSf1ScAAFL/AIoCLtlFYmnUAAAAAElFTkSuQmCC" alt="Signature" class="signature-img" id="signatureImg">
       <div class="signature-glow"></div>
     </div>
     <p class="signature-name bn">শাহেদুজ জামান</p>
@@ -580,12 +690,51 @@
   <span class="en">Made with <span>❤️</span> — © 2026 Shaheduj Jaman · Air Ticketing & Visa Executive</span>
 </footer>
 
-<script src="script_p1.js">
-// Signature Animation
-const sigImg = document.getElementById('signatureImg');
-const sigNames = document.querySelectorAll('.signature-name');
+<script src="script_p1.js"></script>
+<script>
+/* ══════════════════════════════════════
+   নতুন Language Toggle — script_p1.js এর
+   toggleLang() ফাংশনের সাথে সংযুক্ত
+══════════════════════════════════════ */
+function switchLanguage(lang, e) {
+  if (e) e.stopPropagation();
+
+  const body = document.body;
+  const isAlreadyActive =
+    (lang === 'en' && body.classList.contains('lang-en')) ||
+    (lang === 'bn' && body.classList.contains('lang-bn'));
+
+  if (isAlreadyActive) return;
+
+  /* script_p1.js এর toggleLang() কল করি — এটি body class পরিবর্তন করে */
+  if (typeof toggleLang === 'function') {
+    toggleLang();
+  } else {
+    /* fallback: নিজেই class পরিবর্তন */
+    body.classList.toggle('lang-bn');
+    body.classList.toggle('lang-en');
+  }
+
+  /* Ripple effect */
+  if (e) {
+    const toggle = document.getElementById('newLangToggle');
+    const rect   = toggle.getBoundingClientRect();
+    const ripple = document.createElement('div');
+    ripple.className = 'lang-ripple-el';
+    ripple.style.cssText =
+      `width:55px;height:55px;` +
+      `left:${e.clientX - rect.left - 27}px;` +
+      `top:${e.clientY  - rect.top  - 27}px;`;
+    toggle.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+}
+
+/* Signature Animation */
+const sigImg   = document.getElementById('signatureImg');
+const sigNames  = document.querySelectorAll('.signature-name');
 const sigTitles = document.querySelectorAll('.signature-title');
-const sigGlow = document.querySelector('.signature-glow');
+const sigGlow   = document.querySelector('.signature-glow');
 
 const sigObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -593,7 +742,7 @@ const sigObserver = new IntersectionObserver((entries) => {
       sigImg.classList.add('animate');
       if (sigGlow) sigGlow.classList.add('animate');
       setTimeout(() => {
-        sigNames.forEach(el => el.classList.add('visible'));
+        sigNames.forEach(el  => el.classList.add('visible'));
         sigTitles.forEach(el => el.classList.add('visible'));
       }, 2500);
       sigObserver.unobserve(entry.target);
@@ -602,7 +751,7 @@ const sigObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 if (sigImg) sigObserver.observe(sigImg);
-
 </script>
+
 </body>
 </html>
