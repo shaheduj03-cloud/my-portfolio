@@ -118,6 +118,213 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
 @keyframes newLangRipple {
   to { transform: scale(4.5); opacity: 0; }
 }
+
+/* ══════════════════════════════════════
+   SIGNATURE DRAWING ANIMATION
+══════════════════════════════════════ */
+.sig-draw-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.sig-img-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.sig-img {
+  display: block;
+  width: 220px;
+  height: auto;
+  filter: invert(1) brightness(1.8);
+  /* clip-path দিয়ে বাম থেকে ডানে reveal */
+  clip-path: inset(0 100% 0 0);
+  transition: none;
+}
+
+/* drawing শুরু হলে */
+.sig-img.drawing {
+  animation: sigReveal 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sigReveal {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
+
+/* pen cursor */
+.sig-pen {
+  position: absolute;
+  top: 40%;
+  left: 0%;
+  font-size: 20px;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  filter: drop-shadow(0 0 6px rgba(0,212,255,0.6));
+}
+
+.sig-pen.active {
+  opacity: 1;
+  animation: penMove 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes penMove {
+  0%   { left: 0%; }
+  100% { left: 100%; }
+}
+
+/* glow line — drawing শেষে */
+.sig-glow-line {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00d4ff, #ffd000, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0,212,255,0.6);
+  transition: none;
+}
+
+.sig-glow-line.active {
+  animation: glowExpand 0.6s ease-out 2.4s forwards;
+}
+
+@keyframes glowExpand {
+  0%   { width: 0%;   opacity: 0; }
+  50%  { width: 100%; opacity: 1; }
+  100% { width: 100%; opacity: 0.5; }
+}
+
+/* hover colour change */
+.sig-img-container:hover .sig-img {
+  filter: invert(1) brightness(1.8) sepia(1) saturate(3) hue-rotate(160deg);
+  transition: filter 0.4s ease;
+}
+
+/* name & title fade-in */
+.signature-name,
+.signature-title {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.signature-name.visible,
+.signature-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.sig-pro-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.sig-img-box {
+  position: relative;
+  display: inline-block;
+  padding: 8px 24px;
+}
+
+.sig-img-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: rgba(0, 212, 255, 0.04);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.sig-img-box:hover::before {
+  opacity: 1;
+}
+
+/* main signature image */
+.sig-pro-img {
+  display: block;
+  width: 200px;
+  height: auto;
+  filter: invert(1) brightness(2);
+  opacity: 0;
+  transform: scale(0.88) translateY(12px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease;
+}
+
+.sig-pro-img.sig-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.sig-pro-img:hover {
+  filter: invert(1) brightness(2) drop-shadow(0 0 10px rgba(0,212,255,0.45));
+}
+
+/* underline glow bar */
+.sig-underline {
+  width: 0%;
+  max-width: 200px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, #00d4ff 30%, #ffd000 70%, transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 2px;
+}
+
+.sig-underline.sig-visible {
+  width: 100%;
+}
+
+/* name */
+.signature-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 14px 0 2px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.signature-name.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* title */
+.signature-title {
+  font-size: 13px;
+  color: rgba(0, 212, 255, 0.65);
+  margin: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.signature-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 
 </head>
@@ -668,12 +875,19 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
 
 <footer>
   <div class="signature-section">
-    <div class="signature-wrapper">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABQCAYAAACj6kh7AAAFEElEQVR4nO3d27KbMAyFYWfPfv9XphedTAjbB9nIWJL/764dApSYFfkAfR3HkbC9cyN4LTsLoOF39QlgKX6t4MrP6hPAUlRTcIXA2tu1wiLAYBqBBcANAgtvVFcwj8DaFwPucIfAQkpUV3CCwNoT1RVcIrD2Q1jBLQILgBusdN8L667gGhUWADcIrH1QXcE9AguAGwTWHqiuEAKBFR/LGBAGgbUfqiu4RWDFRlcQoRBYANwgsOKiukI4BNYeCCuEQGDFxMwgQiKw4qEriLAIrNgIK4RCYMXCf4iK0AisOBi3QngEVkxUVwiJwIqBriC2QGD5R1cQ2yCwfGMJA7bCO93v6a1uZgYKYYXwCKw+d7tf789rhAtdQWyHwGprBcM5fI5UDqNDuN3IOVFdYQsEVlkpqGrhIAmr898RNEAHBt3zcgHzSuMBoxlMVFfYFoH17Uj5QNAIhdw+esehCCtsjcD6mBVU132OYpAd2yOw/nuychnZd6mLCmyFwFrfzaJyAoQIrG9PhVXPcaiubMqNd2IyAmu9WvhwQ9h0XVOHh7AO68NL1eLlPC26+6RBKZw0n2BABYG1huRXmV9uPddrObJot/YKnyOzTW67nWi1269rSGB9WFp5PrLKfifSYMhtdw4XyfWUvGvs+nhW6fit/Xjy1A/q1/dEYH2zEFrXG4RK60PaJesJtFK1dCVtF5L9Sb9TS22xl9bynfffv1JK6XUc3A/p+VK+NOZRC6vVjXe21jhQ6Vr0PJxe2t/I5+/SvvHuzjzPPmaN5HxeKVFhvV1/mWcOovIL8VfrTRa14M5VoZLvrfSolMWlLW+1trOyXc04dvb6UGHlzVr7VLuxolVX0tCvdcEYxP4r0g3b/X0SWG2aA6eSbk2ksDprje2Uxp9yn41I40YMf53oErZJZoC0Hmq22uB6QqQ5cJpkXTyr16IXQaSICmtcb+WVu0lr0+65P9f2P0qyvqiktL32zJtFmjeO5+vwKCqsca3Kq7cRarwvK/eZnkd/SlXQdT+9U/WebkhrM2g4ocKaQzImJam4WvuoHff6+Z5zbH3eUzhRCQXiucKyPDh7DiBpWLX21VI7znVMKLdtT/dz5QzeyvVLWMxrYHl5CDV3Y/csgJQOQJf22XP8nuPlPjuKCghi3gKr1RV5YuFnj7thdd2utX+NbTWvGdUQVHkLrLNSt0RjAPyu0cdFrvuoVUsru28MTGMJT4ElHbPKVS6W1vVoTPn3BpA0ILVYudYIxlNgjVjRTdSYbZOe45MPvBJCWM5LYN252aw82KwRVucAbi2F6LFjGEVezxP2+/SyDktzDGbWdPyMsNo5jFw0TMdctgsvFZamGRWX1qMnvTep9UZnJXSsX6dZatffykx6F4+BpXWBS8HVewxJo+hltRE9FUBW//3e9D4RYZ7HwNKe8cuNBbW6jVGm9Wc33NX/PgTjMbBmqQ1iS2/snuUDs27mWSFE+MTgsiv4tmNgrb6hRxsK66SgwfV37yWwWm8TeJu51mjWO51mBKjrRgmUeAmsqycHs0ffChFlnAsww2JgWViR3aqmCCNggacDy+rT+++Zx9b5aQ6+A+g0I7A0HqORHqP3XVF3tyOIgIVGA+uJUGrtI7fgU2O/AIySBNZIIFiYupcgoABHroHVExhPv2NJenzL73oHcMNvGg+VJ6qhkaAhnICgnpglJEAAqPhN9bVFhA0AM84VFuEEwLSf1ScAAFL/AIoCLtlFYmnUAAAAAElFTkSuQmCC" alt="Signature" class="signature-img" id="signatureImg">
-      <div class="signature-glow"></div>
+    <div class="sig-pro-wrapper" id="sigProWrapper">
+      <div class="sig-img-box">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABQCAYAAACj6kh7AAAFEElEQVR4nO3d27KbMAyFYWfPfv9XphedTAjbB9nIWJL/764dApSYFfkAfR3HkbC9cyN4LTsLoOF39QlgKX6t4MrP6hPAUlRTcIXA2tu1wiLAYBqBBcANAgtvVFcwj8DaFwPucIfAQkpUV3CCwNoT1RVcIrD2Q1jBLQILgBusdN8L667gGhUWADcIrH1QXcE9AguAGwTWHqiuEAKBFR/LGBAGgbUfqiu4RWDFRlcQoRBYANwgsOKiukI4BNYeCCuEQGDFxMwgQiKw4qEriLAIrNgIK4RCYMXCf4iK0AisOBi3QngEVkxUVwiJwIqBriC2QGD5R1cQ2yCwfGMJA7bCO93v6a1uZgYKYYXwCKw+d7tf789rhAtdQWyHwGprBcM5fI5UDqNDuN3IOVFdYQsEVlkpqGrhIAmr898RNEAHBt3zcgHzSuMBoxlMVFfYFoH17Uj5QNAIhdw+esehCCtsjcD6mBVU132OYpAd2yOw/nuychnZd6mLCmyFwFrfzaJyAoQIrG9PhVXPcaiubMqNd2IyAmu9WvhwQ9h0XVOHh7AO68NL1eLlPC26+6RBKZw0n2BABYG1huRXmV9uPddrObJot/YKnyOzTW67nWi1269rSGB9WFp5PrLKfifSYMhtdw4XyfWUvGvs+nhW6fit/Xjy1A/q1/dEYH2zEFrXG4RK60PaJesJtFK1dCVtF5L9Sb9TS22xl9bynfffv1JK6XUc3A/p+VK+NOZRC6vVjXe21jhQ6Vr0PJxe2t/I5+/SvvHuzjzPPmaN5HxeKVFhvV1/mWcOovIL8VfrTRa14M5VoZLvrfSolMWlLW+1trOyXc04dvb6UGHlzVr7VLuxolVX0tCvdcEYxP4r0g3b/X0SWG2aA6eSbk2ksDprje2Uxp9yn41I40YMf53oErZJZoC0Hmq22uB6QqQ5cJpkXTyr16IXQaSICmtcb+WVu0lr0+65P9f2P0qyvqiktL32zJtFmjeO5+vwKCqsca3Kq7cRarwvK/eZnkd/SlXQdT+9U/WebkhrM2g4ocKaQzImJam4WvuoHff6+Z5zbH3eUzhRCQXiucKyPDh7DiBpWLX21VI7znVMKLdtT/dz5QzeyvVLWMxrYHl5CDV3Y/csgJQOQJf22XP8nuPlPjuKCghi3gKr1RV5YuFnj7thdd2utX+NbTWvGdUQVHkLrLNSt0RjAPyu0cdFrvuoVUsru28MTGMJT4ElHbPKVS6W1vVoTPn3BpA0ILVYudYIxlNgjVjRTdSYbZOe45MPvBJCWM5LYN252aw82KwRVucAbi2F6LFjGEVezxP2+/SyDktzDGbWdPyMsNo5jFw0TMdctgsvFZamGRWX1qMnvTep9UZnJXSsX6dZatffykx6F4+BpXWBS8HVewxJo+hltRE9FUBW//3e9D4RYZ7HwNKe8cuNBbW6jVGm9Wc33NX/PgTjMbBmqQ1iS2/snuUDs27mWSFE+MTgsiv4tmNgrb6hRxsK66SgwfV37yWwWm8TeJu51mjWO51mBKjrRgmUeAmsqycHs0ffChFlnAsww2JgWViR3aqmCCNggacDy+rT+++Zx9b5aQ6+A+g0I7A0HqORHqP3XVF3tyOIgIVGA+uJUGrtI7fgU2O/AIySBNZIIFiYupcgoABHroHVExhPv2NJenzL73oHcMNvGg+VJ6qhkaAhnICgnpglJEAAqPhN9bVFhA0AM84VFuEEwLSf1ScAAFL/AIoCLtlFYmnUAAAAAElFTkSuQmCC"
+          alt="Shaheduj Jaman Signature"
+          class="sig-pro-img"
+          id="signatureImg"
+        />
+      </div>
+      <div class="sig-underline" id="sigUnderline"></div>
     </div>
-    <p class="signature-name bn">সাহেদুজ জামান</p>
-    <p class="signature-name en">Shaheduj Jaman</p>
+    <p class="signature-name bn" id="sigNameBn">সাহেদুজ জামান</p>
+    <p class="signature-name en" id="sigNameEn">Shaheduj Jaman</p>
     <p class="signature-title bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</p>
     <p class="signature-title en">Air Ticketing & Visa Executive</p>
   </div>
@@ -738,27 +952,53 @@ function switchLanguage(lang, e) {
   }
 }
 
-/* Signature Animation */
-const sigImg   = document.getElementById('signatureImg');
-const sigNames  = document.querySelectorAll('.signature-name');
-const sigTitles = document.querySelectorAll('.signature-title');
-const sigGlow   = document.querySelector('.signature-glow');
+/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
+(function () {
+  const sigImg    = document.getElementById('signatureImg');
+  const sigLine   = document.getElementById('sigUnderline');
+  const sigNames  = document.querySelectorAll('.signature-name');
+  const sigTitles = document.querySelectorAll('.signature-title');
 
-const sigObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      sigImg.classList.add('animate');
-      if (sigGlow) sigGlow.classList.add('animate');
-      setTimeout(() => {
-        sigNames.forEach(el  => el.classList.add('visible'));
-        sigTitles.forEach(el => el.classList.add('visible'));
-      }, 2500);
-      sigObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.3 });
+  if (!sigImg) return;
 
-if (sigImg) sigObserver.observe(sigImg);
+  let triggered = false;
+
+  function runAnim() {
+    if (triggered) return;
+    triggered = true;
+
+    /* 1. signature fade-in + scale */
+    setTimeout(() => sigImg.classList.add('sig-visible'), 100);
+
+    /* 2. glow underline expand */
+    setTimeout(() => sigLine.classList.add('sig-visible'), 700);
+
+    /* 3. name fade-in */
+    setTimeout(() => {
+      sigNames.forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 120)
+      );
+    }, 1000);
+
+    /* 4. title fade-in */
+    setTimeout(() => {
+      sigTitles.forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 120)
+      );
+    }, 1250);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runAnim();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+
+  observer.observe(sigImg);
+})();
 </script>
 
 </body>
