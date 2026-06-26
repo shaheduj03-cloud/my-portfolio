@@ -693,39 +693,47 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
 <script src="script_p1.js"></script>
 <script>
 /* ══════════════════════════════════════
-   নতুন Language Toggle — script_p1.js এর
-   toggleLang() ফাংশনের সাথে সংযুক্ত
+   নতুন Language Toggle — সম্পূর্ণ স্বাধীন
+   script_p1.js এর উপর নির্ভর করে না
 ══════════════════════════════════════ */
 function switchLanguage(lang, e) {
   if (e) e.stopPropagation();
 
   const body = document.body;
+
+  /* আগে থেকেই সেই ভাষায় থাকলে কিছু করবে না */
   const isAlreadyActive =
     (lang === 'en' && body.classList.contains('lang-en')) ||
     (lang === 'bn' && body.classList.contains('lang-bn'));
-
   if (isAlreadyActive) return;
 
-  /* script_p1.js এর toggleLang() কল করি — এটি body class পরিবর্তন করে */
-  if (typeof toggleLang === 'function') {
-    toggleLang();
+  /* body class সরাসরি সেট করি — toggle নয়, নির্দিষ্ট ভাষা */
+  if (lang === 'en') {
+    body.classList.remove('lang-bn');
+    body.classList.add('lang-en');
   } else {
-    /* fallback: নিজেই class পরিবর্তন */
-    body.classList.toggle('lang-bn');
-    body.classList.toggle('lang-en');
+    body.classList.remove('lang-en');
+    body.classList.add('lang-bn');
+  }
+
+  /* script_p1.js এ যদি অন্য কোনো কাজ থাকে সেটাও চালাই */
+  if (typeof toggleLang === 'function') {
+    /* toggleLang শুধু তখন call করব যদি body class আর না মিলে */
+    const afterClass = body.classList.contains('lang-' + lang);
+    if (!afterClass) toggleLang();
   }
 
   /* Ripple effect */
   if (e) {
-    const toggle = document.getElementById('newLangToggle');
-    const rect   = toggle.getBoundingClientRect();
-    const ripple = document.createElement('div');
+    const toggleEl = document.getElementById('newLangToggle');
+    const rect     = toggleEl.getBoundingClientRect();
+    const ripple   = document.createElement('div');
     ripple.className = 'lang-ripple-el';
     ripple.style.cssText =
       `width:55px;height:55px;` +
       `left:${e.clientX - rect.left - 27}px;` +
       `top:${e.clientY  - rect.top  - 27}px;`;
-    toggle.appendChild(ripple);
+    toggleEl.appendChild(ripple);
     setTimeout(() => ripple.remove(), 600);
   }
 }
