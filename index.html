@@ -261,22 +261,22 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
   display: block;
   width: 200px;
   height: auto;
-  filter: invert(1) brightness(2);
+  filter: invert(1) brightness(2) !important;
   opacity: 0;
   transform: scale(0.88) translateY(12px);
   transition:
     opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.4s ease;
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sig-pro-img.sig-visible {
   opacity: 1;
   transform: scale(1) translateY(0);
+  filter: invert(1) brightness(2) !important;
 }
 
 .sig-pro-img:hover {
-  filter: invert(1) brightness(2) drop-shadow(0 0 10px rgba(0,212,255,0.45));
+  filter: invert(1) brightness(2) drop-shadow(0 0 10px rgba(0,212,255,0.45)) !important;
 }
 
 /* underline glow bar */
@@ -882,6 +882,7 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
           alt="Shaheduj Jaman Signature"
           class="sig-pro-img"
           id="signatureImg"
+          style="filter: invert(1) brightness(2) !important;"
         />
       </div>
       <div class="sig-underline" id="sigUnderline"></div>
