@@ -715,7 +715,8 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
     <div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">📈 Seller to Sales Leader</div><div class="tc-org">Self Made Bangladesh · Bishwo Shahitto Kendro</div></div>
     <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">🎨 Graphics Design for Freelancing (Level-3)</div><div class="tc-org">NACTAR — Photoshop, Illustrator, Canva</div></div>
     <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">📢 Digital Marketing (Level-3)</div><div class="tc-org">NACTAR — SEO, Facebook Ads, Email Marketing</div></div>
-    <div class="training-card"><div class="tc-year">2022 · 3 Months</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application','cert-computer-basic')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application — Certificate of Merit (2nd Position)','cert-computer-merit')"><span>🏆</span> <span class="bn">মেরিট সার্টিফিকেট</span><span class="en">Merit Certificate</span></button></div>
+    <div class="training-card"><div class="tc-year">2022 · 3 Months</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application','cert-computer-basic')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
+    <div class="training-card"><div class="tc-year">2023 · 🏆 2nd Position</div><div class="tc-title">🥈 Certificate of Merit — Basic Computer Application</div><div class="tc-org">NACTAR — 14th Batch, National Merit Award</div><button class="cert-btn" onclick="openCertLightbox('Certificate of Merit — 2nd Position','cert-computer-merit')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
   </div>
 </section>
 
@@ -900,6 +901,8 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
     </a>
   </div>
   <div class="footer-rule"></div>
+  <span class="bn">তৈরি করেছেন <span>❤️</span> দিয়ে — © ২০২৬ Shaheduj Jaman · Air Ticketing & Visa Executive</span>
+  <span class="en">Made with <span>❤️</span> — © 2026 Shaheduj Jaman · Air Ticketing & Visa Executive</span>
 </footer>
 
 <script src="script_p1.js"></script>
@@ -997,6 +1000,32 @@ function switchLanguage(lang, e) {
 
   observer.observe(sigImg);
 })();
+</script>
+
+
+<script>
+/* ══ CERTIFICATE LIGHTBOX — standalone ══ */
+window.openCertLightbox = function(title, id) {
+  const lightbox = document.getElementById('certLightbox');
+  const titleEl  = document.getElementById('certLightboxTitle');
+  const imgEl    = document.getElementById('certLightboxImg');
+
+  if (!lightbox || !titleEl || !imgEl) return;
+
+  titleEl.textContent = title;
+
+  /* GitHub repository থেকে সরাসরি jpg লোড */
+  imgEl.src = id + '.jpg';
+
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeCertLightbox = function() {
+  const lightbox = document.getElementById('certLightbox');
+  if (lightbox) lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+};
 </script>
 
 </body>
