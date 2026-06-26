@@ -1,19 +1,339 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shaheduj Jaman | Air Ticketing & Visa Executive</title>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style_p1.css" />
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shaheduj Jaman | Air Ticketing & Visa Executive</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style_p1.css" />
+
+<style>
+/* ══════════════════════════════════════
+   নতুন Language Toggle বাটন
+══════════════════════════════════════ */
+.new-lang-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  border-radius: 60px;
+  padding: 5px;
+  width: 178px;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+.new-lang-glider {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  height: calc(100% - 10px);
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%);
+  box-shadow: 0 0 18px rgba(255, 165, 0, 0.55), 0 0 6px rgba(255, 200, 0, 0.35);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.new-lang-glider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 55%);
+}
+
+/* বাংলা active → glider ডানে */
+body.lang-bn .new-lang-glider {
+  transform: translateX(100%);
+}
+
+body.lang-en .new-lang-glider {
+  transform: translateX(0%);
+}
+
+.new-lang-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 0.28s ease, transform 0.18s ease;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+  user-select: none;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', 'Hind Siliguri', sans-serif;
+}
+
+/* English বাটন active */
+body.lang-en .new-lang-btn[data-lang="en"] {
+  color: #1a0a00;
+  font-weight: 700;
+}
+
+/* বাংলা বাটন active */
+body.lang-bn .new-lang-btn[data-lang="bn"] {
+  color: #1a0a00;
+  font-weight: 700;
+}
+
+.new-lang-btn:hover {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body.lang-en .new-lang-btn[data-lang="en"]:hover,
+body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
+  color: #1a0a00;
+}
+
+.new-lang-btn:active {
+  transform: scale(0.95);
+}
+
+/* Ripple */
+.lang-ripple-el {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 190, 0, 0.28);
+  transform: scale(0);
+  animation: newLangRipple 0.55s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes newLangRipple {
+  to { transform: scale(4.5); opacity: 0; }
+}
+
+/* ══════════════════════════════════════
+   SIGNATURE DRAWING ANIMATION
+══════════════════════════════════════ */
+.sig-draw-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.sig-img-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.sig-img {
+  display: block;
+  width: 220px;
+  height: auto;
+  filter: invert(1) brightness(1.8);
+  /* clip-path দিয়ে বাম থেকে ডানে reveal */
+  clip-path: inset(0 100% 0 0);
+  transition: none;
+}
+
+/* drawing শুরু হলে */
+.sig-img.drawing {
+  animation: sigReveal 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sigReveal {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
+
+/* pen cursor */
+.sig-pen {
+  position: absolute;
+  top: 40%;
+  left: 0%;
+  font-size: 20px;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  filter: drop-shadow(0 0 6px rgba(0,212,255,0.6));
+}
+
+.sig-pen.active {
+  opacity: 1;
+  animation: penMove 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes penMove {
+  0%   { left: 0%; }
+  100% { left: 100%; }
+}
+
+/* glow line — drawing শেষে */
+.sig-glow-line {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00d4ff, #ffd000, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0,212,255,0.6);
+  transition: none;
+}
+
+.sig-glow-line.active {
+  animation: glowExpand 0.6s ease-out 2.4s forwards;
+}
+
+@keyframes glowExpand {
+  0%   { width: 0%;   opacity: 0; }
+  50%  { width: 100%; opacity: 1; }
+  100% { width: 100%; opacity: 0.5; }
+}
+
+/* hover colour change */
+.sig-img-container:hover .sig-img {
+  filter: invert(1) brightness(1.8) sepia(1) saturate(3) hue-rotate(160deg);
+  transition: filter 0.4s ease;
+}
+
+/* name & title fade-in */
+.signature-name,
+.signature-title {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.signature-name.visible,
+.signature-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.sig-pro-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.sig-img-box {
+  position: relative;
+  display: inline-block;
+  padding: 8px 24px;
+}
+
+.sig-img-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: rgba(0, 212, 255, 0.04);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.sig-img-box:hover::before {
+  opacity: 1;
+}
+
+/* main signature image */
+.sig-pro-img {
+  display: block;
+  width: 200px;
+  height: auto;
+  filter: invert(1) brightness(2);
+  opacity: 0;
+  transform: scale(0.88) translateY(12px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease;
+}
+
+.sig-pro-img.sig-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.sig-pro-img:hover {
+  filter: invert(1) brightness(2) drop-shadow(0 0 10px rgba(0,212,255,0.45));
+}
+
+/* underline glow bar */
+.sig-underline {
+  width: 0%;
+  max-width: 200px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, #00d4ff 30%, #ffd000 70%, transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 2px;
+}
+
+.sig-underline.sig-visible {
+  width: 100%;
+}
+
+/* name */
+.signature-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 14px 0 2px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.signature-name.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* title */
+.signature-title {
+  font-size: 13px;
+  color: rgba(0, 212, 255, 0.65);
+  margin: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.signature-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
 </head>
 <body class="lang-bn">
+
 <div class="page-veil"><span class="page-veil-mark">SHAHEDUJ JAMAN</span></div>
 <div class="grain-overlay"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
-
 
 <!-- NAV -->
 <nav class="lang-bar">
@@ -25,72 +345,78 @@
     <li><a href="#training" class="bn">প্রশিক্ষণ</a><a href="#training" class="en">Training</a></li>
     <li><a href="#contact" class="bn">যোগাযোগ</a><a href="#contact" class="en">Contact</a></li>
   </ul>
-  <button class="lang-btn" onclick="toggleLang()" id="langToggleBtn">English</button>
+
+  <!-- ✅ নতুন Language Toggle -->
+  <div class="new-lang-toggle" id="newLangToggle">
+    <div class="new-lang-glider" id="newLangGlider"></div>
+    <button class="new-lang-btn" data-lang="en" onclick="switchLanguage('en', event)">English</button>
+    <button class="new-lang-btn" data-lang="bn" onclick="switchLanguage('bn', event)">বাংলা</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-flex">
-  <div class="hero-inner">
-    <div class="open-to-work">
-      <span class="bn">💼 চাকরির জন্য প্রস্তুত</span>
-      <span class="en">💼 Open to Work</span>
-    </div>
-    <div class="hero-eyebrow">
-      <span class="bn">✈ এয়ার টিকেটিং ও ভিসা বিশেষজ্ঞ</span>
-      <span class="en">✈ Air Ticketing & Visa Executive</span>
-    </div>
-    <h1 class="hero-name">
-      <span class="line1 bn">সাহেদুজ</span>
-      <span class="line1 en">Shaheduj</span>
-      <span class="line2 bn">জামান</span>
-      <span class="line2 en">Jaman</span>
-    </h1>
-    <div class="hero-role">
-      <span class="role-badge rb1">Sabre GDS Expert</span>
-      <span class="role-badge rb2">Visa Processing</span>
-      <span class="role-badge rb3">NSDA Level-2 Certified</span>
-    </div>
-    <p class="hero-tagline">
-      <span class="bn">একজন দক্ষ টিকেটিং অফিসার যিনি GDS-ভিত্তিক এয়ার টিকেটিং, ভিসা প্রসেসিং ও NDC-তে বিশেষজ্ঞ। Sabre GDS-এ সম্পূর্ণ দক্ষতা — Issue, Void, Refund ও Re-issuance সহ।</span>
-      <span class="en">A detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. NSDA Level-2 certified with advanced Sabre GDS command — including ticket issuance, void, refund, and re-issuance.</span>
-    </p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
-      <a href="#contact" class="btn-primary en">Get In Touch →</a>
-      <a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
-      <a href="#training" class="btn-secondary en">View Training</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num c1 bn">১ বছর+</div>
-        <div class="stat-num c1 en">1 Year+</div>
-        <div class="stat-label bn">পেশাদার অভিজ্ঞতা</div>
-        <div class="stat-label en">Work Experience</div>
+    <div class="hero-inner">
+      <div class="open-to-work">
+        <span class="bn">💼 চাকরির জন্য প্রস্তুত</span>
+        <span class="en">💼 Open to Work</span>
       </div>
-      <div class="stat-item">
-        <div class="stat-num c2 bn">১৫+</div>
-        <div class="stat-num c2 en">15+</div>
-        <div class="stat-label bn">সার্টিফিকেট কোর্স</div>
-        <div class="stat-label en">Certified Courses</div>
+      <div class="hero-eyebrow">
+        <span class="bn">✈ এয়ার টিকেটিং ও ভিসা বিশেষজ্ঞ</span>
+        <span class="en">✈ Air Ticketing & Visa Executive</span>
       </div>
-      <div class="stat-item">
-        <div class="stat-num c3 bn">৩টি</div>
-        <div class="stat-num c3 en">3</div>
-        <div class="stat-label bn">GDS প্ল্যাটফর্ম দক্ষতা</div>
-        <div class="stat-label en">GDS Platforms</div>
+      <h1 class="hero-name">
+        <span class="line1 bn">সাহেদুজ</span>
+        <span class="line1 en">Shaheduj</span>
+        <span class="line2 bn">জামান</span>
+        <span class="line2 en">Jaman</span>
+      </h1>
+      <div class="hero-role">
+        <span class="role-badge rb1">Sabre GDS Expert</span>
+        <span class="role-badge rb2">Visa Processing</span>
+        <span class="role-badge rb3">NSDA Level-2 Certified</span>
+      </div>
+      <p class="hero-tagline">
+        <span class="bn">একজন দক্ষ টিকেটিং অফিসার যিনি GDS-ভিত্তিক এয়ার টিকেটিং, ভিসা প্রসেসিং ও NDC-তে বিশেষজ্ঞ। Sabre GDS-এ সম্পূর্ণ দক্ষতা — Issue, Void, Refund ও Re-issuance সহ।</span>
+        <span class="en">A detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. NSDA Level-2 certified with advanced Sabre GDS command — including ticket issuance, void, refund, and re-issuance.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
+        <a href="#contact" class="btn-primary en">Get In Touch →</a>
+        <a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
+        <a href="#training" class="btn-secondary en">View Training</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num c1 bn">১ বছর+</div>
+          <div class="stat-num c1 en">1 Year+</div>
+          <div class="stat-label bn">পেশাদার অভিজ্ঞতা</div>
+          <div class="stat-label en">Work Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c2 bn">১৫+</div>
+          <div class="stat-num c2 en">15+</div>
+          <div class="stat-label bn">সার্টিফিকেট কোর্স</div>
+          <div class="stat-label en">Certified Courses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c3 bn">৩টি</div>
+          <div class="stat-num c3 en">3</div>
+          <div class="stat-label bn">GDS প্ল্যাটফর্ম দক্ষতা</div>
+          <div class="stat-label en">GDS Platforms</div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="hero-photo-wrap">
-    <div class="hero-photo-glow"></div>
-    <div class="hero-photo-ring"></div>
-    <div class="hero-photo-frame">
-      <img src="photo-1.jpg" alt="Shaheduj Jaman" />
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-glow"></div>
+      <div class="hero-photo-ring"></div>
+      <div class="hero-photo-frame">
+        <img src="photo-1.jpg" alt="Shaheduj Jaman" />
+      </div>
+      <div class="hero-photo-badge">✈️</div>
     </div>
-    <div class="hero-photo-badge">✈️</div>
-  </div>
   </div>
 </section>
 
@@ -178,7 +504,6 @@
   <div class="section-label en">Career Preferences</div>
   <h2 class="section-title bn reveal">যে সেক্টরে আমি <span>কাজ করতে চাই</span></h2>
   <h2 class="section-title en reveal">Where I'm <span>Looking to Work</span></h2>
-
   <div class="pref-grid stagger reveal">
     <div class="pref-card c1">
       <div class="pref-icon-wrap">🏢</div>
@@ -195,7 +520,6 @@
         <span class="pref-tag">Travel Startup</span>
       </div>
     </div>
-
     <div class="pref-card c2">
       <div class="pref-icon-wrap">🎯</div>
       <div class="pref-card-title bn">পছন্দের পদ ও খাত</div>
@@ -211,7 +535,6 @@
         <span class="pref-tag en">Entry Level</span>
       </div>
     </div>
-
     <div class="pref-card c3">
       <div class="pref-icon-wrap">📍</div>
       <div class="pref-card-title bn">কর্মস্থল</div>
@@ -223,7 +546,6 @@
       </div>
     </div>
   </div>
-
   <div class="pref-globe-strip reveal-scale">
     <span class="flying-plane">✈️</span>
     <div class="globe-icon">🌍</div>
@@ -247,7 +569,6 @@
       </div>
     </div>
   </div>
-
   <div class="salary-card reveal-scale">
     <div class="salary-left">
       <div class="salary-icon-wrap">💰</div>
@@ -329,13 +650,11 @@
   <div class="section-label en">Training & Certifications</div>
   <h2 class="section-title bn reveal">আমার <span>প্রশিক্ষণসমূহ</span></h2>
   <h2 class="section-title en reveal">My <span>Training & Courses</span></h2>
-
   <div class="core-badge reveal">
     <span class="dot-live"></span>
     <span class="bn">এয়ার টিকেটিং ও ভিসা সংক্রান্ত মূল প্রশিক্ষণ</span>
     <span class="en">Core Air Ticketing & Visa Training</span>
   </div>
-
   <div class="core-grid stagger reveal">
     <div class="core-card">
       <div class="core-icon-wrap">✈️</div>
@@ -373,14 +692,12 @@
       <button class="cert-btn" onclick="openCertLightbox('Basics of Aviation Ground Operation','cert-aviation')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
     </div>
   </div>
-
   <div class="support-divider reveal">
     <span class="line"></span>
     <span class="label bn">অতিরিক্ত দক্ষতা ও প্রশিক্ষণ</span>
     <span class="label en">Additional Skills & Training</span>
     <span class="line"></span>
   </div>
-
   <div class="training-grid stagger reveal">
     <div class="training-card">
       <div class="tc-year">2025–2026 · 15 Days</div>
@@ -398,17 +715,11 @@
     <div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">📈 Seller to Sales Leader</div><div class="tc-org">Self Made Bangladesh · Bishwo Shahitto Kendro</div></div>
     <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">🎨 Graphics Design for Freelancing (Level-3)</div><div class="tc-org">NACTAR — Photoshop, Illustrator, Canva</div></div>
     <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">📢 Digital Marketing (Level-3)</div><div class="tc-org">NACTAR — SEO, Facebook Ads, Email Marketing</div></div>
-    <div class="training-card">
-      <div class="tc-year">2023 · 4 Days</div>
-      <div class="tc-title">🧘 Quantum Method Course — Mind Development</div>
-      <div class="tc-org">Yoga Foundation, Dhaka · Reg No. 62/498</div>
-      <button class="cert-btn" onclick="openCertLightbox('Quantum Method Course — Mind Development &amp; Self-Improvement','cert-quantum')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-    </div>
-    <div class="training-card"><div class="tc-year">2022 · 3 Months</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div></div>
+    <div class="training-card"><div class="tc-year">2022 · 3 Months</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application','cert-computer-basic')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application — Certificate of Merit (2nd Position)','cert-computer-merit')"><span>🏆</span> <span class="bn">মেরিট সার্টিফিকেট</span><span class="en">Merit Certificate</span></button></div>
   </div>
 </section>
 
-<!-- CERTIFICATE LIGHTBOX (shared by all cert-btn triggers) -->
+<!-- CERTIFICATE LIGHTBOX -->
 <div class="cert-lightbox" id="certLightbox" onclick="if(event.target===this) closeCertLightbox()">
   <div class="cert-lightbox-inner">
     <div class="cert-lightbox-header">
@@ -563,6 +874,23 @@
 </div>
 
 <footer>
+  <div class="signature-section">
+    <div class="sig-pro-wrapper" id="sigProWrapper">
+      <div class="sig-img-box">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABQCAYAAACj6kh7AAAFEElEQVR4nO3d27KbMAyFYWfPfv9XphedTAjbB9nIWJL/764dApSYFfkAfR3HkbC9cyN4LTsLoOF39QlgKX6t4MrP6hPAUlRTcIXA2tu1wiLAYBqBBcANAgtvVFcwj8DaFwPucIfAQkpUV3CCwNoT1RVcIrD2Q1jBLQILgBusdN8L667gGhUWADcIrH1QXcE9AguAGwTWHqiuEAKBFR/LGBAGgbUfqiu4RWDFRlcQoRBYANwgsOKiukI4BNYeCCuEQGDFxMwgQiKw4qEriLAIrNgIK4RCYMXCf4iK0AisOBi3QngEVkxUVwiJwIqBriC2QGD5R1cQ2yCwfGMJA7bCO93v6a1uZgYKYYXwCKw+d7tf789rhAtdQWyHwGprBcM5fI5UDqNDuN3IOVFdYQsEVlkpqGrhIAmr898RNEAHBt3zcgHzSuMBoxlMVFfYFoH17Uj5QNAIhdw+esehCCtsjcD6mBVU132OYpAd2yOw/nuychnZd6mLCmyFwFrfzaJyAoQIrG9PhVXPcaiubMqNd2IyAmu9WvhwQ9h0XVOHh7AO68NL1eLlPC26+6RBKZw0n2BABYG1huRXmV9uPddrObJot/YKnyOzTW67nWi1269rSGB9WFp5PrLKfifSYMhtdw4XyfWUvGvs+nhW6fit/Xjy1A/q1/dEYH2zEFrXG4RK60PaJesJtFK1dCVtF5L9Sb9TS22xl9bynfffv1JK6XUc3A/p+VK+NOZRC6vVjXe21jhQ6Vr0PJxe2t/I5+/SvvHuzjzPPmaN5HxeKVFhvV1/mWcOovIL8VfrTRa14M5VoZLvrfSolMWlLW+1trOyXc04dvb6UGHlzVr7VLuxolVX0tCvdcEYxP4r0g3b/X0SWG2aA6eSbk2ksDprje2Uxp9yn41I40YMf53oErZJZoC0Hmq22uB6QqQ5cJpkXTyr16IXQaSICmtcb+WVu0lr0+65P9f2P0qyvqiktL32zJtFmjeO5+vwKCqsca3Kq7cRarwvK/eZnkd/SlXQdT+9U/WebkhrM2g4ocKaQzImJam4WvuoHff6+Z5zbH3eUzhRCQXiucKyPDh7DiBpWLX21VI7znVMKLdtT/dz5QzeyvVLWMxrYHl5CDV3Y/csgJQOQJf22XP8nuPlPjuKCghi3gKr1RV5YuFnj7thdd2utX+NbTWvGdUQVHkLrLNSt0RjAPyu0cdFrvuoVUsru28MTGMJT4ElHbPKVS6W1vVoTPn3BpA0ILVYudYIxlNgjVjRTdSYbZOe45MPvBJCWM5LYN252aw82KwRVucAbi2F6LFjGEVezxP2+/SyDktzDGbWdPyMsNo5jFw0TMdctgsvFZamGRWX1qMnvTep9UZnJXSsX6dZatffykx6F4+BpXWBS8HVewxJo+hltRE9FUBW//3e9D4RYZ7HwNKe8cuNBbW6jVGm9Wc33NX/PgTjMbBmqQ1iS2/snuUDs27mWSFE+MTgsiv4tmNgrb6hRxsK66SgwfV37yWwWm8TeJu51mjWO51mBKjrRgmUeAmsqycHs0ffChFlnAsww2JgWViR3aqmCCNggacDy+rT+++Zx9b5aQ6+A+g0I7A0HqORHqP3XVF3tyOIgIVGA+uJUGrtI7fgU2O/AIySBNZIIFiYupcgoABHroHVExhPv2NJenzL73oHcMNvGg+VJ6qhkaAhnICgnpglJEAAqPhN9bVFhA0AM84VFuEEwLSf1ScAAFL/AIoCLtlFYmnUAAAAAElFTkSuQmCC"
+          alt="Shaheduj Jaman Signature"
+          class="sig-pro-img"
+          id="signatureImg"
+        />
+      </div>
+      <div class="sig-underline" id="sigUnderline"></div>
+    </div>
+    <p class="signature-name bn" id="sigNameBn">সাহেদুজ জামান</p>
+    <p class="signature-name en" id="sigNameEn">Shaheduj Jaman</p>
+    <p class="signature-title bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</p>
+    <p class="signature-title en">Air Ticketing & Visa Executive</p>
+  </div>
   <div class="footer-socials">
     <a href="https://www.linkedin.com/in/shaheduj-jaman-2679b5248/" target="_blank" rel="noopener" class="social-icon linkedin" aria-label="LinkedIn">
       <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -572,10 +900,104 @@
     </a>
   </div>
   <div class="footer-rule"></div>
-  <span class="bn">তৈরি করেছেন <span>❤️</span> দিয়ে — © ২০২৬ Shaheduj Jaman · Air Ticketing & Visa Executive</span>
-  <span class="en">Made with <span>❤️</span> — © 2026 Shaheduj Jaman · Air Ticketing & Visa Executive</span>
 </footer>
 
 <script src="script_p1.js"></script>
+<script>
+/* ══════════════════════════════════════
+   নতুন Language Toggle — সম্পূর্ণ স্বাধীন
+   script_p1.js এর উপর নির্ভর করে না
+══════════════════════════════════════ */
+function switchLanguage(lang, e) {
+  if (e) e.stopPropagation();
+
+  const body = document.body;
+
+  /* আগে থেকেই সেই ভাষায় থাকলে কিছু করবে না */
+  const isAlreadyActive =
+    (lang === 'en' && body.classList.contains('lang-en')) ||
+    (lang === 'bn' && body.classList.contains('lang-bn'));
+  if (isAlreadyActive) return;
+
+  /* body class সরাসরি সেট করি — toggle নয়, নির্দিষ্ট ভাষা */
+  if (lang === 'en') {
+    body.classList.remove('lang-bn');
+    body.classList.add('lang-en');
+  } else {
+    body.classList.remove('lang-en');
+    body.classList.add('lang-bn');
+  }
+
+  /* script_p1.js এ যদি অন্য কোনো কাজ থাকে সেটাও চালাই */
+  if (typeof toggleLang === 'function') {
+    /* toggleLang শুধু তখন call করব যদি body class আর না মিলে */
+    const afterClass = body.classList.contains('lang-' + lang);
+    if (!afterClass) toggleLang();
+  }
+
+  /* Ripple effect */
+  if (e) {
+    const toggleEl = document.getElementById('newLangToggle');
+    const rect     = toggleEl.getBoundingClientRect();
+    const ripple   = document.createElement('div');
+    ripple.className = 'lang-ripple-el';
+    ripple.style.cssText =
+      `width:55px;height:55px;` +
+      `left:${e.clientX - rect.left - 27}px;` +
+      `top:${e.clientY  - rect.top  - 27}px;`;
+    toggleEl.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+}
+
+/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
+(function () {
+  const sigImg    = document.getElementById('signatureImg');
+  const sigLine   = document.getElementById('sigUnderline');
+  const sigNames  = document.querySelectorAll('.signature-name');
+  const sigTitles = document.querySelectorAll('.signature-title');
+
+  if (!sigImg) return;
+
+  let triggered = false;
+
+  function runAnim() {
+    if (triggered) return;
+    triggered = true;
+
+    /* 1. signature fade-in + scale */
+    setTimeout(() => sigImg.classList.add('sig-visible'), 100);
+
+    /* 2. glow underline expand */
+    setTimeout(() => sigLine.classList.add('sig-visible'), 700);
+
+    /* 3. name fade-in */
+    setTimeout(() => {
+      sigNames.forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 120)
+      );
+    }, 1000);
+
+    /* 4. title fade-in */
+    setTimeout(() => {
+      sigTitles.forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 120)
+      );
+    }, 1250);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runAnim();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+
+  observer.observe(sigImg);
+})();
+</script>
+
 </body>
 </html>
