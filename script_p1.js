@@ -9,7 +9,8 @@
     'cert-hsc': 'cert-hsc.jpg',
     'cert-ssc': 'cert-ssc.jpg',
     'cert-ai-career': 'cert-ai-career.jpg',
-    'cert-tesol': 'cert-tesol.jpg'
+    'cert-tesol': 'cert-tesol.jpg',
+    'cert-quantum': 'cert-quantum.jpg'
   };
   function openCertLightbox(title, key) {
     const src = certImages[key];
