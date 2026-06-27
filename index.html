@@ -9,7 +9,7 @@
 
 <style>
 /* ══════════════════════════════════════
-   নতুন Language Toggle বাটন
+   Language Toggle বাটন
 ══════════════════════════════════════ */
 .new-lang-toggle {
   position: relative;
@@ -48,14 +48,8 @@
   background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 55%);
 }
 
-/* বাংলা active → glider ডানে */
-body.lang-bn .new-lang-glider {
-  transform: translateX(100%);
-}
-
-body.lang-en .new-lang-glider {
-  transform: translateX(0%);
-}
+body.lang-bn .new-lang-glider { transform: translateX(100%); }
+body.lang-en .new-lang-glider { transform: translateX(0%); }
 
 .new-lang-btn {
   flex: 1;
@@ -79,32 +73,20 @@ body.lang-en .new-lang-glider {
   font-family: 'Space Grotesk', 'Hind Siliguri', sans-serif;
 }
 
-/* English বাটন active */
-body.lang-en .new-lang-btn[data-lang="en"] {
-  color: #1a0a00;
-  font-weight: 700;
-}
-
-/* বাংলা বাটন active */
+body.lang-en .new-lang-btn[data-lang="en"],
 body.lang-bn .new-lang-btn[data-lang="bn"] {
   color: #1a0a00;
   font-weight: 700;
 }
 
-.new-lang-btn:hover {
-  color: rgba(255, 255, 255, 0.72);
-}
+.new-lang-btn:hover { color: rgba(255, 255, 255, 0.72); }
 
 body.lang-en .new-lang-btn[data-lang="en"]:hover,
-body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
-  color: #1a0a00;
-}
+body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
 
-.new-lang-btn:active {
-  transform: scale(0.95);
-}
+.new-lang-btn:active { transform: scale(0.95); }
 
-/* Ripple */
+/* Ripple effect */
 .lang-ripple-el {
   position: absolute;
   border-radius: 50%;
@@ -120,110 +102,18 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
 }
 
 /* ══════════════════════════════════════
-   SIGNATURE DRAWING ANIMATION
+   PROFESSIONAL SIGNATURE SECTION
 ══════════════════════════════════════ */
-.sig-draw-wrapper {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 14px;
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
-
-.sig-img-container {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-}
-
-.sig-img {
-  display: block;
-  width: 220px;
-  height: auto;
-  filter: invert(1) brightness(1.8);
-  /* clip-path দিয়ে বাম থেকে ডানে reveal */
-  clip-path: inset(0 100% 0 0);
-  transition: none;
-}
-
-/* drawing শুরু হলে */
-.sig-img.drawing {
-  animation: sigReveal 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes sigReveal {
-  0%   { clip-path: inset(0 100% 0 0); }
-  100% { clip-path: inset(0 0% 0 0); }
-}
-
-/* pen cursor */
-.sig-pen {
-  position: absolute;
-  top: 40%;
-  left: 0%;
-  font-size: 20px;
-  transform: translate(-50%, -50%) rotate(-30deg);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-  filter: drop-shadow(0 0 6px rgba(0,212,255,0.6));
-}
-
-.sig-pen.active {
-  opacity: 1;
-  animation: penMove 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes penMove {
-  0%   { left: 0%; }
-  100% { left: 100%; }
-}
-
-/* glow line — drawing শেষে */
-.sig-glow-line {
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00d4ff, #ffd000, transparent);
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(0,212,255,0.6);
-  transition: none;
-}
-
-.sig-glow-line.active {
-  animation: glowExpand 0.6s ease-out 2.4s forwards;
-}
-
-@keyframes glowExpand {
-  0%   { width: 0%;   opacity: 0; }
-  50%  { width: 100%; opacity: 1; }
-  100% { width: 100%; opacity: 0.5; }
-}
-
-/* hover colour change */
-.sig-img-container:hover .sig-img {
-  filter: invert(1) brightness(1.8) sepia(1) saturate(3) hue-rotate(160deg);
-  transition: filter 0.4s ease;
-}
-
-/* name & title fade-in */
-.signature-name,
-.signature-title {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.signature-name.visible,
-.signature-title.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
 
 .sig-pro-wrapper {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   gap: 0;
@@ -260,7 +150,7 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
   transform: translateY(-4px) scale(1.015);
 }
 
-/* shimmer sweep */
+/* Shimmer sweep */
 .sig-shimmer {
   position: absolute;
   inset: 0;
@@ -284,135 +174,7 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
   to   { background-position: 220% 0; }
 }
 
-/* সিগনেচার image — গাঢ় নেভি রঙে */
-.sig-pro-img {
-  display: block;
-  width: 220px;
-  height: auto;
-  filter: none;
-  position: relative;
-  z-index: 1;
-}
-
-/* glow underline */
-.sig-underline {
-  width: 0;
-  max-width: 300px;
-  height: 2px;
-  background: linear-gradient(90deg,
-    transparent, #00d4ff 30%, #ffd000 70%, transparent);
-  border-radius: 2px;
-  box-shadow: 0 0 10px rgba(0,212,255,0.5);
-  transition: width 0.9s cubic-bezier(0.22,1,0.36,1);
-  margin: 6px auto 0;
-}
-
-.sig-underline.sig-visible { width: 300px; }
-
-/* pulse dots */
-.sig-dots {
-  display: flex;
-  gap: 6px;
-  margin-top: 4px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.sig-dots.sig-visible { opacity: 1; }
-
-.sig-dots .pdot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  animation: pdotPulse 2s ease-in-out infinite;
-}
-
-.sig-dots .pdot:nth-child(1) { background: rgba(0,212,255,0.6); }
-.sig-dots .pdot:nth-child(2) { background: rgba(255,208,0,0.6); animation-delay: 0.3s; }
-.sig-dots .pdot:nth-child(3) { background: rgba(0,212,255,0.6); animation-delay: 0.6s; }
-
-@keyframes pdotPulse {
-  0%,100% { transform: scale(1); opacity: 0.5; }
-  50%      { transform: scale(1.6); opacity: 1; }
-}
-
-/* নাম */
-.signature-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 12px 0 3px;
-  font-family: var(--font-sans, sans-serif);
-  letter-spacing: 0.04em;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.signature-name.visible { opacity: 1; transform: translateY(0); }
-
-/* পদবি */
-.signature-title {
-  font-size: 13px;
-  color: rgba(0,212,255,0.7);
-  margin: 0;
-  font-family: var(--font-sans, sans-serif);
-  letter-spacing: 0.05em;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
-}
-
-.signature-title.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
-.signature-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
-.sig-pro-wrapper {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
-.sig-img-box {
-  position: relative;
-  display: inline-block;
-  padding: 8px 24px;
-}
-
-.sig-img-box::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  background: rgba(0, 212, 255, 0.04);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.sig-img-box:hover::before {
-  opacity: 1;
-}
-
-/* main signature image */
-.sig-img-box {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 14px 28px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.08);
-}
-
+/* সিগনেচার image */
 .sig-pro-img {
   display: block;
   width: 200px;
@@ -423,6 +185,8 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
   transition:
     opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 1;
 }
 
 .sig-pro-img.sig-visible {
@@ -430,11 +194,7 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
   transform: scale(1) translateY(0);
 }
 
-.sig-img-box:hover {
-  box-shadow: 0 6px 30px rgba(0,0,0,0.4), 0 0 14px rgba(0,212,255,0.15);
-}
-
-/* underline glow bar */
+/* Glow underline */
 .sig-underline {
   width: 0%;
   max-width: 200px;
@@ -446,18 +206,46 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
   margin-top: 2px;
 }
 
-.sig-underline.sig-visible {
-  width: 100%;
+.sig-underline.sig-visible { width: 100%; }
+
+/* Pulse dots */
+.sig-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-/* name */
+.sig-dots.sig-visible { opacity: 1; }
+
+.sig-dots .pdot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  animation: pdotPulse 2s ease-in-out infinite;
+}
+
+.sig-dots .pdot:nth-child(1) { background: rgba(0,212,255,0.6); }
+.sig-dots .pdot:nth-child(2) { background: rgba(255,208,0,0.6); animation-delay: 0.3s; }
+.sig-dots .pdot:nth-child(3) { background: rgba(0,212,255,0.6); animation-delay: 0.6s; }
+
+@keyframes pdotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.6); opacity: 1; }
+}
+
+/* নাম */
 .signature-name {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   color: #ffffff;
-  margin: 14px 0 2px;
+  margin: 14px 0 3px;
+  font-family: var(--font-sans, sans-serif);
+  letter-spacing: 0.04em;
+  text-align: center;
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
@@ -466,14 +254,17 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
   transform: translateY(0);
 }
 
-/* title */
+/* পদবি */
 .signature-title {
   font-size: 13px;
-  color: rgba(0, 212, 255, 0.65);
+  color: rgba(0, 212, 255, 0.7);
   margin: 0;
+  font-family: var(--font-sans, sans-serif);
+  letter-spacing: 0.05em;
+  text-align: center;
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
 }
 
 .signature-title.visible {
@@ -1120,10 +911,12 @@ window.closeCertLightbox = function() {
   const sigTitles  = document.querySelectorAll('.signature-title');
   if (!sigCard) return;
   let triggered = false;
+  const sigImg = document.getElementById('signatureImg');
   function runAnim() {
     if (triggered) return;
     triggered = true;
     setTimeout(() => sigCard.classList.add('sig-visible'), 200);
+    setTimeout(() => { if (sigImg) sigImg.classList.add('sig-visible'); }, 400);
     setTimeout(() => sigShimmer.classList.add('active'), 950);
     setTimeout(() => sigLine.classList.add('sig-visible'), 1150);
     setTimeout(() => sigDots.classList.add('sig-visible'), 1450);
