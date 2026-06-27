@@ -4,27 +4,332 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Shaheduj Jaman | Air Ticketing & Visa Executive</title>
-
-<!-- SEO Meta Tags (নতুন যোগ — দেখা যায় না, শুধু Google/Facebook এর জন্য) -->
-<meta name="description" content="Shaheduj Jaman — Air Ticketing & Visa Executive. Sabre GDS Expert, NSDA Level-2 Certified, Visa Processing Specialist based in Dhaka, Bangladesh." />
-<meta name="keywords" content="Shaheduj Jaman, Air Ticketing, Visa Executive, Sabre GDS, Bangladesh, Travel Agent, NSDA" />
-<meta name="author" content="Shaheduj Jaman" />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://shaheduj03-cloud.github.io/my-portfolio/" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://shaheduj03-cloud.github.io/my-portfolio/" />
-<meta property="og:title" content="Shaheduj Jaman | Air Ticketing & Visa Executive" />
-<meta property="og:description" content="Sabre GDS Expert & NSDA Level-2 Certified Air Ticketing and Visa Executive based in Dhaka, Bangladesh." />
-<meta property="og:image" content="https://shaheduj03-cloud.github.io/my-portfolio/photo-1.jpg" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Shaheduj Jaman | Air Ticketing & Visa Executive" />
-<meta name="twitter:description" content="Sabre GDS Expert & NSDA Level-2 Certified Air Ticketing and Visa Executive based in Dhaka, Bangladesh." />
-<meta name="twitter:image" content="https://shaheduj03-cloud.github.io/my-portfolio/photo-1.jpg" />
-
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style_p1.css" />
+
+<style>
+/* ══════════════════════════════════════
+   নতুন Language Toggle বাটন
+══════════════════════════════════════ */
+.new-lang-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  border-radius: 60px;
+  padding: 5px;
+  width: 178px;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+.new-lang-glider {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  height: calc(100% - 10px);
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%);
+  box-shadow: 0 0 18px rgba(255, 165, 0, 0.55), 0 0 6px rgba(255, 200, 0, 0.35);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.new-lang-glider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 55%);
+}
+
+/* বাংলা active → glider ডানে */
+body.lang-bn .new-lang-glider {
+  transform: translateX(100%);
+}
+
+body.lang-en .new-lang-glider {
+  transform: translateX(0%);
+}
+
+.new-lang-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 0.28s ease, transform 0.18s ease;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+  user-select: none;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', 'Hind Siliguri', sans-serif;
+}
+
+/* English বাটন active */
+body.lang-en .new-lang-btn[data-lang="en"] {
+  color: #1a0a00;
+  font-weight: 700;
+}
+
+/* বাংলা বাটন active */
+body.lang-bn .new-lang-btn[data-lang="bn"] {
+  color: #1a0a00;
+  font-weight: 700;
+}
+
+.new-lang-btn:hover {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body.lang-en .new-lang-btn[data-lang="en"]:hover,
+body.lang-bn .new-lang-btn[data-lang="bn"]:hover {
+  color: #1a0a00;
+}
+
+.new-lang-btn:active {
+  transform: scale(0.95);
+}
+
+/* Ripple */
+.lang-ripple-el {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 190, 0, 0.28);
+  transform: scale(0);
+  animation: newLangRipple 0.55s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes newLangRipple {
+  to { transform: scale(4.5); opacity: 0; }
+}
+
+/* ══════════════════════════════════════
+   SIGNATURE DRAWING ANIMATION
+══════════════════════════════════════ */
+.sig-draw-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.sig-img-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.sig-img {
+  display: block;
+  width: 220px;
+  height: auto;
+  filter: invert(1) brightness(1.8);
+  /* clip-path দিয়ে বাম থেকে ডানে reveal */
+  clip-path: inset(0 100% 0 0);
+  transition: none;
+}
+
+/* drawing শুরু হলে */
+.sig-img.drawing {
+  animation: sigReveal 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sigReveal {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
+
+/* pen cursor */
+.sig-pen {
+  position: absolute;
+  top: 40%;
+  left: 0%;
+  font-size: 20px;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  filter: drop-shadow(0 0 6px rgba(0,212,255,0.6));
+}
+
+.sig-pen.active {
+  opacity: 1;
+  animation: penMove 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes penMove {
+  0%   { left: 0%; }
+  100% { left: 100%; }
+}
+
+/* glow line — drawing শেষে */
+.sig-glow-line {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00d4ff, #ffd000, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0,212,255,0.6);
+  transition: none;
+}
+
+.sig-glow-line.active {
+  animation: glowExpand 0.6s ease-out 2.4s forwards;
+}
+
+@keyframes glowExpand {
+  0%   { width: 0%;   opacity: 0; }
+  50%  { width: 100%; opacity: 1; }
+  100% { width: 100%; opacity: 0.5; }
+}
+
+/* hover colour change */
+.sig-img-container:hover .sig-img {
+  filter: invert(1) brightness(1.8) sepia(1) saturate(3) hue-rotate(160deg);
+  transition: filter 0.4s ease;
+}
+
+/* name & title fade-in */
+.signature-name,
+.signature-title {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.signature-name.visible,
+.signature-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.sig-pro-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.sig-img-box {
+  position: relative;
+  display: inline-block;
+  padding: 8px 24px;
+}
+
+.sig-img-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: rgba(0, 212, 255, 0.04);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.sig-img-box:hover::before {
+  opacity: 1;
+}
+
+/* main signature image */
+.sig-pro-img {
+  display: block;
+  width: 200px;
+  height: auto;
+  filter: invert(1) brightness(2);
+  opacity: 0;
+  transform: scale(0.88) translateY(12px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease;
+}
+
+.sig-pro-img.sig-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.sig-pro-img:hover {
+  filter: invert(1) brightness(2) drop-shadow(0 0 10px rgba(0,212,255,0.45));
+}
+
+/* underline glow bar */
+.sig-underline {
+  width: 0%;
+  max-width: 200px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, #00d4ff 30%, #ffd000 70%, transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 2px;
+}
+
+.sig-underline.sig-visible {
+  width: 100%;
+}
+
+/* name */
+.signature-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 14px 0 2px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.signature-name.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* title */
+.signature-title {
+  font-size: 13px;
+  color: rgba(0, 212, 255, 0.65);
+  margin: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.signature-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
 </head>
 <body class="lang-bn">
+
 <div class="page-veil"><span class="page-veil-mark">SHAHEDUJ JAMAN</span></div>
 <div class="grain-overlay"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
@@ -32,586 +337,694 @@
 
 <!-- NAV -->
 <nav class="lang-bar">
-<div class="nav-logo">SJ <span>✈</span></div>
-<ul class="nav-links">
-<li><a href="#about" class="bn">আমার সম্পর্কে</a><a href="#about" class="en">About</a></li>
-<li><a href="#experience" class="bn">অভিজ্ঞতা</a><a href="#experience" class="en">Experience</a></li>
-<li><a href="#skills" class="bn">দক্ষতা</a><a href="#skills" class="en">Skills</a></li>
-<li><a href="#training" class="bn">প্রশিক্ষণ</a><a href="#training" class="en">Training</a></li>
-<li><a href="#contact" class="bn">যোগাযোগ</a><a href="#contact" class="en">Contact</a></li>
-</ul>
-<button class="lang-btn" onclick="toggleLang()" id="langToggleBtn">English</button>
+  <div class="nav-logo">SJ <span>✈</span></div>
+  <ul class="nav-links">
+    <li><a href="#about" class="bn">আমার সম্পর্কে</a><a href="#about" class="en">About</a></li>
+    <li><a href="#experience" class="bn">অভিজ্ঞতা</a><a href="#experience" class="en">Experience</a></li>
+    <li><a href="#skills" class="bn">দক্ষতা</a><a href="#skills" class="en">Skills</a></li>
+    <li><a href="#training" class="bn">প্রশিক্ষণ</a><a href="#training" class="en">Training</a></li>
+    <li><a href="#contact" class="bn">যোগাযোগ</a><a href="#contact" class="en">Contact</a></li>
+  </ul>
+
+  <!-- ✅ নতুন Language Toggle -->
+  <div class="new-lang-toggle" id="newLangToggle">
+    <div class="new-lang-glider" id="newLangGlider"></div>
+    <button class="new-lang-btn" data-lang="en" onclick="switchLanguage('en', event)">English</button>
+    <button class="new-lang-btn" data-lang="bn" onclick="switchLanguage('bn', event)">বাংলা</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-<div class="hero-bg"></div>
-<div class="hero-flex">
-<div class="hero-inner">
-<div class="open-to-work">
-<span class="bn">💼 চাকরির জন্য প্রস্তুত</span>
-<span class="en">💼 Open to Work</span>
-</div>
-<div class="hero-eyebrow">
-<span class="bn">✈ এয়ার টিকেটিং ও ভিসা বিশেষজ্ঞ</span>
-<span class="en">✈ Air Ticketing & Visa Executive</span>
-</div>
-<h1 class="hero-name">
-<span class="line1 bn">সাহেদুজ</span>
-<span class="line1 en">Shaheduj</span>
-<span class="line2 bn">জামান</span>
-<span class="line2 en">Jaman</span>
-</h1>
-<div class="hero-role">
-<span class="role-badge rb1">Sabre GDS Expert</span>
-<span class="role-badge rb2">Visa Processing</span>
-<span class="role-badge rb3">NSDA Level-2 Certified</span>
-</div>
-<p class="hero-tagline">
-<span class="bn">একজন দক্ষ টিকেটিং অফিসার যিনি GDS-ভিত্তিক এয়ার টিকেটিং, ভিসা প্রসেসিং ও NDC-তে বিশেষজ্ঞ। Sabre GDS-এ সম্পূর্ণ দক্ষতা — Issue, Void, Refund ও Re-issuance সহ।</span>
-<span class="en">A detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. NSDA Level-2 certified with advanced Sabre GDS command — including ticket issuance, void, refund, and re-issuance.</span>
-</p>
-<div class="hero-cta">
-<a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
-<a href="#contact" class="btn-primary en">Get In Touch →</a>
-<a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
-<a href="#training" class="btn-secondary en">View Training</a>
-</div>
-<div class="hero-stats">
-<div class="stat-item">
-<div class="stat-num c1 bn">১ বছর+</div>
-<div class="stat-num c1 en">1 Year+</div>
-<div class="stat-label bn">পেশাদার অভিজ্ঞতা</div>
-<div class="stat-label en">Work Experience</div>
-</div>
-<div class="stat-item">
-<div class="stat-num c2 bn">১৫+</div>
-<div class="stat-num c2 en">15+</div>
-<div class="stat-label bn">সার্টিফিকেট কোর্স</div>
-<div class="stat-label en">Certified Courses</div>
-</div>
-<div class="stat-item">
-<div class="stat-num c3 bn">৩টি</div>
-<div class="stat-num c3 en">3</div>
-<div class="stat-label bn">GDS প্ল্যাটফর্ম দক্ষতা</div>
-<div class="stat-label en">GDS Platforms</div>
-</div>
-</div>
-</div>
-<div class="hero-photo-wrap">
-<div class="hero-photo-glow"></div>
-<div class="hero-photo-ring"></div>
-<div class="hero-photo-frame">
-<img src="photo-1.jpg" alt="Shaheduj Jaman" />
-</div>
-<div class="hero-photo-badge">✈️</div>
-</div>
-</div>
+  <div class="hero-bg"></div>
+  <div class="hero-flex">
+    <div class="hero-inner">
+      <div class="open-to-work">
+        <span class="bn">💼 চাকরির জন্য প্রস্তুত</span>
+        <span class="en">💼 Open to Work</span>
+      </div>
+      <div class="hero-eyebrow">
+        <span class="bn">✈ এয়ার টিকেটিং ও ভিসা বিশেষজ্ঞ</span>
+        <span class="en">✈ Air Ticketing & Visa Executive</span>
+      </div>
+      <h1 class="hero-name">
+        <span class="line1 bn">সাহেদুজ</span>
+        <span class="line1 en">Shaheduj</span>
+        <span class="line2 bn">জামান</span>
+        <span class="line2 en">Jaman</span>
+      </h1>
+      <div class="hero-role">
+        <span class="role-badge rb1">Sabre GDS Expert</span>
+        <span class="role-badge rb2">Visa Processing</span>
+        <span class="role-badge rb3">NSDA Level-2 Certified</span>
+      </div>
+      <p class="hero-tagline">
+        <span class="bn">একজন দক্ষ টিকেটিং অফিসার যিনি GDS-ভিত্তিক এয়ার টিকেটিং, ভিসা প্রসেসিং ও NDC-তে বিশেষজ্ঞ। Sabre GDS-এ সম্পূর্ণ দক্ষতা — Issue, Void, Refund ও Re-issuance সহ।</span>
+        <span class="en">A detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. NSDA Level-2 certified with advanced Sabre GDS command — including ticket issuance, void, refund, and re-issuance.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
+        <a href="#contact" class="btn-primary en">Get In Touch →</a>
+        <a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
+        <a href="#training" class="btn-secondary en">View Training</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num c1 bn">১ বছর+</div>
+          <div class="stat-num c1 en">1 Year+</div>
+          <div class="stat-label bn">পেশাদার অভিজ্ঞতা</div>
+          <div class="stat-label en">Work Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c2 bn">১৫+</div>
+          <div class="stat-num c2 en">15+</div>
+          <div class="stat-label bn">সার্টিফিকেট কোর্স</div>
+          <div class="stat-label en">Certified Courses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c3 bn">৩টি</div>
+          <div class="stat-num c3 en">3</div>
+          <div class="stat-label bn">GDS প্ল্যাটফর্ম দক্ষতা</div>
+          <div class="stat-label en">GDS Platforms</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-glow"></div>
+      <div class="hero-photo-ring"></div>
+      <div class="hero-photo-frame">
+        <img src="photo-1.jpg" alt="Shaheduj Jaman" />
+      </div>
+      <div class="hero-photo-badge">✈️</div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
-<div class="section-label bn">আমার সম্পর্কে</div>
-<div class="section-label en">About Me</div>
-<h2 class="section-title bn reveal">আমি কে এবং <span>আমি কী করি?</span></h2>
-<h2 class="section-title en reveal">Who I Am & <span>What I Do</span></h2>
-<div class="about-grid reveal">
-<div class="about-card">
-<div class="about-avatar">
-<div class="about-avatar-ring"></div>
-<img src="photo-2.jpg" alt="Shaheduj Jaman" />
-</div>
-<h3 class="bn">সাহেদুজ জামান</h3>
-<h3 class="en">Shaheduj Jaman</h3>
-<div class="role bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</div>
-<div class="role en">Air Ticketing & Visa Executive</div>
-<div class="info-row"><span class="ico">📍</span><span class="txt">Motijheel, Dhaka 1222</span></div>
-<div class="info-row"><span class="ico">📞</span><span class="txt">01701093217</span></div>
-<div class="info-row"><span class="ico">✉️</span><span class="txt">shaheduj03@gmail.com</span></div>
-<div class="info-row"><span class="ico">🎂</span><span class="txt">December 1997</span></div>
-<div class="info-row"><span class="ico">🩸</span><span class="txt">Blood Group: O+</span></div>
-<div class="info-row"><span class="ico">🌍</span><span class="txt">Bangladeshi</span></div>
-</div>
-<div class="about-text">
-<p class="bn">আমি একজন দক্ষ টিকেটিং অফিসার — GDS-ভিত্তিক এয়ার টিকেটিং, রিজার্ভেশন ম্যানেজমেন্ট এবং NDC-তে আমার বিশেষ দক্ষতা রয়েছে। NSDA Level-2-এ Air Ticketing & Reservation-এ সার্টিফাইড এবং Sabre GDS-এ অ্যাডভান্সড দক্ষতা অর্জন করেছি।</p>
-<p class="en">I am a detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. Certified in Air Ticketing & Reservation at NSDA Level-2, with advanced command over Sabre GDS including ticket issuance, void, refund, and re-issuance.</p>
-<p class="bn">আমার লক্ষ্য হলো একজন দক্ষ ও নিবেদিতপ্রাণ এয়ার টিকেট রিজার্ভেশন ও ভিসা এক্সিকিউটিভ হিসেবে ক্যারিয়ার গড়া। AI টুলস ব্যবহার করে কাজের দক্ষতা ও উৎপাদনশীলতা বৃদ্ধিতে আমি সর্বদা সচেষ্ট।</p>
-<p class="en">My goal is to develop my career as a competent Air Ticket Reservation & Visa Executive. I leverage AI tools to boost workflow efficiency and am committed to error-free ticketing and seamless travel experiences for every client.</p>
-<div class="skill-chips">
-<span class="chip c">Sabre GDS</span>
-<span class="chip pk">Amadeus</span>
-<span class="chip p">Travelport/Galileo</span>
-<span class="chip g">Visa Processing</span>
-<span class="chip y">NDC Expert</span>
-<span class="chip c">AI Tools</span>
-<span class="chip pk">English Fluent</span>
-<span class="chip g">OTA System</span>
-</div>
-</div>
-</div>
+  <div class="section-label bn">আমার সম্পর্কে</div>
+  <div class="section-label en">About Me</div>
+  <h2 class="section-title bn reveal">আমি কে এবং <span>আমি কী করি?</span></h2>
+  <h2 class="section-title en reveal">Who I Am & <span>What I Do</span></h2>
+  <div class="about-grid reveal">
+    <div class="about-card">
+      <div class="about-avatar">
+        <div class="about-avatar-ring"></div>
+        <img src="photo-2.jpg" alt="Shaheduj Jaman" />
+      </div>
+      <h3 class="bn">সাহেদুজ জামান</h3>
+      <h3 class="en">Shaheduj Jaman</h3>
+      <div class="role bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</div>
+      <div class="role en">Air Ticketing & Visa Executive</div>
+      <div class="info-row"><span class="ico">📍</span><span class="txt">Motijheel, Dhaka 1222</span></div>
+      <div class="info-row"><span class="ico">📞</span><span class="txt">01701093217</span></div>
+      <div class="info-row"><span class="ico">✉️</span><span class="txt">shaheduj03@gmail.com</span></div>
+      <div class="info-row"><span class="ico">🎂</span><span class="txt">December 1997</span></div>
+      <div class="info-row"><span class="ico">🩸</span><span class="txt">Blood Group: O+</span></div>
+      <div class="info-row"><span class="ico">🌍</span><span class="txt">Bangladeshi</span></div>
+    </div>
+    <div class="about-text">
+      <p class="bn">আমি একজন দক্ষ টিকেটিং অফিসার — GDS-ভিত্তিক এয়ার টিকেটিং, রিজার্ভেশন ম্যানেজমেন্ট এবং NDC-তে আমার বিশেষ দক্ষতা রয়েছে। NSDA Level-2-এ Air Ticketing & Reservation-এ সার্টিফাইড এবং Sabre GDS-এ অ্যাডভান্সড দক্ষতা অর্জন করেছি।</p>
+      <p class="en">I am a detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. Certified in Air Ticketing & Reservation at NSDA Level-2, with advanced command over Sabre GDS including ticket issuance, void, refund, and re-issuance.</p>
+      <p class="bn">আমার লক্ষ্য হলো একজন দক্ষ ও নিবেদিতপ্রাণ এয়ার টিকেট রিজার্ভেশন ও ভিসা এক্সিকিউটিভ হিসেবে ক্যারিয়ার গড়া। AI টুলস ব্যবহার করে কাজের দক্ষতা ও উৎপাদনশীলতা বৃদ্ধিতে আমি সর্বদা সচেষ্ট।</p>
+      <p class="en">My goal is to develop my career as a competent Air Ticket Reservation & Visa Executive. I leverage AI tools to boost workflow efficiency and am committed to error-free ticketing and seamless travel experiences for every client.</p>
+      <div class="skill-chips">
+        <span class="chip c">Sabre GDS</span>
+        <span class="chip pk">Amadeus</span>
+        <span class="chip p">Travelport/Galileo</span>
+        <span class="chip g">Visa Processing</span>
+        <span class="chip y">NDC Expert</span>
+        <span class="chip c">AI Tools</span>
+        <span class="chip pk">English Fluent</span>
+        <span class="chip g">OTA System</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-<div class="section-label bn">কর্মঅভিজ্ঞতা</div>
-<div class="section-label en">Work Experience</div>
-<h2 class="section-title bn reveal">পেশাদার <span>অভিজ্ঞতা</span></h2>
-<h2 class="section-title en reveal">Professional <span>Experience</span></h2>
-<div class="exp-timeline stagger reveal">
-<div class="exp-item">
-<div class="exp-dot" style="border-color:var(--cyan)"></div>
-<div class="exp-date bn">নভেম্বর ২০২২ – ডিসেম্বর ২০২৩ · ১ বছর ১ মাস</div>
-<div class="exp-date en">Nov 2022 – Dec 2023 · 1 Year 1 Month</div>
-<div class="exp-title bn">সিনিয়র এক্সিকিউটিভ</div>
-<div class="exp-title en">Senior Executive</div>
-<div class="exp-org">Aotrek Tourism Ltd. — Uttar Badda, Dhaka</div>
-<div class="exp-desc bn">কোম্পানির সেলস বৃদ্ধি ও যোগাযোগ দক্ষতার মাধ্যমে ক্লায়েন্টদের ভ্রমণ সমাধান প্রদান করা। এয়ার টিকেটিং ও কাস্টমার সার্ভিসে দক্ষতার সাথে কাজ করা।</div>
-<div class="exp-desc en">Increasing company sales and providing travel solutions to clients through strong communication and interpersonal skills. Handled air ticketing and customer service professionally.</div>
-</div>
-<div class="exp-item">
-<div class="exp-dot" style="border-color:var(--purple)"></div>
-<div class="exp-date bn">জানুয়ারি ২০২২ – জুন ২০২২ · ৫ মাস</div>
-<div class="exp-date en">Jan 2022 – Jun 2022 · 5 Months</div>
-<div class="exp-title bn">ইংরেজি শিক্ষক (হাই স্কুল)</div>
-<div class="exp-title en">English Teacher (High School)</div>
-<div class="exp-org">Chauddagram High School — Cumilla</div>
-<div class="exp-desc bn">শিক্ষার্থীদের ইংরেজি ভাষা শিক্ষা প্রদান — পড়া, লেখা, বলা ও শোনার দক্ষতা উন্নয়নে সহায়তা করা।</div>
-<div class="exp-desc en">Teaching English language skills to high school students — developing reading, writing, speaking, and listening abilities.</div>
-</div>
-</div>
+  <div class="section-label bn">কর্মঅভিজ্ঞতা</div>
+  <div class="section-label en">Work Experience</div>
+  <h2 class="section-title bn reveal">পেশাদার <span>অভিজ্ঞতা</span></h2>
+  <h2 class="section-title en reveal">Professional <span>Experience</span></h2>
+  <div class="exp-timeline stagger reveal">
+    <div class="exp-item">
+      <div class="exp-dot" style="border-color:var(--cyan)"></div>
+      <div class="exp-date bn">নভেম্বর ২০২২ – ডিসেম্বর ২০২৩ · ১ বছর ১ মাস</div>
+      <div class="exp-date en">Nov 2022 – Dec 2023 · 1 Year 1 Month</div>
+      <div class="exp-title bn">সিনিয়র এক্সিকিউটিভ</div>
+      <div class="exp-title en">Senior Executive</div>
+      <div class="exp-org">Aotrek Tourism Ltd. — Uttar Badda, Dhaka</div>
+      <div class="exp-desc bn">কোম্পানির সেলস বৃদ্ধি ও যোগাযোগ দক্ষতার মাধ্যমে ক্লায়েন্টদের ভ্রমণ সমাধান প্রদান করা। এয়ার টিকেটিং ও কাস্টমার সার্ভিসে দক্ষতার সাথে কাজ করা।</div>
+      <div class="exp-desc en">Increasing company sales and providing travel solutions to clients through strong communication and interpersonal skills. Handled air ticketing and customer service professionally.</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot" style="border-color:var(--purple)"></div>
+      <div class="exp-date bn">জানুয়ারি ২০২২ – জুন ২০২২ · ৫ মাস</div>
+      <div class="exp-date en">Jan 2022 – Jun 2022 · 5 Months</div>
+      <div class="exp-title bn">ইংরেজি শিক্ষক (হাই স্কুল)</div>
+      <div class="exp-title en">English Teacher (High School)</div>
+      <div class="exp-org">Chauddagram High School — Cumilla</div>
+      <div class="exp-desc bn">শিক্ষার্থীদের ইংরেজি ভাষা শিক্ষা প্রদান — পড়া, লেখা, বলা ও শোনার দক্ষতা উন্নয়নে সহায়তা করা।</div>
+      <div class="exp-desc en">Teaching English language skills to high school students — developing reading, writing, speaking, and listening abilities.</div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- PREFERRED SECTORS -->
 <section id="sectors">
-<div class="section-label bn">কর্মক্ষেত্র পছন্দ</div>
-<div class="section-label en">Career Preferences</div>
-<h2 class="section-title bn reveal">যে সেক্টরে আমি <span>কাজ করতে চাই</span></h2>
-<h2 class="section-title en reveal">Where I'm <span>Looking to Work</span></h2>
-<div class="pref-grid stagger reveal">
-<div class="pref-card c1">
-<div class="pref-icon-wrap">🏢</div>
-<div class="pref-card-title bn">পছন্দের প্রতিষ্ঠান</div>
-<div class="pref-card-title en">Preferred Organizations</div>
-<div class="pref-card-sub bn">যেসব প্রতিষ্ঠানে কাজ করতে আগ্রহী</div>
-<div class="pref-card-sub en">Organization types I'd love to join</div>
-<div class="pref-tags">
-<span class="pref-tag">Airline</span>
-<span class="pref-tag">Travel Agent</span>
-<span class="pref-tag">GSA</span>
-<span class="pref-tag">Tour Operator</span>
-<span class="pref-tag">Airport Service</span>
-<span class="pref-tag">Travel Startup</span>
-</div>
-</div>
-<div class="pref-card c2">
-<div class="pref-icon-wrap">🎯</div>
-<div class="pref-card-title bn">পছন্দের পদ ও খাত</div>
-<div class="pref-card-title en">Job Category &amp; Role</div>
-<div class="pref-card-sub bn">আমার কাঙ্ক্ষিত কর্মক্ষেত্র</div>
-<div class="pref-card-sub en">The field I'm targeting</div>
-<div class="pref-tags">
-<span class="pref-tag bn">হসপিটালিটি</span>
-<span class="pref-tag en">Hospitality</span>
-<span class="pref-tag">Travel</span>
-<span class="pref-tag">Tourism</span>
-<span class="pref-tag bn">এন্ট্রি লেভেল</span>
-<span class="pref-tag en">Entry Level</span>
-</div>
-</div>
-<div class="pref-card c3">
-<div class="pref-icon-wrap">📍</div>
-<div class="pref-card-title bn">কর্মস্থল</div>
-<div class="pref-card-title en">Work Location</div>
-<div class="pref-card-sub bn">দেশের ভেতরে পছন্দের জেলা</div>
-<div class="pref-card-sub en">Preferred district within Bangladesh</div>
-<div class="pref-tags">
-<span class="pref-tag">📍 Dhaka</span>
-</div>
-</div>
-</div>
-<div class="pref-globe-strip reveal-scale">
-<span class="flying-plane">✈️</span>
-<div class="globe-icon">🌍</div>
-<div class="pref-globe-text">
-<div class="gt-label bn">কাজের জন্য পছন্দের দেশ</div>
-<div class="gt-label en">Preferred Countries Abroad</div>
-<div class="gt-sub bn">বিদেশে কাজের সুযোগ পেলে যেসব দেশে যেতে আগ্রহী</div>
-<div class="gt-sub en">Open to opportunities in these countries</div>
-</div>
-<div class="country-track-wrap">
-<div class="country-track" id="countryTrack">
-<span class="country-chip">🇧🇪 Belgium</span>
-<span class="country-chip">🇩🇰 Denmark</span>
-<span class="country-chip">🇫🇮 Finland</span>
-<span class="country-chip">🇫🇷 France</span>
-<span class="country-chip">🇮🇹 Italy</span>
-<span class="country-chip">🇳🇴 Norway</span>
-<span class="country-chip">🇵🇹 Portugal</span>
-<span class="country-chip">🇸🇪 Sweden</span>
-<span class="country-chip">🇨🇭 Switzerland</span>
-</div>
-</div>
-</div>
-<div class="salary-card reveal-scale">
-<div class="salary-left">
-<div class="salary-icon-wrap">💰</div>
-<div>
-<div class="salary-label bn">প্রত্যাশিত বেতন</div>
-<div class="salary-label en">Expected Salary</div>
-</div>
-</div>
-<div class="salary-right">
-<span class="salary-currency">৳</span>
-<span class="salary-amount" id="salaryCounter">0</span>
-<span class="salary-period bn">/ মাস</span>
-<span class="salary-period en">/ month</span>
-</div>
-</div>
+  <div class="section-label bn">কর্মক্ষেত্র পছন্দ</div>
+  <div class="section-label en">Career Preferences</div>
+  <h2 class="section-title bn reveal">যে সেক্টরে আমি <span>কাজ করতে চাই</span></h2>
+  <h2 class="section-title en reveal">Where I'm <span>Looking to Work</span></h2>
+  <div class="pref-grid stagger reveal">
+    <div class="pref-card c1">
+      <div class="pref-icon-wrap">🏢</div>
+      <div class="pref-card-title bn">পছন্দের প্রতিষ্ঠান</div>
+      <div class="pref-card-title en">Preferred Organizations</div>
+      <div class="pref-card-sub bn">যেসব প্রতিষ্ঠানে কাজ করতে আগ্রহী</div>
+      <div class="pref-card-sub en">Organization types I'd love to join</div>
+      <div class="pref-tags">
+        <span class="pref-tag">Airline</span>
+        <span class="pref-tag">Travel Agent</span>
+        <span class="pref-tag">GSA</span>
+        <span class="pref-tag">Tour Operator</span>
+        <span class="pref-tag">Airport Service</span>
+        <span class="pref-tag">Travel Startup</span>
+      </div>
+    </div>
+    <div class="pref-card c2">
+      <div class="pref-icon-wrap">🎯</div>
+      <div class="pref-card-title bn">পছন্দের পদ ও খাত</div>
+      <div class="pref-card-title en">Job Category &amp; Role</div>
+      <div class="pref-card-sub bn">আমার কাঙ্ক্ষিত কর্মক্ষেত্র</div>
+      <div class="pref-card-sub en">The field I'm targeting</div>
+      <div class="pref-tags">
+        <span class="pref-tag bn">হসপিটালিটি</span>
+        <span class="pref-tag en">Hospitality</span>
+        <span class="pref-tag">Travel</span>
+        <span class="pref-tag">Tourism</span>
+        <span class="pref-tag bn">এন্ট্রি লেভেল</span>
+        <span class="pref-tag en">Entry Level</span>
+      </div>
+    </div>
+    <div class="pref-card c3">
+      <div class="pref-icon-wrap">📍</div>
+      <div class="pref-card-title bn">কর্মস্থল</div>
+      <div class="pref-card-title en">Work Location</div>
+      <div class="pref-card-sub bn">দেশের ভেতরে পছন্দের জেলা</div>
+      <div class="pref-card-sub en">Preferred district within Bangladesh</div>
+      <div class="pref-tags">
+        <span class="pref-tag">📍 Dhaka</span>
+      </div>
+    </div>
+  </div>
+  <div class="pref-globe-strip reveal-scale">
+    <span class="flying-plane">✈️</span>
+    <div class="globe-icon">🌍</div>
+    <div class="pref-globe-text">
+      <div class="gt-label bn">কাজের জন্য পছন্দের দেশ</div>
+      <div class="gt-label en">Preferred Countries Abroad</div>
+      <div class="gt-sub bn">বিদেশে কাজের সুযোগ পেলে যেসব দেশে যেতে আগ্রহী</div>
+      <div class="gt-sub en">Open to opportunities in these countries</div>
+    </div>
+    <div class="country-track-wrap">
+      <div class="country-track" id="countryTrack">
+        <span class="country-chip">🇧🇪 Belgium</span>
+        <span class="country-chip">🇩🇰 Denmark</span>
+        <span class="country-chip">🇫🇮 Finland</span>
+        <span class="country-chip">🇫🇷 France</span>
+        <span class="country-chip">🇮🇹 Italy</span>
+        <span class="country-chip">🇳🇴 Norway</span>
+        <span class="country-chip">🇵🇹 Portugal</span>
+        <span class="country-chip">🇸🇪 Sweden</span>
+        <span class="country-chip">🇨🇭 Switzerland</span>
+      </div>
+    </div>
+  </div>
+  <div class="salary-card reveal-scale">
+    <div class="salary-left">
+      <div class="salary-icon-wrap">💰</div>
+      <div>
+        <div class="salary-label bn">প্রত্যাশিত বেতন</div>
+        <div class="salary-label en">Expected Salary</div>
+      </div>
+    </div>
+    <div class="salary-right">
+      <span class="salary-currency">৳</span>
+      <span class="salary-amount" id="salaryCounter">0</span>
+      <span class="salary-period bn">/ মাস</span>
+      <span class="salary-period en">/ month</span>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- SKILLS -->
 <section class="skills-section" id="skills">
-<div class="section-label bn">দক্ষতাসমূহ</div>
-<div class="section-label en">Expertise</div>
-<h2 class="section-title bn reveal">আমার <span>পেশাদার দক্ষতা</span></h2>
-<h2 class="section-title en reveal">My <span>Professional Skills</span></h2>
-<div class="skills-grid stagger reveal">
-<div class="skill-row">
-<div class="skill-info"><span class="skill-name">Sabre GDS (Issue/Void/Refund)</span><span class="skill-pct">95%</span></div>
-<div class="skill-track"><div class="skill-fill fill-pk" style="--fill-w:95%"></div></div>
-</div>
-<div class="skill-row">
-<div class="skill-info"><span class="skill-name">Visa Processing</span><span class="skill-pct">88%</span></div>
-<div class="skill-track"><div class="skill-fill fill-cy" style="--fill-w:88%"></div></div>
-</div>
-<div class="skill-row">
-<div class="skill-info"><span class="skill-name">Air Ticketing & Reservation</span><span class="skill-pct">92%</span></div>
-<div class="skill-track"><div class="skill-fill fill-ye" style="--fill-w:92%"></div></div>
-</div>
-<div class="skill-row">
-<div class="skill-info"><span class="skill-name">Amadeus / Travelport GDS</span><span class="skill-pct">80%</span></div>
-<div class="skill-track"><div class="skill-fill fill-pu" style="--fill-w:80%"></div></div>
-</div>
-<div class="skill-row">
-<div class="skill-info">
-<span class="skill-name bn">কম্পিউটার লিটারেসি (MS Office)</span>
-<span class="skill-name en">Computer Literacy (MS Office)</span>
-<span class="skill-pct">90%</span>
-</div>
-<div class="skill-track"><div class="skill-fill fill-gr" style="--fill-w:90%"></div></div>
-</div>
-<div class="skill-row">
-<div class="skill-info"><span class="skill-name">AI Tools & Prompt Engineering</span><span class="skill-pct">85%</span></div>
-<div class="skill-track"><div class="skill-fill fill-pk" style="--fill-w:85%"></div></div>
-</div>
-<div class="skill-row">
-<div class="skill-info">
-<span class="skill-name bn">ডিজিটাল মার্কেটিং</span>
-<span class="skill-name en">Digital Marketing</span>
-<span class="skill-pct">75%</span>
-</div>
-<div class="skill-track"><div class="skill-fill fill-cy" style="--fill-w:75%"></div></div>
-</div>
-<div class="skill-row">
-<div class="skill-info">
-<span class="skill-name bn">গ্রাফিক্স ডিজাইন (Canva/PS)</span>
-<span class="skill-name en">Graphics Design (Canva/PS)</span>
-<span class="skill-pct">70%</span>
-</div>
-<div class="skill-track"><div class="skill-fill fill-pu" style="--fill-w:70%"></div></div>
-</div>
-</div>
+  <div class="section-label bn">দক্ষতাসমূহ</div>
+  <div class="section-label en">Expertise</div>
+  <h2 class="section-title bn reveal">আমার <span>পেশাদার দক্ষতা</span></h2>
+  <h2 class="section-title en reveal">My <span>Professional Skills</span></h2>
+  <div class="skills-grid stagger reveal">
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Sabre GDS (Issue/Void/Refund)</span><span class="skill-pct">95%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-pk" style="--fill-w:95%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Visa Processing</span><span class="skill-pct">88%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-cy" style="--fill-w:88%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Air Ticketing & Reservation</span><span class="skill-pct">92%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-ye" style="--fill-w:92%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Amadeus / Travelport GDS</span><span class="skill-pct">80%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-pu" style="--fill-w:80%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info">
+        <span class="skill-name bn">কম্পিউটার লিটারেসি (MS Office)</span>
+        <span class="skill-name en">Computer Literacy (MS Office)</span>
+        <span class="skill-pct">90%</span>
+      </div>
+      <div class="skill-track"><div class="skill-fill fill-gr" style="--fill-w:90%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">AI Tools & Prompt Engineering</span><span class="skill-pct">85%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-pk" style="--fill-w:85%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info">
+        <span class="skill-name bn">ডিজিটাল মার্কেটিং</span>
+        <span class="skill-name en">Digital Marketing</span>
+        <span class="skill-pct">75%</span>
+      </div>
+      <div class="skill-track"><div class="skill-fill fill-cy" style="--fill-w:75%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info">
+        <span class="skill-name bn">গ্রাফিক্স ডিজাইন (Canva/PS)</span>
+        <span class="skill-name en">Graphics Design (Canva/PS)</span>
+        <span class="skill-pct">70%</span>
+      </div>
+      <div class="skill-track"><div class="skill-fill fill-pu" style="--fill-w:70%"></div></div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- TRAINING -->
 <section id="training">
-<div class="section-label bn">প্রশিক্ষণ ও সার্টিফিকেট</div>
-<div class="section-label en">Training & Certifications</div>
-<h2 class="section-title bn reveal">আমার <span>প্রশিক্ষণসমূহ</span></h2>
-<h2 class="section-title en reveal">My <span>Training & Courses</span></h2>
-<div class="core-badge reveal">
-<span class="dot-live"></span>
-<span class="bn">এয়ার টিকেটিং ও ভিসা সংক্রান্ত মূল প্রশিক্ষণ</span>
-<span class="en">Core Air Ticketing & Visa Training</span>
-</div>
-<div class="core-grid stagger reveal">
-<div class="core-card">
-<div class="core-icon-wrap">✈️</div>
-<div class="core-tc-year">2024 · 6 Months</div>
-<div class="core-tc-title">Air Ticketing & Reservation — NSDA Level-2</div>
-<div class="core-tc-org">NSDA — ATAB Office, Naya Palton, Dhaka</div>
-<button class="cert-btn" onclick="openCertLightbox('Air Ticketing &amp; Reservation — NSDA Level-2','cert-nsda-l2')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="core-card">
-<div class="core-icon-wrap">🎫</div>
-<div class="core-tc-year">2025 · 3 Months</div>
-<div class="core-tc-title">Ticketing & Reservation Professional Course</div>
-<div class="core-tc-org">HB Aviation & Tourism Institute, Mirpur 11</div>
-<button class="cert-btn" onclick="openCertLightbox('Ticketing &amp; Reservation Professional Course','cert-hb-ticketing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="core-card">
-<div class="core-icon-wrap">🛂</div>
-<div class="core-tc-year">2025 · 2 Months</div>
-<div class="core-tc-title">Visa Processing Course</div>
-<div class="core-tc-org">HB Aviation & Tourism Institute, Mirpur 11</div>
-<button class="cert-btn" onclick="openCertLightbox('Visa Processing Course','cert-visa-processing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="core-card">
-<div class="core-icon-wrap">🖥️</div>
-<div class="core-tc-year">2025 · 2 Days</div>
-<div class="core-tc-title">Reservation & Ticketing on SABRE (Advanced)</div>
-<div class="core-tc-org">Sabre Travel Network Bangladesh Ltd.</div>
-<button class="cert-btn" onclick="openCertLightbox('Reservation &amp; Ticketing on SABRE (Advanced)','cert-sabre')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="core-card">
-<div class="core-icon-wrap">🛫</div>
-<div class="core-tc-year">2025 · 1 Month</div>
-<div class="core-tc-title">Basics of Aviation Ground Operation</div>
-<div class="core-tc-org">aviation.com.bd Academy (Online)</div>
-<button class="cert-btn" onclick="openCertLightbox('Basics of Aviation Ground Operation','cert-aviation')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-</div>
-<div class="support-divider reveal">
-<span class="line"></span>
-<span class="label bn">অতিরিক্ত দক্ষতা ও প্রশিক্ষণ</span>
-<span class="label en">Additional Skills & Training</span>
-<span class="line"></span>
-</div>
-<div class="training-grid stagger reveal">
-<div class="training-card">
-<div class="tc-year">2025–2026 · 15 Days</div>
-<div class="tc-title">🤖 AI For Career Development</div>
-<div class="tc-org">CED Foundation — Claude, ChatGPT, Gemini, Notion</div>
-<button class="cert-btn" onclick="openCertLightbox('AI For Career Development','cert-ai-career')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="training-card">
-<div class="tc-year">2025–2026 · 1 Month</div>
-<div class="tc-title">🗣️ Teachers Training on English (Phonics & Phonetics)</div>
-<div class="tc-org">TESOL Bangladesh (Online)</div>
-<button class="cert-btn" onclick="openCertLightbox('Teachers Training on English (Phonics &amp; Phonetics)','cert-tesol')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">🏆 Career Summit 2025 — Leadership Development</div><div class="tc-org">JCI Dhaka Pioneer · TCB Auditorium</div></div>
-<div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">📈 Seller to Sales Leader</div><div class="tc-org">Self Made Bangladesh · Bishwo Shahitto Kendro</div></div>
-<div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">🎨 Graphics Design for Freelancing (Level-3)</div><div class="tc-org">NACTAR — Photoshop, Illustrator, Canva</div></div>
-<div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">📢 Digital Marketing (Level-3)</div><div class="tc-org">NACTAR — SEO, Facebook Ads, Email Marketing</div></div>
-<div class="training-card"><div class="tc-year">2022 · 3 Months</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div></div>
-</div>
+  <div class="section-label bn">প্রশিক্ষণ ও সার্টিফিকেট</div>
+  <div class="section-label en">Training & Certifications</div>
+  <h2 class="section-title bn reveal">আমার <span>প্রশিক্ষণসমূহ</span></h2>
+  <h2 class="section-title en reveal">My <span>Training & Courses</span></h2>
+  <div class="core-badge reveal">
+    <span class="dot-live"></span>
+    <span class="bn">এয়ার টিকেটিং ও ভিসা সংক্রান্ত মূল প্রশিক্ষণ</span>
+    <span class="en">Core Air Ticketing & Visa Training</span>
+  </div>
+  <div class="core-grid stagger reveal">
+    <div class="core-card">
+      <div class="core-icon-wrap">✈️</div>
+      <div class="core-tc-year">2024 · 6 Months</div>
+      <div class="core-tc-title">Air Ticketing & Reservation — NSDA Level-2</div>
+      <div class="core-tc-org">NSDA — ATAB Office, Naya Palton, Dhaka</div>
+      <button class="cert-btn" onclick="openCertLightbox('Air Ticketing &amp; Reservation — NSDA Level-2','cert-nsda-l2')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🎫</div>
+      <div class="core-tc-year">2025 · 3 Months</div>
+      <div class="core-tc-title">Ticketing & Reservation Professional Course</div>
+      <div class="core-tc-org">HB Aviation & Tourism Institute, Mirpur 11</div>
+      <button class="cert-btn" onclick="openCertLightbox('Ticketing &amp; Reservation Professional Course','cert-hb-ticketing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🛂</div>
+      <div class="core-tc-year">2025 · 2 Months</div>
+      <div class="core-tc-title">Visa Processing Course</div>
+      <div class="core-tc-org">HB Aviation & Tourism Institute, Mirpur 11</div>
+      <button class="cert-btn" onclick="openCertLightbox('Visa Processing Course','cert-visa-processing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🖥️</div>
+      <div class="core-tc-year">2025 · 2 Days</div>
+      <div class="core-tc-title">Reservation & Ticketing on SABRE (Advanced)</div>
+      <div class="core-tc-org">Sabre Travel Network Bangladesh Ltd.</div>
+      <button class="cert-btn" onclick="openCertLightbox('Reservation &amp; Ticketing on SABRE (Advanced)','cert-sabre')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🛫</div>
+      <div class="core-tc-year">2025 · 1 Month</div>
+      <div class="core-tc-title">Basics of Aviation Ground Operation</div>
+      <div class="core-tc-org">aviation.com.bd Academy (Online)</div>
+      <button class="cert-btn" onclick="openCertLightbox('Basics of Aviation Ground Operation','cert-aviation')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+  </div>
+  <div class="support-divider reveal">
+    <span class="line"></span>
+    <span class="label bn">অতিরিক্ত দক্ষতা ও প্রশিক্ষণ</span>
+    <span class="label en">Additional Skills & Training</span>
+    <span class="line"></span>
+  </div>
+  <div class="training-grid stagger reveal">
+    <div class="training-card">
+      <div class="tc-year">2025–2026 · 15 Days</div>
+      <div class="tc-title">🤖 AI For Career Development</div>
+      <div class="tc-org">CED Foundation — Claude, ChatGPT, Gemini, Notion</div>
+      <button class="cert-btn" onclick="openCertLightbox('AI For Career Development','cert-ai-career')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="training-card">
+      <div class="tc-year">2025–2026 · 1 Month</div>
+      <div class="tc-title">🗣️ Teachers Training on English (Phonics & Phonetics)</div>
+      <div class="tc-org">TESOL Bangladesh (Online)</div>
+      <button class="cert-btn" onclick="openCertLightbox('Teachers Training on English (Phonics &amp; Phonetics)','cert-tesol')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">🏆 Career Summit 2025 — Leadership Development</div><div class="tc-org">JCI Dhaka Pioneer · TCB Auditorium</div></div>
+    <div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">📈 Seller to Sales Leader</div><div class="tc-org">Self Made Bangladesh · Bishwo Shahitto Kendro</div></div>
+    <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">🎨 Graphics Design for Freelancing (Level-3)</div><div class="tc-org">NACTAR — Photoshop, Illustrator, Canva</div></div>
+    <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">📢 Digital Marketing (Level-3)</div><div class="tc-org">NACTAR — SEO, Facebook Ads, Email Marketing</div></div>
+    <div class="training-card"><div class="tc-year">2022 · 3 Months · 🏆 2nd Position</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div><div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;"><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application','cert-computer-basic')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button><button class="cert-btn" onclick="openCertLightbox('Certificate of Merit — 2nd Position','cert-computer-merit')"><span>🏆</span> <span class="bn">মেরিট সার্টিফিকেট</span><span class="en">Merit Certificate</span></button></div></div>
+  </div>
 </section>
 
 <!-- CERTIFICATE LIGHTBOX -->
 <div class="cert-lightbox" id="certLightbox" onclick="if(event.target===this) closeCertLightbox()">
-<div class="cert-lightbox-inner">
-<div class="cert-lightbox-header">
-<div class="cert-lightbox-title" id="certLightboxTitle"></div>
-<button class="cert-lightbox-close" onclick="closeCertLightbox()" aria-label="Close">✕</button>
-</div>
-<div class="cert-lightbox-body">
-<div class="cert-scan"></div>
-<img id="certLightboxImg" src="" alt="Certificate" />
-</div>
-</div>
+  <div class="cert-lightbox-inner">
+    <div class="cert-lightbox-header">
+      <div class="cert-lightbox-title" id="certLightboxTitle"></div>
+      <button class="cert-lightbox-close" onclick="closeCertLightbox()" aria-label="Close">✕</button>
+    </div>
+    <div class="cert-lightbox-body">
+      <div class="cert-scan"></div>
+      <img id="certLightboxImg" src="" alt="Certificate" />
+    </div>
+  </div>
 </div>
 
 <div class="divider"></div>
 
 <!-- EDUCATION -->
 <section style="background: var(--surface);" id="education">
-<div class="section-label bn">শিক্ষাগত যোগ্যতা</div>
-<div class="section-label en">Education</div>
-<h2 class="section-title bn reveal">আমার <span>শিক্ষা</span></h2>
-<h2 class="section-title en reveal">My <span>Academic Background</span></h2>
-<div class="edu-grid stagger reveal">
-<div class="edu-card">
-<div class="edu-icon">🎓</div>
-<div class="edu-degree bn">মাস্টার অব আর্টস (MA)</div>
-<div class="edu-degree en">Master of Arts (MA)</div>
-<div class="edu-major">English Literature</div>
-<div class="edu-inst bn">ন্যাশনাল ইউনিভার্সিটি — সিদ্ধেশ্বরী কলেজ, ঢাকা</div>
-<div class="edu-inst en">National University — Siddheswari College, Dhaka</div>
-<div class="edu-year bn">ভর্তি ২০২৩ (চলমান)</div>
-<div class="edu-year en">Enrolled 2023 (Ongoing)</div>
-<button class="edu-cert-btn coming-soon">🔒 <span class="bn">শীঘ্রই আসছে</span><span class="en">Coming Soon</span></button>
-</div>
-<div class="edu-card">
-<div class="edu-icon">📚</div>
-<div class="edu-degree bn">বি.এ অনার্স</div>
-<div class="edu-degree en">B.A. (Hons)</div>
-<div class="edu-major">English Literature · CGPA 2.63/4</div>
-<div class="edu-inst bn">ন্যাশনাল ইউনিভার্সিটি — কুমিল্লা সরকারি কলেজ</div>
-<div class="edu-inst en">National University — Comilla Govt. College, Cumilla</div>
-<div class="edu-year bn">পাস ২০১৯</div>
-<div class="edu-year en">Passed 2019</div>
-<button class="edu-cert-btn" onclick="openCertLightbox('Bachelor of Arts — Honours (English)', 'cert-ba')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="edu-card">
-<div class="edu-icon">🏫</div>
-<div class="edu-degree">HSC</div>
-<div class="edu-major">Business Studies · GPA 4.33/5</div>
-<div class="edu-inst">Omargani M.E.S College</div>
-<div class="edu-year bn">পাস ২০১৫</div>
-<div class="edu-year en">Passed 2015</div>
-<button class="edu-cert-btn" onclick="openCertLightbox('Higher Secondary Certificate (HSC)', 'cert-hsc')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-<div class="edu-card">
-<div class="edu-icon">🏫</div>
-<div class="edu-degree">SSC</div>
-<div class="edu-major">Science · GPA 4.75/5</div>
-<div class="edu-inst">Mostafa Kamal High School</div>
-<div class="edu-year bn">পাস ২০১৩</div>
-<div class="edu-year en">Passed 2013</div>
-<button class="edu-cert-btn" onclick="openCertLightbox('Secondary School Certificate (SSC)', 'cert-ssc')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
-</div>
-</div>
+  <div class="section-label bn">শিক্ষাগত যোগ্যতা</div>
+  <div class="section-label en">Education</div>
+  <h2 class="section-title bn reveal">আমার <span>শিক্ষা</span></h2>
+  <h2 class="section-title en reveal">My <span>Academic Background</span></h2>
+  <div class="edu-grid stagger reveal">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-degree bn">মাস্টার অব আর্টস (MA)</div>
+      <div class="edu-degree en">Master of Arts (MA)</div>
+      <div class="edu-major">English Literature</div>
+      <div class="edu-inst bn">ন্যাশনাল ইউনিভার্সিটি — সিদ্ধেশ্বরী কলেজ, ঢাকা</div>
+      <div class="edu-inst en">National University — Siddheswari College, Dhaka</div>
+      <div class="edu-year bn">ভর্তি ২০২৩ (চলমান)</div>
+      <div class="edu-year en">Enrolled 2023 (Ongoing)</div>
+      <button class="edu-cert-btn coming-soon">🔒 <span class="bn">শীঘ্রই আসছে</span><span class="en">Coming Soon</span></button>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">📚</div>
+      <div class="edu-degree bn">বি.এ অনার্স</div>
+      <div class="edu-degree en">B.A. (Hons)</div>
+      <div class="edu-major">English Literature · CGPA 2.63/4</div>
+      <div class="edu-inst bn">ন্যাশনাল ইউনিভার্সিটি — কুমিল্লা সরকারি কলেজ</div>
+      <div class="edu-inst en">National University — Comilla Govt. College, Cumilla</div>
+      <div class="edu-year bn">পাস ২০১৯</div>
+      <div class="edu-year en">Passed 2019</div>
+      <button class="edu-cert-btn" onclick="openCertLightbox('Bachelor of Arts — Honours (English)', 'cert-ba')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <div class="edu-degree">HSC</div>
+      <div class="edu-major">Business Studies · GPA 4.33/5</div>
+      <div class="edu-inst">Omargani M.E.S College</div>
+      <div class="edu-year bn">পাস ২০১৫</div>
+      <div class="edu-year en">Passed 2015</div>
+      <button class="edu-cert-btn" onclick="openCertLightbox('Higher Secondary Certificate (HSC)', 'cert-hsc')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <div class="edu-degree">SSC</div>
+      <div class="edu-major">Science · GPA 4.75/5</div>
+      <div class="edu-inst">Mostafa Kamal High School</div>
+      <div class="edu-year bn">পাস ২০১৩</div>
+      <div class="edu-year en">Passed 2013</div>
+      <button class="edu-cert-btn" onclick="openCertLightbox('Secondary School Certificate (SSC)', 'cert-ssc')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-<div class="contact-inner reveal-scale">
-<div class="section-label bn">যোগাযোগ করুন</div>
-<div class="section-label en">Get In Touch</div>
-<h2 class="section-title bn reveal" style="margin-bottom:12px;">একসাথে <span>কাজ করি?</span></h2>
-<h2 class="section-title en reveal" style="margin-bottom:12px;">Let's Work <span>Together?</span></h2>
-<p class="bn" style="color:var(--muted);font-size:15px;line-height:1.7;">এয়ার টিকেটিং, ভিসা প্রসেসিং বা ট্যুর রিলেটেড যেকোনো কাজে আমার সাথে যোগাযোগ করুন।</p>
-<p class="en" style="color:var(--muted);font-size:15px;line-height:1.7;">Reach out for air ticketing, visa processing, or any travel-related opportunity.</p>
-<div class="contact-links">
-<a href="mailto:shaheduj03@gmail.com" class="contact-link">
-<span class="icon">📧</span>
-<div class="info"><div class="label">Email</div><div class="value">shaheduj03@gmail.com</div></div>
-</a>
-<a href="tel:+8801701093217" class="contact-link">
-<span class="icon">📱</span>
-<div class="info">
-<div class="label bn">ফোন</div><div class="label en">Phone</div>
-<div class="value">01701093217</div>
-</div>
-</a>
-</div>
-<div class="ref-note reveal" role="button" tabindex="0" onclick="openRefLightbox()" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); openRefLightbox(); }">
-<div class="ref-note-icowrap">📋</div>
-<div class="ref-note-text">
-<span class="bn">পেশাদার রেফারেন্স দেখুন<span class="sub">ক্লিক করে বিস্তারিত দেখুন</span></span>
-<span class="en">View Professional References<span class="sub">Click to see contact details</span></span>
-</div>
-<div class="ref-note-arrow">→</div>
-</div>
-</div>
+  <div class="contact-inner reveal-scale">
+    <div class="section-label bn">যোগাযোগ করুন</div>
+    <div class="section-label en">Get In Touch</div>
+    <h2 class="section-title bn reveal" style="margin-bottom:12px;">একসাথে <span>কাজ করি?</span></h2>
+    <h2 class="section-title en reveal" style="margin-bottom:12px;">Let's Work <span>Together?</span></h2>
+    <p class="bn" style="color:var(--muted);font-size:15px;line-height:1.7;">এয়ার টিকেটিং, ভিসা প্রসেসিং বা ট্যুর রিলেটেড যেকোনো কাজে আমার সাথে যোগাযোগ করুন।</p>
+    <p class="en" style="color:var(--muted);font-size:15px;line-height:1.7;">Reach out for air ticketing, visa processing, or any travel-related opportunity.</p>
+    <div class="contact-links">
+      <a href="mailto:shaheduj03@gmail.com" class="contact-link">
+        <span class="icon">📧</span>
+        <div class="info"><div class="label">Email</div><div class="value">shaheduj03@gmail.com</div></div>
+      </a>
+      <a href="tel:+8801701093217" class="contact-link">
+        <span class="icon">📱</span>
+        <div class="info">
+          <div class="label bn">ফোন</div><div class="label en">Phone</div>
+          <div class="value">01701093217</div>
+        </div>
+      </a>
+    </div>
+    <div class="ref-note reveal" role="button" tabindex="0" onclick="openRefLightbox()" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); openRefLightbox(); }">
+      <div class="ref-note-icowrap">📋</div>
+      <div class="ref-note-text">
+        <span class="bn">পেশাদার রেফারেন্স দেখুন<span class="sub">ক্লিক করে বিস্তারিত দেখুন</span></span>
+        <span class="en">View Professional References<span class="sub">Click to see contact details</span></span>
+      </div>
+      <div class="ref-note-arrow">→</div>
+    </div>
+  </div>
 </section>
 
 <!-- REFERENCE LIGHTBOX -->
 <div class="ref-lightbox" id="refLightbox" onclick="if(event.target===this) closeRefLightbox()">
-<div class="ref-lightbox-inner">
-<div class="ref-lightbox-header">
-<div class="ref-lightbox-title">
-<span class="bn">পেশাদার রেফারেন্স</span>
-<span class="en">Professional References</span>
-</div>
-<button class="ref-lightbox-close" onclick="closeRefLightbox()" aria-label="Close">✕</button>
-</div>
-<div class="ref-lightbox-body">
-<div class="ref-person-card">
-<div class="ref-person-top">
-<div class="ref-person-avatar">HR</div>
-<div>
-<div class="ref-person-name">Harunur Rashid</div>
-<div class="ref-person-role">Founder &amp; CEO</div>
-</div>
-</div>
-<div class="ref-person-org"><span class="org-icon">🏢</span>aviation.com.bd</div>
-<div class="ref-person-relation">
-<span class="bn">🎓 একাডেমিক রেফারেন্স</span>
-<span class="en">🎓 Academic Reference</span>
-</div>
-<div class="ref-person-contact">
-<a href="tel:+8801313966688" class="ref-contact-row"><span class="icon">📱</span><span class="text">01313966688</span></a>
-<a href="mailto:harun@aviation.com.bd" class="ref-contact-row"><span class="icon">📧</span><span class="text">harun@aviation.com.bd</span></a>
-<div class="ref-contact-row address"><span class="icon">📍</span><span class="text">Concord Tower, Suite 902, Level 09, 113 Kazi Nazrul Islam Avenue, Dhaka 1215</span></div>
-</div>
-</div>
-<div class="ref-person-card">
-<div class="ref-person-top">
-<div class="ref-person-avatar">ZB</div>
-<div>
-<div class="ref-person-name">Zaki S. Bari</div>
-<div class="ref-person-role">Founder &amp; Chairman</div>
-</div>
-</div>
-<div class="ref-person-org"><span class="org-icon">🏢</span>HB Aviation and Tourism Institute</div>
-<div class="ref-person-relation">
-<span class="bn">🎓 একাডেমিক রেফারেন্স</span>
-<span class="en">🎓 Academic Reference</span>
-</div>
-<div class="ref-person-contact">
-<a href="tel:+8801786469878" class="ref-contact-row"><span class="icon">📱</span><span class="text">01786469878</span></a>
-<a href="mailto:hbaviationbd@gmail.com" class="ref-contact-row"><span class="icon">📧</span><span class="text">hbaviationbd@gmail.com</span></div>
-<div class="ref-contact-row address"><span class="icon">📍</span><span class="text">Plot-9, Road-4, Section-7, Mirpur, Dhaka 1216</span></div>
-</div>
-</div>
-</div>
-</div>
+  <div class="ref-lightbox-inner">
+    <div class="ref-lightbox-header">
+      <div class="ref-lightbox-title">
+        <span class="bn">পেশাদার রেফারেন্স</span>
+        <span class="en">Professional References</span>
+      </div>
+      <button class="ref-lightbox-close" onclick="closeRefLightbox()" aria-label="Close">✕</button>
+    </div>
+    <div class="ref-lightbox-body">
+      <div class="ref-person-card">
+        <div class="ref-person-top">
+          <div class="ref-person-avatar">HR</div>
+          <div>
+            <div class="ref-person-name">Harunur Rashid</div>
+            <div class="ref-person-role">Founder &amp; CEO</div>
+          </div>
+        </div>
+        <div class="ref-person-org"><span class="org-icon">🏢</span>aviation.com.bd</div>
+        <div class="ref-person-relation">
+          <span class="bn">🎓 একাডেমিক রেফারেন্স</span>
+          <span class="en">🎓 Academic Reference</span>
+        </div>
+        <div class="ref-person-contact">
+          <a href="tel:+8801313966688" class="ref-contact-row"><span class="icon">📱</span><span class="text">01313966688</span></a>
+          <a href="mailto:harun@aviation.com.bd" class="ref-contact-row"><span class="icon">📧</span><span class="text">harun@aviation.com.bd</span></a>
+          <div class="ref-contact-row address"><span class="icon">📍</span><span class="text">Concord Tower, Suite 902, Level 09, 113 Kazi Nazrul Islam Avenue, Dhaka 1215</span></div>
+        </div>
+      </div>
+      <div class="ref-person-card">
+        <div class="ref-person-top">
+          <div class="ref-person-avatar">ZB</div>
+          <div>
+            <div class="ref-person-name">Zaki S. Bari</div>
+            <div class="ref-person-role">Founder &amp; Chairman</div>
+          </div>
+        </div>
+        <div class="ref-person-org"><span class="org-icon">🏢</span>HB Aviation and Tourism Institute</div>
+        <div class="ref-person-relation">
+          <span class="bn">🎓 একাডেমিক রেফারেন্স</span>
+          <span class="en">🎓 Academic Reference</span>
+        </div>
+        <div class="ref-person-contact">
+          <a href="tel:+8801786469878" class="ref-contact-row"><span class="icon">📱</span><span class="text">01786469878</span></a>
+          <a href="mailto:hbaviationbd@gmail.com" class="ref-contact-row"><span class="icon">📧</span><span class="text">hbaviationbd@gmail.com</span></a>
+          <div class="ref-contact-row address"><span class="icon">📍</span><span class="text">Plot-9, Road-4, Section-7, Mirpur, Dhaka 1216</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
-<div class="signature-section">
-<div class="signature-wrapper">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABQCAYAAACj6kh7AAAFEElEQVR4nO3d27KbMAyFYWfPfv9XphedTAjbB9nIWJL/764dApSYFfkAfR3HkbC9cyN4LTsLoOF39QlgKX6t4MrP6hPAUlRTcIXA2tu1wiLAYBqBBcANAgtvVFcwj8DaFwPucIfAQkpUV3CCwNoT1RVcIrD2Q1jBLQILgBusdN8L667gGhUWADcIrH1QXcE9AguAGwTWHqiuEAKBFR/LGBAGgbUfqiu4RWDFRlcQoRBYANwgsOKiukI4BNYeCCuEQGDFxMwgQiKw4qEriLAIrNgIK4RCYMXCf4iK0AisOBi3QngEVkxUVwiJwIqBriC2QGD5R1cQ2yCwfGMJA7bCO93v6a1uZgYKYYXwCKw+d7tf789rhAtdQWyHwGprBcM5fI5UDqNDuN3IOVFdYQsEVlkpqGrhIAmr898RNEAHBt3zcgHzSuMBoxlMVFfYFoH17Uj5QNAIhdw+esehCCtsjcD6mBVU132OYpAd2yOw/nuychnZd6mLCmyFwFrfzaJyAoQIrG9PhVXPcaiubMqNd2IyAmu9WvhwQ9h0XVOHh7AO68NL1eLlPC26+6RBKZw0n2BABYG1huRXmV9uPddrObJot/YKnyOzTW67nWi1369rSGB9WFp5PrLKfifSYMhtdw4XyfWUvGvs+nhW6fit/Xjy1A/q1/dEYH2zEFrXG4RK60PaJesJtFK1dCVtF5L9Sb9TS22xl9bynfffv1JK6XUc3A/p+VK+NOZRC6vVjXe21jhQ6Vr0PJxe2t/I5+/SvvHuzjzPPmaN5HxeKVFhvV1/mWcOovIL8VfrTRa14M5VoZLvrfSolMWlLW+1trOyXc04dvb6UGHlzVr7VLuxolVX0tCvdcEYxP4r0g3b/X0SWG2aA6eSbk2ksDprje2Uxp9yn41I40YMf53oErZJZoC0Hmq22uB6QqQ5cJpkXTyr16IXQaSICmtcb+WVu0lr0+65P9f2P0qyvqiktL32zJtFmjeO5+vwKCqsca3Kq7cRarwvK/eZnkd/SlXQdT+9U/WebkhrM2g4ocKaQzImJam4WvuoHff6+Z5zbH3eUzhRCQXiucKyPDh7DiBpWLX21VI7znVMKLdtT/dz5QzeyvVLWMxrYHl5CDV3Y/csgJQOQJf22XP8nuPlPjuKCghi3gKr1RV5YuFnj7thdd2utX+NbTWvGdUQVHkLrLNSt0RjAPyu0cdFrvuoVUsru28MTGMJT4ElHbPKVS6W1vVoTPn3BpA0ILVYudYIxlNgjVjRTdSYbZOe45MPvBJCWM5LYN252aw82KwRVucAbi2F6LFjGEVezxP2+/SyDktzDGbWdPyMsNo5jFw0TMdctgsvFZamGRWX1qMnvTep9UZnJXSsX6dZatffykx6F4+BpXWBS8HVewxJo+hltRE9FUBW//3e9D4RYZ7HwNKe8cuNBbW6jVGm9Wc33NX/PgTjMbBmqQ1iS2/snuUDs27mWSFE+MTgsiv4tmNgrb6hRxsK66SgwfV37yWwWm8TeJu51mjWO51mBKjrRgmUeAmsqycHs0ffChFlnAsww2JgWViR3aqmCCNggacDy+rT+++Zx9b5aQ6+A+g0I7A0HqORHqP3XVF3tyOIgIVGA+uJUGrtI7fgU2O/AIySBNZIIFiYupcgoABHroHVExhPv2NJenzL73oHcMNvGg+VJ6qhkaAhnICgnpglJEAAqPhN9bVFhA0AM84VFuEEwLSf1ScAAFL/AIoCLtlFYmnUAAAAAElFTkSuQmCC" alt="Signature" class="signature-img" id="signatureImg">
-<div class="signature-glow"></div>
-</div>
-<p class="signature-name bn">শাহেদুজ জামান</p>
-<p class="signature-name en">Shaheduj Jaman</p>
-<p class="signature-title bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</p>
-<p class="signature-title en">Air Ticketing & Visa Executive</p>
-</div>
-<div class="footer-socials">
-<a href="https://www.linkedin.com/in/shaheduj-jaman-2679b5248/" target="_blank" rel="noopener" class="social-icon linkedin" aria-label="LinkedIn">
-<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-</a>
-<a href="https://www.facebook.com/share/18ufgma2ka/" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook">
-<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-</a>
-</div>
-<div class="footer-rule"></div>
-<span class="bn">তৈরি করেছেন <span>❤️</span> দিয়ে — © ২০২৬ Shaheduj Jaman · Air Ticketing & Visa Executive</span>
-<span class="en">Made with <span>❤️</span> — © 2026 Shaheduj Jaman · Air Ticketing & Visa Executive</span>
+  <div class="signature-section">
+    <div class="sig-pro-wrapper" id="sigProWrapper">
+      <div class="sig-img-box">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABQCAYAAACj6kh7AAAFEElEQVR4nO3d27KbMAyFYWfPfv9XphedTAjbB9nIWJL/764dApSYFfkAfR3HkbC9cyN4LTsLoOF39QlgKX6t4MrP6hPAUlRTcIXA2tu1wiLAYBqBBcANAgtvVFcwj8DaFwPucIfAQkpUV3CCwNoT1RVcIrD2Q1jBLQILgBusdN8L667gGhUWADcIrH1QXcE9AguAGwTWHqiuEAKBFR/LGBAGgbUfqiu4RWDFRlcQoRBYANwgsOKiukI4BNYeCCuEQGDFxMwgQiKw4qEriLAIrNgIK4RCYMXCf4iK0AisOBi3QngEVkxUVwiJwIqBriC2QGD5R1cQ2yCwfGMJA7bCO93v6a1uZgYKYYXwCKw+d7tf789rhAtdQWyHwGprBcM5fI5UDqNDuN3IOVFdYQsEVlkpqGrhIAmr898RNEAHBt3zcgHzSuMBoxlMVFfYFoH17Uj5QNAIhdw+esehCCtsjcD6mBVU132OYpAd2yOw/nuychnZd6mLCmyFwFrfzaJyAoQIrG9PhVXPcaiubMqNd2IyAmu9WvhwQ9h0XVOHh7AO68NL1eLlPC26+6RBKZw0n2BABYG1huRXmV9uPddrObJot/YKnyOzTW67nWi1269rSGB9WFp5PrLKfifSYMhtdw4XyfWUvGvs+nhW6fit/Xjy1A/q1/dEYH2zEFrXG4RK60PaJesJtFK1dCVtF5L9Sb9TS22xl9bynfffv1JK6XUc3A/p+VK+NOZRC6vVjXe21jhQ6Vr0PJxe2t/I5+/SvvHuzjzPPmaN5HxeKVFhvV1/mWcOovIL8VfrTRa14M5VoZLvrfSolMWlLW+1trOyXc04dvb6UGHlzVr7VLuxolVX0tCvdcEYxP4r0g3b/X0SWG2aA6eSbk2ksDprje2Uxp9yn41I40YMf53oErZJZoC0Hmq22uB6QqQ5cJpkXTyr16IXQaSICmtcb+WVu0lr0+65P9f2P0qyvqiktL32zJtFmjeO5+vwKCqsca3Kq7cRarwvK/eZnkd/SlXQdT+9U/WebkhrM2g4ocKaQzImJam4WvuoHff6+Z5zbH3eUzhRCQXiucKyPDh7DiBpWLX21VI7znVMKLdtT/dz5QzeyvVLWMxrYHl5CDV3Y/csgJQOQJf22XP8nuPlPjuKCghi3gKr1RV5YuFnj7thdd2utX+NbTWvGdUQVHkLrLNSt0RjAPyu0cdFrvuoVUsru28MTGMJT4ElHbPKVS6W1vVoTPn3BpA0ILVYudYIxlNgjVjRTdSYbZOe45MPvBJCWM5LYN252aw82KwRVucAbi2F6LFjGEVezxP2+/SyDktzDGbWdPyMsNo5jFw0TMdctgsvFZamGRWX1qMnvTep9UZnJXSsX6dZatffykx6F4+BpXWBS8HVewxJo+hltRE9FUBW//3e9D4RYZ7HwNKe8cuNBbW6jVGm9Wc33NX/PgTjMbBmqQ1iS2/snuUDs27mWSFE+MTgsiv4tmNgrb6hRxsK66SgwfV37yWwWm8TeJu51mjWO51mBKjrRgmUeAmsqycHs0ffChFlnAsww2JgWViR3aqmCCNggacDy+rT+++Zx9b5aQ6+A+g0I7A0HqORHqP3XVF3tyOIgIVGA+uJUGrtI7fgU2O/AIySBNZIIFiYupcgoABHroHVExhPv2NJenzL73oHcMNvGg+VJ6qhkaAhnICgnpglJEAAqPhN9bVFhA0AM84VFuEEwLSf1ScAAFL/AIoCLtlFYmnUAAAAAElFTkSuQmCC"
+          alt="Shaheduj Jaman Signature"
+          class="sig-pro-img"
+          id="signatureImg"
+        />
+      </div>
+      <div class="sig-underline" id="sigUnderline"></div>
+    </div>
+    <p class="signature-name bn" id="sigNameBn">সাহেদুজ জামান</p>
+    <p class="signature-name en" id="sigNameEn">Shaheduj Jaman</p>
+    <p class="signature-title bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</p>
+    <p class="signature-title en">Air Ticketing & Visa Executive</p>
+  </div>
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/shaheduj-jaman-2679b5248/" target="_blank" rel="noopener" class="social-icon linkedin" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/share/18ufgma2ka/" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+  <div class="footer-rule"></div>
+  <span class="bn">তৈরি করেছেন <span>❤️</span> দিয়ে — © ২০২৬ Shaheduj Jaman · Air Ticketing & Visa Executive</span>
+  <span class="en">Made with <span>❤️</span> — © 2026 Shaheduj Jaman · Air Ticketing & Visa Executive</span>
 </footer>
 
-<!-- ✅ FIX 1: script_p1.js আলাদাভাবে লোড হচ্ছে -->
 <script src="script_p1.js"></script>
-
-<!-- ✅ FIX 2: Signature animation আলাদা script ট্যাগে (আগে src এর ভেতরে ছিল, কাজ করত না) -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  var sigImg = document.getElementById('signatureImg');
-  var sigNames = document.querySelectorAll('.signature-name');
-  var sigTitles = document.querySelectorAll('.signature-title');
-  var sigGlow = document.querySelector('.signature-glow');
+/* ══════════════════════════════════════
+   নতুন Language Toggle — সম্পূর্ণ স্বাধীন
+   script_p1.js এর উপর নির্ভর করে না
+══════════════════════════════════════ */
+function switchLanguage(lang, e) {
+  if (e) e.stopPropagation();
+
+  const body = document.body;
+
+  /* আগে থেকেই সেই ভাষায় থাকলে কিছু করবে না */
+  const isAlreadyActive =
+    (lang === 'en' && body.classList.contains('lang-en')) ||
+    (lang === 'bn' && body.classList.contains('lang-bn'));
+  if (isAlreadyActive) return;
+
+  /* body class সরাসরি সেট করি — toggle নয়, নির্দিষ্ট ভাষা */
+  if (lang === 'en') {
+    body.classList.remove('lang-bn');
+    body.classList.add('lang-en');
+  } else {
+    body.classList.remove('lang-en');
+    body.classList.add('lang-bn');
+  }
+
+  /* script_p1.js এ যদি অন্য কোনো কাজ থাকে সেটাও চালাই */
+  if (typeof toggleLang === 'function') {
+    /* toggleLang শুধু তখন call করব যদি body class আর না মিলে */
+    const afterClass = body.classList.contains('lang-' + lang);
+    if (!afterClass) toggleLang();
+  }
+
+  /* Ripple effect */
+  if (e) {
+    const toggleEl = document.getElementById('newLangToggle');
+    const rect     = toggleEl.getBoundingClientRect();
+    const ripple   = document.createElement('div');
+    ripple.className = 'lang-ripple-el';
+    ripple.style.cssText =
+      `width:55px;height:55px;` +
+      `left:${e.clientX - rect.left - 27}px;` +
+      `top:${e.clientY  - rect.top  - 27}px;`;
+    toggleEl.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+}
+
+/* ══ PROFESSIONAL SIGNATURE ANIMATION ══ */
+(function () {
+  const sigImg    = document.getElementById('signatureImg');
+  const sigLine   = document.getElementById('sigUnderline');
+  const sigNames  = document.querySelectorAll('.signature-name');
+  const sigTitles = document.querySelectorAll('.signature-title');
+
   if (!sigImg) return;
-  var sigObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
+
+  let triggered = false;
+
+  function runAnim() {
+    if (triggered) return;
+    triggered = true;
+
+    /* 1. signature fade-in + scale */
+    setTimeout(() => sigImg.classList.add('sig-visible'), 100);
+
+    /* 2. glow underline expand */
+    setTimeout(() => sigLine.classList.add('sig-visible'), 700);
+
+    /* 3. name fade-in */
+    setTimeout(() => {
+      sigNames.forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 120)
+      );
+    }, 1000);
+
+    /* 4. title fade-in */
+    setTimeout(() => {
+      sigTitles.forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 120)
+      );
+    }, 1250);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        sigImg.classList.add('animate');
-        if (sigGlow) sigGlow.classList.add('animate');
-        setTimeout(function() {
-          sigNames.forEach(function(el) { el.classList.add('visible'); });
-          sigTitles.forEach(function(el) { el.classList.add('visible'); });
-        }, 2500);
-        sigObserver.unobserve(entry.target);
+        runAnim();
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.3 });
-  sigObserver.observe(sigImg);
-});
+  }, { threshold: 0.35 });
+
+  observer.observe(sigImg);
+})();
+</script>
+
+
+<script>
+/* ══ CERTIFICATE LIGHTBOX — standalone ══ */
+window.openCertLightbox = function(title, id) {
+  const lightbox = document.getElementById('certLightbox');
+  const titleEl  = document.getElementById('certLightboxTitle');
+  const imgEl    = document.getElementById('certLightboxImg');
+
+  if (!lightbox || !titleEl || !imgEl) return;
+
+  titleEl.textContent = title;
+
+  /* GitHub repository থেকে সরাসরি jpg লোড */
+  imgEl.src = id + '.jpg';
+
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeCertLightbox = function() {
+  const lightbox = document.getElementById('certLightbox');
+  if (lightbox) lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+};
 </script>
 
 </body>
