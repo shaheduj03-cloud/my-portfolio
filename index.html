@@ -488,6 +488,97 @@ h1:hover, h2:hover, h3:hover {
   color: #1a0a00 !important;
   -webkit-text-fill-color: #1a0a00 !important;
 }
+/* ══════════════════════════════════════
+   Extra Curricular Activities
+══════════════════════════════════════ */
+.eca-wrapper {
+  margin-top: 28px;
+}
+
+.eca-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.eca-header-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+}
+
+.eca-header-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0,212,255,0.6);
+  white-space: nowrap;
+  font-family: var(--font-display, sans-serif);
+}
+
+.eca-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eca-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(255,208,0,0.04) 100%);
+  border: 1px solid rgba(0,212,255,0.15);
+  cursor: default;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition:
+    opacity 0.55s ease var(--d, 0s),
+    transform 0.55s ease var(--d, 0s),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.eca-badge.eca-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.eca-badge:hover {
+  border-color: rgba(255,165,0,0.45);
+  background: linear-gradient(135deg, rgba(255,149,0,0.08) 0%, rgba(255,208,0,0.06) 100%);
+  box-shadow: 0 4px 18px rgba(255,165,0,0.12);
+}
+
+.eca-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  animation: ecaIconPulse 3s ease-in-out infinite;
+}
+
+.eca-badge:nth-child(2) .eca-icon { animation-delay: 0.5s; }
+.eca-badge:nth-child(3) .eca-icon { animation-delay: 1s; }
+
+@keyframes ecaIconPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+.eca-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.78);
+  font-family: var(--font-sans, sans-serif);
+  transition: color 0.3s ease;
+}
+
+.eca-badge:hover .eca-text {
+  color: #ffd000;
+}
 </style>
 
 </head>
@@ -622,6 +713,33 @@ h1:hover, h2:hover, h3:hover {
         <span class="chip c">AI Tools</span>
         <span class="chip pk">English Fluent</span>
         <span class="chip g">OTA System</span>
+      </div>
+
+      <!-- Extra Curricular Activities -->
+      <div class="eca-wrapper reveal">
+        <div class="eca-header">
+          <span class="eca-header-line"></span>
+          <span class="eca-header-label bn">এক্সট্রা কারিকুলার অ্যাক্টিভিটিস</span>
+          <span class="eca-header-label en">Extra Curricular Activities</span>
+          <span class="eca-header-line"></span>
+        </div>
+        <div class="eca-badges">
+          <div class="eca-badge" style="--d:0.1s">
+            <span class="eca-icon">🏕️</span>
+            <span class="eca-text bn">বাংলাদেশ স্কাউটস, কুমিল্লা</span>
+            <span class="eca-text en">Bangladesh Scouts, Cumilla</span>
+          </div>
+          <div class="eca-badge" style="--d:0.25s">
+            <span class="eca-icon">🎤</span>
+            <span class="eca-text bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</span>
+            <span class="eca-text en">Victoria College Debating Society (VCDS)</span>
+          </div>
+          <div class="eca-badge" style="--d:0.4s">
+            <span class="eca-icon">🩸</span>
+            <span class="eca-text bn">ব্লাড ডোনেশন ক্লাব (বাঁধন), কুমিল্লা</span>
+            <span class="eca-text en">Blood Donation Club (Badhon), Cumilla</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1189,6 +1307,20 @@ window.closeCertLightbox = function() {
     entries.forEach(entry => { if (entry.isIntersecting) { runAnim(); observer.unobserve(entry.target); } });
   }, { threshold: 0.3 });
   observer.observe(sigCard);
+
+  // ECA badges scroll animation
+  const ecaBadges = document.querySelectorAll('.eca-badge');
+  if (ecaBadges.length) {
+    const ecaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('eca-visible');
+          ecaObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    ecaBadges.forEach(badge => ecaObserver.observe(badge));
+  }
 })();
 </script>
 
