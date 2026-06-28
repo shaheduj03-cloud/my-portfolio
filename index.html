@@ -401,20 +401,90 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
   0%, 100% { transform: scale(1); opacity: 0.5; box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
   50%       { transform: scale(1.4); opacity: 1;   box-shadow: 0 0 0 4px rgba(0,212,255,0.0); }
 }
-/* cert-btn hover — হলুদ-কমলা gradient */
+/* ══════════════════════════════════════
+   Global Hover — হলুদ-কমলা রঙ
+══════════════════════════════════════ */
+
+/* cert-btn */
 .cert-btn {
-  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease !important;
+  transform: none !important;
 }
 
 .cert-btn:hover {
   background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%) !important;
   border-color: #ffd000 !important;
   color: #1a0a00 !important;
-  box-shadow: 0 4px 20px rgba(255,165,0,0.45), 0 0 12px rgba(255,200,0,0.3) !important;
-  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 20px rgba(255,165,0,0.4) !important;
+  transform: none !important;
 }
 
-.cert-btn:hover span {
+.cert-btn:hover span,
+.cert-btn:hover .bn,
+.cert-btn:hover .en {
+  color: #1a0a00 !important;
+  -webkit-text-fill-color: #1a0a00 !important;
+}
+
+/* Navigation links */
+.nav-link, .nav-item a {
+  transition: color 0.3s ease !important;
+}
+.nav-link:hover, .nav-item a:hover {
+  color: #ffd000 !important;
+}
+
+/* Section titles & headings */
+h1:hover, h2:hover, h3:hover {
+  color: #ffd000 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Training card hover */
+.training-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+}
+.training-card:hover .tc-title {
+  color: #ffd000 !important;
+  transition: color 0.3s ease !important;
+}
+.training-card:hover .tc-year {
+  color: #ff9500 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Footer social icons */
+.footer-social a, .social-btn {
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+.footer-social a:hover, .social-btn:hover {
+  color: #ffd000 !important;
+  border-color: #ffd000 !important;
+  box-shadow: 0 0 12px rgba(255,208,0,0.3) !important;
+  transform: none !important;
+}
+
+/* Contact links */
+.contact-link, .contact-item a {
+  transition: color 0.3s ease !important;
+}
+.contact-link:hover, .contact-item a:hover {
+  color: #ffd000 !important;
+}
+
+/* edu-cert-btn */
+.edu-cert-btn {
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease !important;
+  transform: none !important;
+}
+.edu-cert-btn:hover {
+  background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%) !important;
+  border-color: #ffd000 !important;
+  color: #1a0a00 !important;
+  box-shadow: 0 4px 20px rgba(255,165,0,0.4) !important;
+  transform: none !important;
+}
+.edu-cert-btn:hover span {
   color: #1a0a00 !important;
   -webkit-text-fill-color: #1a0a00 !important;
 }
