@@ -271,6 +271,136 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ══════════════════════════════════════
+   Animated Training Section Headers
+══════════════════════════════════════ */
+.training-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  max-width: 1100px;
+  margin: 0 auto 36px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.training-section-header.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.training-section-header .tsh-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.35), transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.training-section-header .tsh-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.9), transparent);
+  animation: tshSweep 3s ease-in-out infinite;
+}
+
+@keyframes tshSweep {
+  0%   { left: -60%; }
+  100% { left: 160%; }
+}
+
+.training-section-header .tsh-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08) 0%, rgba(255,208,0,0.06) 100%);
+  border: 1px solid rgba(0,212,255,0.25);
+  box-shadow: 0 0 20px rgba(0,212,255,0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.training-section-header .tsh-badge:hover {
+  border-color: rgba(0,212,255,0.5);
+  box-shadow: 0 0 32px rgba(0,212,255,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.training-section-header .tsh-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+  background-size: 250% 100%;
+  background-position: -100% 0;
+  animation: tshShimmer 4s ease-in-out infinite;
+}
+
+@keyframes tshShimmer {
+  0%   { background-position: -100% 0; }
+  50%  { background-position: 200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.tsh-icon {
+  font-size: 18px;
+  animation: tshIconPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes tshIconPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.18); }
+}
+
+.tsh-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.tsh-text .bn {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, #00d4ff 0%, #ffd000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tsh-text .en {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.tsh-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0,212,255,0.6);
+  animation: tshDotPulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes tshDotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+  50%       { transform: scale(1.4); opacity: 1;   box-shadow: 0 0 0 4px rgba(0,212,255,0.0); }
+}
 </style>
 
 </head>
@@ -640,8 +770,8 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
   </div>
   <div class="support-divider reveal">
     <span class="line"></span>
-    <span class="label bn">ইংরেজি ভাষা প্রশিক্ষণ</span>
-    <span class="label en">English Language Training</span>
+    <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">ইংরেজি ভাষা প্রশিক্ষণ</span>
+    <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">English Language Training</span>
     <span class="line"></span>
   </div>
   <div class="training-grid stagger reveal">
@@ -664,10 +794,10 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
       <button class="cert-btn" onclick="openCertLightbox('Workplace Communication Essentials','cert-workplace-comm')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
     </div>
   </div>
-  <div class="support-divider reveal">
+  <div class="support-divider reveal" style="margin-top: 56px;">
     <span class="line"></span>
-    <span class="label bn">পার্সোনাল ডেভেলপমেন্ট ট্রেনিং</span>
-    <span class="label en">Personal Development Training</span>
+    <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">পার্সোনাল ডেভেলপমেন্ট ট্রেনিং</span>
+    <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">Personal Development Training</span>
     <span class="line"></span>
   </div>
   <div class="training-grid stagger reveal">
@@ -686,10 +816,10 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
       <button class="cert-btn" onclick="openCertLightbox('Quantum Method Course','cert-quantum-method')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
     </div>
   </div>
-  <div class="support-divider reveal">
+  <div class="support-divider reveal" style="margin-top: 56px;">
     <span class="line"></span>
-    <span class="label bn">কম্পিউটার ও ডিজিটাল দক্ষতা</span>
-    <span class="label en">Computer & Digital Skills</span>
+    <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">কম্পিউটার ও ডিজিটাল দক্ষতা</span>
+    <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">Computer & Digital Skills</span>
     <span class="line"></span>
   </div>
   <div class="training-grid stagger reveal">
