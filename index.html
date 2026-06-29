@@ -824,7 +824,7 @@ h1:hover, h2:hover, h3:hover {
           <div style="display:flex; align-items:center; justify-content:space-between;">
             <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</div>
             <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Volunteer — Career Summit 2025</div>
-            <button class="cert-btn" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')" style="font-size:10px; padding:3px 8px; flex-shrink:0;"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+            <button class="cert-btn coming-soon" style="font-size:10px; padding:3px 8px; flex-shrink:0; opacity:0.6; cursor:not-allowed;" title="সার্টিফিকেট শীঘ্রই আসছে"><span>🔒</span> <span class="bn">শীঘ্রই আসছে</span><span class="en">Coming Soon</span></button>
           </div>
           <div style="font-size:10px; color:rgba(255,255,255,0.38);">Youth Skill Development Institute Trust · Dhaka</div>
         </div>
@@ -906,6 +906,24 @@ h1:hover, h2:hover, h3:hover {
       </div>
     </div>
   </div>
+
+  <!-- ✅ Bug 1 Fixed: salary-card moved inside sectors section -->
+  <div class="salary-card reveal-scale" style="padding-top:10px; padding-bottom:10px;">
+    <div class="salary-left">
+      <div class="salary-icon-wrap">💰</div>
+      <div>
+        <div class="salary-label bn">প্রত্যাশিত বেতন</div>
+        <div class="salary-label en">Expected Salary</div>
+      </div>
+    </div>
+    <div class="salary-right">
+      <span class="salary-currency">৳</span>
+      <span class="salary-amount" id="salaryCounter">0</span>
+      <span class="salary-period bn">/ মাস</span>
+      <span class="salary-period en">/ month</span>
+    </div>
+  </div>
+
 </section>
 
 <div class="divider"></div>
@@ -1096,7 +1114,12 @@ h1:hover, h2:hover, h3:hover {
     </div>
     <div class="cert-lightbox-body">
       <div class="cert-scan"></div>
-      <img id="certLightboxImg" src="" alt="Certificate" />
+      <img id="certLightboxImg" src="" alt="Certificate" onerror="this.style.display='none'; document.getElementById('certImgError').style.display='flex';" onload="this.style.display='block'; document.getElementById('certImgError').style.display='none';" />
+      <div id="certImgError" style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:40px; color:rgba(255,255,255,0.5);">
+        <span style="font-size:48px;">🔒</span>
+        <div class="bn" style="font-size:14px;">সার্টিফিকেটটি শীঘ্রই যুক্ত করা হবে</div>
+        <div class="en" style="font-size:14px;">Certificate will be added soon</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1154,22 +1177,6 @@ h1:hover, h2:hover, h3:hover {
 </section>
 
 <div class="divider"></div>
-
-  <div class="salary-card reveal-scale" style="padding-top:10px; padding-bottom:10px;">
-    <div class="salary-left">
-      <div class="salary-icon-wrap">💰</div>
-      <div>
-        <div class="salary-label bn">প্রত্যাশিত বেতন</div>
-        <div class="salary-label en">Expected Salary</div>
-      </div>
-    </div>
-    <div class="salary-right">
-      <span class="salary-currency">৳</span>
-      <span class="salary-amount" id="salaryCounter">0</span>
-      <span class="salary-period bn">/ মাস</span>
-      <span class="salary-period en">/ month</span>
-    </div>
-  </div>
 
 <div class="divider"></div>
 
@@ -1322,6 +1329,20 @@ function switchLanguage(lang, e) {
     t.appendChild(r); setTimeout(()=>r.remove(),600);
   }
 }
+
+/* ══ Reference Lightbox ══ Bug 2 Fixed: function was missing */
+window.openRefLightbox = function() {
+  const lb = document.getElementById('refLightbox');
+  if (lb) {
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+};
+window.closeRefLightbox = function() {
+  const lb = document.getElementById('refLightbox');
+  if (lb) lb.classList.remove('active');
+  document.body.style.overflow = '';
+};
 
 /* ══ Certificate Lightbox ══ */
 window.openCertLightbox = function(title, id) {
