@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shaheduj Jaman | Air Ticketing & Visa Executive</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style_p1.css" />
+
+<style>
+/* ══════════════════════════════════════
+   Language Toggle বাটন
+══════════════════════════════════════ */
+.new-lang-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  border-radius: 60px;
+  padding: 5px;
+  width: 178px;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+.new-lang-glider {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  height: calc(100% - 10px);
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%);
+  box-shadow: 0 0 18px rgba(255, 165, 0, 0.55), 0 0 6px rgba(255, 200, 0, 0.35);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.new-lang-glider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 55%);
+}
+
+body.lang-bn .new-lang-glider { transform: translateX(100%); }
+body.lang-en .new-lang-glider { transform: translateX(0%); }
+
+.new-lang-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 0.28s ease, transform 0.18s ease;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+  user-select: none;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', 'Hind Siliguri', sans-serif;
+}
+
+body.lang-en .new-lang-btn[data-lang="en"],
+body.lang-bn .new-lang-btn[data-lang="bn"] {
+  color: #1a0a00;
+  font-weight: 700;
+}
+
+.new-lang-btn:hover { color: rgba(255, 255, 255, 0.72); }
+
+body.lang-en .new-lang-btn[data-lang="en"]:hover,
+body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
+
+.new-lang-btn:active { transform: scale(0.95); }
+
+/* Ripple effect */
+.lang-ripple-el {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 190, 0, 0.28);
+  transform: scale(0);
+  animation: newLangRipple 0.55s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes newLangRipple {
+  to { transform: scale(4.5); opacity: 0; }
+}
+
+/* ══════════════════════════════════════
+   PROFESSIONAL SIGNATURE SECTION
+══════════════════════════════════════ */
+.signature-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.sig-pro-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* সিগনেচার card */
+.sig-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 40px 18px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.1),
+    0 10px 40px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: translateY(22px) scale(0.94);
+  transition:
+    opacity 0.85s cubic-bezier(0.22,1,0.36,1),
+    transform 0.85s cubic-bezier(0.22,1,0.36,1),
+    box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+.sig-card.sig-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.sig-card:hover {
+  box-shadow:
+    0 0 0 1.5px rgba(0,212,255,0.35),
+    0 14px 48px rgba(0,0,0,0.55),
+    0 0 28px rgba(0,212,255,0.1);
+  transform: translateY(-4px) scale(1.015);
+}
+
+/* Shimmer sweep */
+.sig-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 35%,
+    rgba(255,255,255,0.7) 50%,
+    transparent 65%);
+  background-size: 250% 100%;
+  background-position: -100% 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sig-shimmer.active {
+  opacity: 1;
+  animation: sigShimmer 0.9s ease forwards;
+}
+
+@keyframes sigShimmer {
+  from { background-position: -100% 0; }
+  to   { background-position: 220% 0; }
+}
+
+/* সিগনেচার image */
+.sig-pro-img {
+  display: block;
+  width: 200px;
+  height: auto;
+  filter: none;
+  opacity: 0;
+  transform: scale(0.88) translateY(12px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.sig-pro-img.sig-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Glow underline */
+.sig-underline {
+  width: 0%;
+  max-width: 200px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, #00d4ff 30%, #ffd000 70%, transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-top: 2px;
+}
+
+.sig-underline.sig-visible { width: 100%; }
+
+/* Pulse dots */
+.sig-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.sig-dots.sig-visible { opacity: 1; }
+
+.sig-dots .pdot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  animation: pdotPulse 2s ease-in-out infinite;
+}
+
+.sig-dots .pdot:nth-child(1) { background: rgba(0,212,255,0.6); }
+.sig-dots .pdot:nth-child(2) { background: rgba(255,208,0,0.6); animation-delay: 0.3s; }
+.sig-dots .pdot:nth-child(3) { background: rgba(0,212,255,0.6); animation-delay: 0.6s; }
+
+@keyframes pdotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.6); opacity: 1; }
+}
+
+/* নাম */
+.signature-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 14px 0 3px;
+  font-family: var(--font-sans, sans-serif);
+  letter-spacing: 0.04em;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.signature-name.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* পদবি */
+.signature-title {
+  font-size: 13px;
+  color: rgba(0, 212, 255, 0.7);
+  margin: 0;
+  font-family: var(--font-sans, sans-serif);
+  letter-spacing: 0.05em;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+}
+
+.signature-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════
+   Animated Training Section Headers
+══════════════════════════════════════ */
+.training-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  max-width: 1100px;
+  margin: 0 auto 36px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.training-section-header.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.training-section-header .tsh-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.35), transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.training-section-header .tsh-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.9), transparent);
+  animation: tshSweep 3s ease-in-out infinite;
+}
+
+@keyframes tshSweep {
+  0%   { left: -60%; }
+  100% { left: 160%; }
+}
+
+.training-section-header .tsh-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08) 0%, rgba(255,208,0,0.06) 100%);
+  border: 1px solid rgba(0,212,255,0.25);
+  box-shadow: 0 0 20px rgba(0,212,255,0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.training-section-header .tsh-badge:hover {
+  border-color: rgba(0,212,255,0.5);
+  box-shadow: 0 0 32px rgba(0,212,255,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.training-section-header .tsh-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+  background-size: 250% 100%;
+  background-position: -100% 0;
+  animation: tshShimmer 4s ease-in-out infinite;
+}
+
+@keyframes tshShimmer {
+  0%   { background-position: -100% 0; }
+  50%  { background-position: 200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.tsh-icon {
+  font-size: 18px;
+  animation: tshIconPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes tshIconPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.18); }
+}
+
+.tsh-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.tsh-text .bn {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, #00d4ff 0%, #ffd000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tsh-text .en {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.tsh-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0,212,255,0.6);
+  animation: tshDotPulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes tshDotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+  50%       { transform: scale(1.4); opacity: 1;   box-shadow: 0 0 0 4px rgba(0,212,255,0.0); }
+}
+/* ══════════════════════════════════════
+   Global Hover — হলুদ-কমলা রঙ
+══════════════════════════════════════ */
+
+/* cert-btn */
+.cert-btn {
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease !important;
+  transform: none !important;
+}
+
+.cert-btn:hover {
+  background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%) !important;
+  border-color: #ffd000 !important;
+  color: #1a0a00 !important;
+  box-shadow: 0 4px 20px rgba(255,165,0,0.4) !important;
+  transform: none !important;
+}
+
+.cert-btn:hover span,
+.cert-btn:hover .bn,
+.cert-btn:hover .en {
+  color: #1a0a00 !important;
+  -webkit-text-fill-color: #1a0a00 !important;
+}
+
+/* Navigation links */
+.nav-link, .nav-item a {
+  transition: color 0.3s ease !important;
+}
+.nav-link:hover, .nav-item a:hover {
+  color: #ffd000 !important;
+}
+
+/* Section titles & headings */
+h1:hover, h2:hover, h3:hover {
+  color: #ffd000 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Training card hover */
+.training-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+}
+.training-card:hover .tc-title {
+  color: #ffd000 !important;
+  transition: color 0.3s ease !important;
+}
+.training-card:hover .tc-year {
+  color: #ff9500 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Footer social icons */
+.footer-social a, .social-btn {
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+.footer-social a:hover, .social-btn:hover {
+  color: #ffd000 !important;
+  border-color: #ffd000 !important;
+  box-shadow: 0 0 12px rgba(255,208,0,0.3) !important;
+  transform: none !important;
+}
+
+/* Contact links */
+.contact-link, .contact-item a {
+  transition: color 0.3s ease !important;
+}
+.contact-link:hover, .contact-item a:hover {
+  color: #ffd000 !important;
+}
+
+/* edu-cert-btn */
+.edu-cert-btn {
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease !important;
+  transform: none !important;
+}
+.edu-cert-btn:hover {
+  background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%) !important;
+  border-color: #ffd000 !important;
+  color: #1a0a00 !important;
+  box-shadow: 0 4px 20px rgba(255,165,0,0.4) !important;
+  transform: none !important;
+}
+.edu-cert-btn:hover span {
+  color: #1a0a00 !important;
+  -webkit-text-fill-color: #1a0a00 !important;
+}
+/* ══════════════════════════════════════
+   Extra Curricular Activities
+══════════════════════════════════════ */
+.eca-wrapper {
+  margin-top: 80px;
+  padding-top: 8px;
+}
+
+.eca-top-rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), rgba(255,208,0,0.2), transparent);
+  margin-bottom: 24px;
+}
+
+.eca-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.eca-header-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+}
+
+.eca-header-label {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0,212,255,0.9);
+  white-space: nowrap;
+  font-family: var(--font-display, sans-serif);
+}
+
+/* ECA Timeline */
+.eca-timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 16px;
+  border-left: 2px solid rgba(255,255,255,0.07);
+  margin-left: 8px;
+}
+
+.eca-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0 12px 20px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease var(--d, 0s),
+    transform 0.55s ease var(--d, 0s);
+  cursor: default;
+}
+
+.eca-item.eca-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eca-dot {
+  position: absolute;
+  left: -25px;
+  top: 17px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #00d4ff;
+  background: #0a0a0f;
+  box-shadow: 0 0 8px rgba(0,212,255,0.35);
+  flex-shrink: 0;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.eca-item:hover .eca-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 14px rgba(255,165,0,0.6);
+}
+
+.eca-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  animation: ecaIconPulse 3s ease-in-out infinite;
+}
+
+.eca-item:nth-child(2) .eca-icon { animation-delay: 0.5s; }
+.eca-item:nth-child(3) .eca-icon { animation-delay: 1s; }
+
+@keyframes ecaIconPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+.eca-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.eca-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-sans, sans-serif);
+  transition: color 0.3s ease;
+  line-height: 1.4;
+}
+
+.eca-item:hover .eca-title {
+  color: #ffd000;
+}
+
+.eca-org {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.38);
+  font-family: var(--font-sans, sans-serif);
+  letter-spacing: 0.04em;
+}
+</style>
+
+</head>
+<body class="lang-bn">
+
+<div class="page-veil"><span class="page-veil-mark">SHAHEDUJ JAMAN</span></div>
+<div class="grain-overlay"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav class="lang-bar">
+  <div class="nav-logo">SJ <span>✈</span></div>
+  <ul class="nav-links">
+    <li><a href="#about" class="bn">আমার সম্পর্কে</a><a href="#about" class="en">About</a></li>
+    <li><a href="#experience" class="bn">অভিজ্ঞতা</a><a href="#experience" class="en">Experience</a></li>
+    <li><a href="#skills" class="bn">দক্ষতা</a><a href="#skills" class="en">Skills</a></li>
+    <li><a href="#training" class="bn">প্রশিক্ষণ</a><a href="#training" class="en">Training</a></li>
+    <li><a href="#contact" class="bn">যোগাযোগ</a><a href="#contact" class="en">Contact</a></li>
+  </ul>
+
+  <!-- ✅ নতুন Language Toggle -->
+  <div class="new-lang-toggle" id="newLangToggle">
+    <div class="new-lang-glider" id="newLangGlider"></div>
+    <button class="new-lang-btn" data-lang="en" onclick="switchLanguage('en', event)">English</button>
+    <button class="new-lang-btn" data-lang="bn" onclick="switchLanguage('bn', event)">বাংলা</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-flex">
+    <div class="hero-inner">
+      <div class="open-to-work">
+        <span class="bn">💼 চাকরির জন্য প্রস্তুত</span>
+        <span class="en">💼 Open to Work</span>
+      </div>
+      <div class="hero-eyebrow">
+        <span class="bn">✈ এয়ার টিকেটিং ও ভিসা বিশেষজ্ঞ</span>
+        <span class="en">✈ Air Ticketing & Visa Executive</span>
+      </div>
+      <h1 class="hero-name">
+        <span class="line1 bn">সাহেদুজ</span>
+        <span class="line1 en">Shaheduj</span>
+        <span class="line2 bn">জামান</span>
+        <span class="line2 en">Jaman</span>
+      </h1>
+      <div class="hero-role">
+        <span class="role-badge rb1">Sabre GDS Expert</span>
+        <span class="role-badge rb2">Visa Processing</span>
+        <span class="role-badge rb3">NSDA Level-2 Certified</span>
+      </div>
+      <p class="hero-tagline">
+        <span class="bn">একজন দক্ষ টিকেটিং অফিসার যিনি GDS-ভিত্তিক এয়ার টিকেটিং, ভিসা প্রসেসিং ও NDC-তে বিশেষজ্ঞ। Sabre GDS-এ সম্পূর্ণ দক্ষতা — Issue, Void, Refund ও Re-issuance সহ।</span>
+        <span class="en">A detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. NSDA Level-2 certified with advanced Sabre GDS command — including ticket issuance, void, refund, and re-issuance.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
+        <a href="#contact" class="btn-primary en">Get In Touch →</a>
+        <a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
+        <a href="#training" class="btn-secondary en">View Training</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num c1 bn">১ বছর+</div>
+          <div class="stat-num c1 en">1 Year+</div>
+          <div class="stat-label bn">পেশাদার অভিজ্ঞতা</div>
+          <div class="stat-label en">Work Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c2 bn">১৫+</div>
+          <div class="stat-num c2 en">15+</div>
+          <div class="stat-label bn">সার্টিফিকেট কোর্স</div>
+          <div class="stat-label en">Certified Courses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num c3 bn">৩টি</div>
+          <div class="stat-num c3 en">3</div>
+          <div class="stat-label bn">GDS প্ল্যাটফর্ম দক্ষতা</div>
+          <div class="stat-label en">GDS Platforms</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-glow"></div>
+      <div class="hero-photo-ring"></div>
+      <div class="hero-photo-frame">
+        <img src="photo-1.jpg" alt="Shaheduj Jaman" />
+      </div>
+      <div class="hero-photo-badge">✈️</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label bn">আমার সম্পর্কে</div>
+  <div class="section-label en">About Me</div>
+  <h2 class="section-title bn reveal">আমি কে এবং <span>আমি কী করি?</span></h2>
+  <h2 class="section-title en reveal">Who I Am & <span>What I Do</span></h2>
+  <div class="about-grid reveal">
+    <div class="about-card">
+      <div class="about-avatar">
+        <div class="about-avatar-ring"></div>
+        <img src="photo-2.jpg" alt="Shaheduj Jaman" />
+      </div>
+      <h3 class="bn">সাহেদুজ জামান</h3>
+      <h3 class="en">Shaheduj Jaman</h3>
+      <div class="role bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</div>
+      <div class="role en">Air Ticketing & Visa Executive</div>
+      <div class="info-row"><span class="ico">📍</span><span class="txt">Motijheel, Dhaka 1222</span></div>
+      <div class="info-row"><span class="ico">📞</span><span class="txt">01701093217</span></div>
+      <div class="info-row"><span class="ico">✉️</span><span class="txt">shaheduj03@gmail.com</span></div>
+      <div class="info-row"><span class="ico">🎂</span><span class="txt">December 1997</span></div>
+      <div class="info-row"><span class="ico">🩸</span><span class="txt">Blood Group: O+</span></div>
+      <div class="info-row"><span class="ico">🌍</span><span class="txt">Bangladeshi</span></div>
+    </div>
+    <div class="about-text">
+      <p class="bn">আমি একজন দক্ষ টিকেটিং অফিসার — GDS-ভিত্তিক এয়ার টিকেটিং, রিজার্ভেশন ম্যানেজমেন্ট এবং NDC-তে আমার বিশেষ দক্ষতা রয়েছে। NSDA Level-2-এ Air Ticketing & Reservation-এ সার্টিফাইড এবং Sabre GDS-এ অ্যাডভান্সড দক্ষতা অর্জন করেছি।</p>
+      <p class="en">I am a detail-oriented Ticketing Officer with expertise in GDS-based air ticketing, reservation management, and NDC. Certified in Air Ticketing & Reservation at NSDA Level-2, with advanced command over Sabre GDS including ticket issuance, void, refund, and re-issuance.</p>
+      <p class="bn">আমার লক্ষ্য হলো একজন দক্ষ ও নিবেদিতপ্রাণ এয়ার টিকেট রিজার্ভেশন ও ভিসা এক্সিকিউটিভ হিসেবে ক্যারিয়ার গড়া। AI টুলস ব্যবহার করে কাজের দক্ষতা ও উৎপাদনশীলতা বৃদ্ধিতে আমি সর্বদা সচেষ্ট।</p>
+      <p class="en">My goal is to develop my career as a competent Air Ticket Reservation & Visa Executive. I leverage AI tools to boost workflow efficiency and am committed to error-free ticketing and seamless travel experiences for every client.</p>
+      <div class="skill-chips">
+        <span class="chip c">Sabre GDS</span>
+        <span class="chip pk">Amadeus</span>
+        <span class="chip p">Travelport/Galileo</span>
+        <span class="chip g">Visa Processing</span>
+        <span class="chip y">NDC Expert</span>
+        <span class="chip c">AI Tools</span>
+        <span class="chip pk">English Fluent</span>
+        <span class="chip g">OTA System</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label bn">কর্মঅভিজ্ঞতা</div>
+  <div class="section-label en">Work Experience</div>
+  <h2 class="section-title bn reveal">পেশাদার <span>অভিজ্ঞতা</span></h2>
+  <h2 class="section-title en reveal">Professional <span>Experience</span></h2>
+  <div class="exp-timeline stagger reveal">
+    <div class="exp-item">
+      <div class="exp-dot" style="border-color:var(--cyan)"></div>
+      <div class="exp-date bn">নভেম্বর ২০২২ – ডিসেম্বর ২০২৩ · ১ বছর ১ মাস</div>
+      <div class="exp-date en">Nov 2022 – Dec 2023 · 1 Year 1 Month</div>
+      <div class="exp-title bn">সিনিয়র এক্সিকিউটিভ</div>
+      <div class="exp-title en">Senior Executive</div>
+      <div class="exp-org">Aotrek Tourism Ltd. — Uttar Badda, Dhaka</div>
+      <div class="exp-desc bn">কোম্পানির সেলস বৃদ্ধি ও যোগাযোগ দক্ষতার মাধ্যমে ক্লায়েন্টদের ভ্রমণ সমাধান প্রদান করা। এয়ার টিকেটিং ও কাস্টমার সার্ভিসে দক্ষতার সাথে কাজ করা।</div>
+      <div class="exp-desc en">Increasing company sales and providing travel solutions to clients through strong communication and interpersonal skills. Handled air ticketing and customer service professionally.</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot" style="border-color:var(--purple)"></div>
+      <div class="exp-date bn">জানুয়ারি ২০২২ – জুন ২০২২ · ৫ মাস</div>
+      <div class="exp-date en">Jan 2022 – Jun 2022 · 5 Months</div>
+      <div class="exp-title bn">ইংরেজি শিক্ষক (হাই স্কুল)</div>
+      <div class="exp-title en">English Teacher (High School)</div>
+      <div class="exp-org">Chauddagram High School — Cumilla</div>
+      <div class="exp-desc bn">শিক্ষার্থীদের ইংরেজি ভাষা শিক্ষা প্রদান — পড়া, লেখা, বলা ও শোনার দক্ষতা উন্নয়নে সহায়তা করা।</div>
+      <div class="exp-desc en">Teaching English language skills to high school students — developing reading, writing, speaking, and listening abilities.</div>
+    </div>
+  </div>
+</section>
+
+<section class="experience reveal" style="padding-top: 0; margin-top: -20px;">
+  <div class="section-inner" style="max-width:900px; margin:0 auto; padding: 0 24px 24px;">
+    <div class="section-label bn" style="font-size:10px;">এক্সট্রা কারিকুলার</div>
+    <div class="section-label en" style="font-size:10px;">Extra Curricular</div>
+    <h2 class="section-title bn" style="font-size:16px; margin-bottom:10px;">অতিরিক্ত কার্যক্রম</h2>
+    <h2 class="section-title en" style="font-size:16px; margin-bottom:10px;">Extra Curricular Activities</h2>
+    <div style="display:flex; flex-direction:column; gap:5px; margin-top:10px;">
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(0,212,255,0.15);">
+        <span style="font-size:14px;">🏕️</span>
+        <div>
+          <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">বাংলাদেশ স্কাউটস</div>
+          <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Bangladesh Scouts</div>
+          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Cumilla</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(168,85,247,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(168,85,247,0.15);">
+        <span style="font-size:14px;">🎤</span>
+        <div>
+          <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</div>
+          <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Victoria College Debating Society (VCDS)</div>
+          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Cumilla</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(244,63,94,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(244,63,94,0.15);">
+        <span style="font-size:14px;">🩸</span>
+        <div>
+          <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">ব্লাড ডোনেশন ক্লাব (বাঁধন)</div>
+          <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Blood Donation Club (Badhon)</div>
+          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Cumilla</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(255,165,0,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(255,165,0,0.15);">
+        <span style="font-size:14px;">🤝</span>
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</div>
+            <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Volunteer — Career Summit 2025</div>
+            <button class="cert-btn" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')" style="font-size:10px; padding:3px 8px; flex-shrink:0;"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+          </div>
+          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Youth Skill Development Institute Trust · Dhaka</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PREFERRED SECTORS -->
+<section id="sectors">
+  <div class="section-label bn">কর্মক্ষেত্র পছন্দ</div>
+  <div class="section-label en">Career Preferences</div>
+  <h2 class="section-title bn reveal">যে সেক্টরে আমি <span>কাজ করতে চাই</span></h2>
+  <h2 class="section-title en reveal">Where I'm <span>Looking to Work</span></h2>
+  <div class="pref-grid stagger reveal">
+    <div class="pref-card c1">
+      <div class="pref-icon-wrap">🏢</div>
+      <div class="pref-card-title bn">পছন্দের প্রতিষ্ঠান</div>
+      <div class="pref-card-title en">Preferred Organizations</div>
+      <div class="pref-card-sub bn">যেসব প্রতিষ্ঠানে কাজ করতে আগ্রহী</div>
+      <div class="pref-card-sub en">Organization types I'd love to join</div>
+      <div class="pref-tags">
+        <span class="pref-tag">Airline</span>
+        <span class="pref-tag">Travel Agent</span>
+        <span class="pref-tag">GSA</span>
+        <span class="pref-tag">Tour Operator</span>
+        <span class="pref-tag">Airport Service</span>
+        <span class="pref-tag">Travel Startup</span>
+      </div>
+    </div>
+    <div class="pref-card c2">
+      <div class="pref-icon-wrap">🎯</div>
+      <div class="pref-card-title bn">পছন্দের পদ ও খাত</div>
+      <div class="pref-card-title en">Job Category &amp; Role</div>
+      <div class="pref-card-sub bn">আমার কাঙ্ক্ষিত কর্মক্ষেত্র</div>
+      <div class="pref-card-sub en">The field I'm targeting</div>
+      <div class="pref-tags">
+        <span class="pref-tag bn">হসপিটালিটি</span>
+        <span class="pref-tag en">Hospitality</span>
+        <span class="pref-tag">Travel</span>
+        <span class="pref-tag">Tourism</span>
+        <span class="pref-tag bn">এন্ট্রি লেভেল</span>
+        <span class="pref-tag en">Entry Level</span>
+      </div>
+    </div>
+    <div class="pref-card c3">
+      <div class="pref-icon-wrap">📍</div>
+      <div class="pref-card-title bn">কর্মস্থল</div>
+      <div class="pref-card-title en">Work Location</div>
+      <div class="pref-card-sub bn">দেশের ভেতরে পছন্দের জেলা</div>
+      <div class="pref-card-sub en">Preferred district within Bangladesh</div>
+      <div class="pref-tags">
+        <span class="pref-tag">📍 Dhaka</span>
+      </div>
+    </div>
+  </div>
+  <div class="pref-globe-strip reveal-scale">
+    <span class="flying-plane">✈️</span>
+    <div class="globe-icon">🌍</div>
+    <div class="pref-globe-text">
+      <div class="gt-label bn">কাজের জন্য পছন্দের দেশ</div>
+      <div class="gt-label en">Preferred Countries Abroad</div>
+      <div class="gt-sub bn">বিদেশে কাজের সুযোগ পেলে যেসব দেশে যেতে আগ্রহী</div>
+      <div class="gt-sub en">Open to opportunities in these countries</div>
+    </div>
+    <div class="country-track-wrap">
+      <div class="country-track" id="countryTrack">
+        <span class="country-chip">🇧🇪 Belgium</span>
+        <span class="country-chip">🇩🇰 Denmark</span>
+        <span class="country-chip">🇫🇮 Finland</span>
+        <span class="country-chip">🇫🇷 France</span>
+        <span class="country-chip">🇮🇹 Italy</span>
+        <span class="country-chip">🇳🇴 Norway</span>
+        <span class="country-chip">🇵🇹 Portugal</span>
+        <span class="country-chip">🇸🇪 Sweden</span>
+        <span class="country-chip">🇨🇭 Switzerland</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-label bn">দক্ষতাসমূহ</div>
+  <div class="section-label en">Expertise</div>
+  <h2 class="section-title bn reveal">আমার <span>পেশাদার দক্ষতা</span></h2>
+  <h2 class="section-title en reveal">My <span>Professional Skills</span></h2>
+  <div class="skills-grid stagger reveal">
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Sabre GDS (Issue/Void/Refund)</span><span class="skill-pct">95%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-pk" style="--fill-w:95%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Visa Processing</span><span class="skill-pct">88%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-cy" style="--fill-w:88%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Air Ticketing & Reservation</span><span class="skill-pct">92%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-ye" style="--fill-w:92%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">Amadeus / Travelport GDS</span><span class="skill-pct">80%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-pu" style="--fill-w:80%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info">
+        <span class="skill-name bn">কম্পিউটার লিটারেসি (MS Office)</span>
+        <span class="skill-name en">Computer Literacy (MS Office)</span>
+        <span class="skill-pct">90%</span>
+      </div>
+      <div class="skill-track"><div class="skill-fill fill-gr" style="--fill-w:90%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info"><span class="skill-name">AI Tools & Prompt Engineering</span><span class="skill-pct">85%</span></div>
+      <div class="skill-track"><div class="skill-fill fill-pk" style="--fill-w:85%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info">
+        <span class="skill-name bn">ডিজিটাল মার্কেটিং</span>
+        <span class="skill-name en">Digital Marketing</span>
+        <span class="skill-pct">75%</span>
+      </div>
+      <div class="skill-track"><div class="skill-fill fill-cy" style="--fill-w:75%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-info">
+        <span class="skill-name bn">গ্রাফিক্স ডিজাইন (Canva/PS)</span>
+        <span class="skill-name en">Graphics Design (Canva/PS)</span>
+        <span class="skill-pct">70%</span>
+      </div>
+      <div class="skill-track"><div class="skill-fill fill-pu" style="--fill-w:70%"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRAINING -->
+<section id="training">
+  <div class="section-label bn">প্রশিক্ষণ ও সার্টিফিকেট</div>
+  <div class="section-label en">Training & Certifications</div>
+  <h2 class="section-title bn reveal">আমার <span>প্রশিক্ষণসমূহ</span></h2>
+  <h2 class="section-title en reveal">My <span>Training & Courses</span></h2>
+  <div class="core-badge reveal">
+    <span class="dot-live"></span>
+    <span class="bn">এয়ার টিকেটিং ও ভিসা সংক্রান্ত মূল প্রশিক্ষণ</span>
+    <span class="en">Core Air Ticketing & Visa Training</span>
+  </div>
+  <div class="core-grid stagger reveal">
+    <div class="core-card">
+      <div class="core-icon-wrap">✈️</div>
+      <div class="core-tc-year">2024 · 6 Months</div>
+      <div class="core-tc-title">Air Ticketing & Reservation — NSDA Level-2</div>
+      <div class="core-tc-org">NSDA — ATAB Office, Naya Palton, Dhaka</div>
+      <button class="cert-btn" onclick="openCertLightbox('Air Ticketing &amp; Reservation — NSDA Level-2','cert-nsda-l2')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🎫</div>
+      <div class="core-tc-year">2025 · 3 Months</div>
+      <div class="core-tc-title">Ticketing & Reservation Professional Course</div>
+      <div class="core-tc-org">HB Aviation & Tourism Institute, Mirpur 11</div>
+      <button class="cert-btn" onclick="openCertLightbox('Ticketing &amp; Reservation Professional Course','cert-hb-ticketing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🛂</div>
+      <div class="core-tc-year">2025 · 2 Months</div>
+      <div class="core-tc-title">Visa Processing Course</div>
+      <div class="core-tc-org">HB Aviation & Tourism Institute, Mirpur 11</div>
+      <button class="cert-btn" onclick="openCertLightbox('Visa Processing Course','cert-visa-processing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🖥️</div>
+      <div class="core-tc-year">2025 · 2 Days</div>
+      <div class="core-tc-title">Reservation & Ticketing on SABRE (Advanced)</div>
+      <div class="core-tc-org">Sabre Travel Network Bangladesh Ltd.</div>
+      <button class="cert-btn" onclick="openCertLightbox('Reservation &amp; Ticketing on SABRE (Advanced)','cert-sabre')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="core-card">
+      <div class="core-icon-wrap">🛫</div>
+      <div class="core-tc-year">2025 · 1 Month</div>
+      <div class="core-tc-title">Basics of Aviation Ground Operation</div>
+      <div class="core-tc-org">aviation.com.bd Academy (Online)</div>
+      <button class="cert-btn" onclick="openCertLightbox('Basics of Aviation Ground Operation','cert-aviation')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+  </div>
+  <div class="support-divider reveal">
+    <span class="line"></span>
+    <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">ইংরেজি ভাষা প্রশিক্ষণ</span>
+    <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">English Language Training</span>
+    <span class="line"></span>
+  </div>
+  <div class="training-grid stagger reveal">
+    <div class="training-card">
+      <div class="tc-year">2025–2026 · 1 Month</div>
+      <div class="tc-title">🗣️ Teachers Training on English (Phonics & Phonetics)</div>
+      <div class="tc-org">TESOL Bangladesh (Online)</div>
+      <button class="cert-btn" onclick="openCertLightbox('Teachers Training on English (Phonics &amp; Phonetics)','cert-tesol')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="training-card">
+      <div class="tc-year">2026 · 3 Hours</div>
+      <div class="tc-title">🗣️ English Pronunciation and Phonics (Webinar)</div>
+      <div class="tc-org">TESOL Bangladesh · Certificate No. 355</div>
+      <button class="cert-btn" onclick="openCertLightbox('English Pronunciation and Phonics','cert-tesol-phonics')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="training-card">
+      <div class="tc-year">2023 · 2 Months</div>
+      <div class="tc-title">🗣️ Spoken English</div>
+      <div class="tc-org">Rahat's English Care · Mirpur 10, Dhaka — Speaking, Reading, Writing &amp; Listening</div>
+      <button class="cert-btn" onclick="openCertLightbox('Spoken English','cert-spoken-english')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+  </div>
+  <div class="support-divider reveal" style="margin-top: 56px;">
+    <span class="line"></span>
+    <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">পার্সোনাল ডেভেলপমেন্ট ট্রেনিং</span>
+    <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">Personal Development Training</span>
+    <span class="line"></span>
+  </div>
+  <div class="training-grid stagger reveal">
+    <div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">🏆 Career Summit 2025 — Leadership Development</div><div class="tc-org">JCI Dhaka Pioneer · TCB Auditorium</div><button class="cert-btn" onclick="openCertLightbox('Career Summit 2025 — Leadership Development','cert-career-summit')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
+    <div class="training-card"><div class="tc-year">2025 · Day Long</div><div class="tc-title">📈 Seller to Sales Leader</div><div class="tc-org">Self Made Bangladesh · Bishwo Shahitto Kendro</div><button class="cert-btn" onclick="openCertLightbox('Seller to Sales Leader','cert-seller-sales')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
+    <div class="training-card">
+      <div class="tc-year">2023 · 4 Days</div>
+      <div class="tc-title">🧘 Quantum Method Course</div>
+      <div class="tc-org">Yoga Foundation · Quantum Method, Dhaka — Mind Development &amp; Self-Improvement</div>
+      <button class="cert-btn" onclick="openCertLightbox('Quantum Method Course','cert-quantum-method')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="training-card">
+      <div class="tc-year">2026 · Day Long</div>
+      <div class="tc-title">💼 Workplace Communication Essentials</div>
+      <div class="tc-org">Passport to Earning Bangladesh · UNICEF · Generation Unlimited</div>
+      <button class="cert-btn" onclick="openCertLightbox('Workplace Communication Essentials','cert-workplace-comm')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+  </div>
+  <div class="support-divider reveal" style="margin-top: 56px;">
+    <span class="line"></span>
+    <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">কম্পিউটার ও ডিজিটাল দক্ষতা</span>
+    <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">Computer & Digital Skills</span>
+    <span class="line"></span>
+  </div>
+  <div class="training-grid stagger reveal">
+    <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">🎨 Graphics Design for Freelancing (Level-3)</div><div class="tc-org">NACTAR — Photoshop, Illustrator, Canva</div><button class="cert-btn" onclick="openCertLightbox('Graphics Design for Freelancing (Level-3)','cert-graphics-design')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
+    <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">📢 Digital Marketing (Level-3)</div><div class="tc-org">NACTAR — SEO, Facebook Ads, Email Marketing</div><button class="cert-btn" onclick="openCertLightbox('Digital Marketing (Level-3)','cert-digital-marketing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
+    <div class="training-card">
+      <div class="tc-year">2023 · 1 Month</div>
+      <div class="tc-title">🎬 Video Editing</div>
+      <div class="tc-org">NACTAR — Bogura, Bangladesh</div>
+      <button class="cert-btn" onclick="openCertLightbox('Video Editing','cert-video-editing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="training-card">
+      <div class="tc-year">2025–2026 · 15 Days</div>
+      <div class="tc-title">🤖 AI For Career Development</div>
+      <div class="tc-org">CED Foundation — Claude, ChatGPT, Gemini, Notion</div>
+      <button class="cert-btn" onclick="openCertLightbox('AI For Career Development','cert-ai-career')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="training-card"><div class="tc-year">2022 · 3 Months · 🏆 2nd Position</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div><div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;"><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application','cert-computer-basic')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button><button class="cert-btn" onclick="openCertLightbox('Certificate of Merit — 2nd Position','cert-computer-merit')"><span>🏆</span> <span class="bn">মেরিট সার্টিফিকেট</span><span class="en">Merit Certificate</span></button></div></div>
+  </div>
+</section>
+
+<!-- CERTIFICATE LIGHTBOX -->
+<div class="cert-lightbox" id="certLightbox" onclick="if(event.target===this) closeCertLightbox()">
+  <div class="cert-lightbox-inner">
+    <div class="cert-lightbox-header">
+      <div class="cert-lightbox-title" id="certLightboxTitle"></div>
+      <button class="cert-lightbox-close" onclick="closeCertLightbox()" aria-label="Close">✕</button>
+    </div>
+    <div class="cert-lightbox-body">
+      <div class="cert-scan"></div>
+      <img id="certLightboxImg" src="" alt="Certificate" />
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section style="background: var(--surface);" id="education">
+  <div class="section-label bn">শিক্ষাগত যোগ্যতা</div>
+  <div class="section-label en">Education</div>
+  <h2 class="section-title bn reveal">আমার <span>শিক্ষা</span></h2>
+  <h2 class="section-title en reveal">My <span>Academic Background</span></h2>
+  <div class="edu-grid stagger reveal">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-degree bn">মাস্টার অব আর্টস (MA)</div>
+      <div class="edu-degree en">Master of Arts (MA)</div>
+      <div class="edu-major">English Literature</div>
+      <div class="edu-inst bn">ন্যাশনাল ইউনিভার্সিটি — সিদ্ধেশ্বরী কলেজ, ঢাকা</div>
+      <div class="edu-inst en">National University — Siddheswari College, Dhaka</div>
+      <div class="edu-year bn">ভর্তি ২০২৩ (চলমান)</div>
+      <div class="edu-year en">Enrolled 2023 (Ongoing)</div>
+      <button class="edu-cert-btn coming-soon">🔒 <span class="bn">শীঘ্রই আসছে</span><span class="en">Coming Soon</span></button>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">📚</div>
+      <div class="edu-degree bn">বি.এ অনার্স</div>
+      <div class="edu-degree en">B.A. (Hons)</div>
+      <div class="edu-major">English Literature · CGPA 2.63/4</div>
+      <div class="edu-inst bn">ন্যাশনাল ইউনিভার্সিটি — কুমিল্লা সরকারি কলেজ</div>
+      <div class="edu-inst en">National University — Comilla Govt. College, Cumilla</div>
+      <div class="edu-year bn">পাস ২০১৯</div>
+      <div class="edu-year en">Passed 2019</div>
+      <button class="edu-cert-btn" onclick="openCertLightbox('Bachelor of Arts — Honours (English)', 'cert-ba')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <div class="edu-degree">HSC</div>
+      <div class="edu-major">Business Studies · GPA 4.33/5</div>
+      <div class="edu-inst">Omargani M.E.S College</div>
+      <div class="edu-year bn">পাস ২০১৫</div>
+      <div class="edu-year en">Passed 2015</div>
+      <button class="edu-cert-btn" onclick="openCertLightbox('Higher Secondary Certificate (HSC)', 'cert-hsc')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <div class="edu-degree">SSC</div>
+      <div class="edu-major">Science · GPA 4.75/5</div>
+      <div class="edu-inst">Mostafa Kamal High School</div>
+      <div class="edu-year bn">পাস ২০১৩</div>
+      <div class="edu-year en">Passed 2013</div>
+      <button class="edu-cert-btn" onclick="openCertLightbox('Secondary School Certificate (SSC)', 'cert-ssc')">📄 <span class="bn">সনদ দেখুন</span><span class="en">View Certificate</span></button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+  <div class="salary-card reveal-scale">
+    <div class="salary-left">
+      <div class="salary-icon-wrap">💰</div>
+      <div>
+        <div class="salary-label bn">প্রত্যাশিত বেতন</div>
+        <div class="salary-label en">Expected Salary</div>
+      </div>
+    </div>
+    <div class="salary-right">
+      <span class="salary-currency">৳</span>
+      <span class="salary-amount" id="salaryCounter">0</span>
+      <span class="salary-period bn">/ মাস</span>
+      <span class="salary-period en">/ month</span>
+    </div>
+  </div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner reveal-scale">
+    <div class="section-label bn">যোগাযোগ করুন</div>
+    <div class="section-label en">Get In Touch</div>
+    <h2 class="section-title bn reveal" style="margin-bottom:12px;">একসাথে <span>কাজ করি?</span></h2>
+    <h2 class="section-title en reveal" style="margin-bottom:12px;">Let's Work <span>Together?</span></h2>
+    <p class="bn" style="color:var(--muted);font-size:15px;line-height:1.7;">এয়ার টিকেটিং, ভিসা প্রসেসিং বা ট্যুর রিলেটেড যেকোনো কাজে আমার সাথে যোগাযোগ করুন।</p>
+    <p class="en" style="color:var(--muted);font-size:15px;line-height:1.7;">Reach out for air ticketing, visa processing, or any travel-related opportunity.</p>
+    <div class="contact-links">
+      <a href="mailto:shaheduj03@gmail.com" class="contact-link">
+        <span class="icon">📧</span>
+        <div class="info"><div class="label">Email</div><div class="value">shaheduj03@gmail.com</div></div>
+      </a>
+      <a href="tel:+8801701093217" class="contact-link">
+        <span class="icon">📱</span>
+        <div class="info">
+          <div class="label bn">ফোন</div><div class="label en">Phone</div>
+          <div class="value">01701093217</div>
+        </div>
+      </a>
+    </div>
+    <div class="ref-note reveal" role="button" tabindex="0" onclick="openRefLightbox()" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); openRefLightbox(); }">
+      <div class="ref-note-icowrap">📋</div>
+      <div class="ref-note-text">
+        <span class="bn">পেশাদার রেফারেন্স দেখুন<span class="sub">ক্লিক করে বিস্তারিত দেখুন</span></span>
+        <span class="en">View Professional References<span class="sub">Click to see contact details</span></span>
+      </div>
+      <div class="ref-note-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCE LIGHTBOX -->
+<div class="ref-lightbox" id="refLightbox" onclick="if(event.target===this) closeRefLightbox()">
+  <div class="ref-lightbox-inner">
+    <div class="ref-lightbox-header">
+      <div class="ref-lightbox-title">
+        <span class="bn">পেশাদার রেফারেন্স</span>
+        <span class="en">Professional References</span>
+      </div>
+      <button class="ref-lightbox-close" onclick="closeRefLightbox()" aria-label="Close">✕</button>
+    </div>
+    <div class="ref-lightbox-body">
+      <div class="ref-person-card">
+        <div class="ref-person-top">
+          <div class="ref-person-avatar">HR</div>
+          <div>
+            <div class="ref-person-name">Harunur Rashid</div>
+            <div class="ref-person-role">Founder &amp; CEO</div>
+          </div>
+        </div>
+        <div class="ref-person-org"><span class="org-icon">🏢</span>aviation.com.bd</div>
+        <div class="ref-person-relation">
+          <span class="bn">🎓 একাডেমিক রেফারেন্স</span>
+          <span class="en">🎓 Academic Reference</span>
+        </div>
+        <div class="ref-person-contact">
+          <a href="tel:+8801313966688" class="ref-contact-row"><span class="icon">📱</span><span class="text">01313966688</span></a>
+          <a href="mailto:harun@aviation.com.bd" class="ref-contact-row"><span class="icon">📧</span><span class="text">harun@aviation.com.bd</span></a>
+          <div class="ref-contact-row address"><span class="icon">📍</span><span class="text">Concord Tower, Suite 902, Level 09, 113 Kazi Nazrul Islam Avenue, Dhaka 1215</span></div>
+        </div>
+      </div>
+      <div class="ref-person-card">
+        <div class="ref-person-top">
+          <div class="ref-person-avatar">ZB</div>
+          <div>
+            <div class="ref-person-name">Zaki S. Bari</div>
+            <div class="ref-person-role">Founder &amp; Chairman</div>
+          </div>
+        </div>
+        <div class="ref-person-org"><span class="org-icon">🏢</span>HB Aviation and Tourism Institute</div>
+        <div class="ref-person-relation">
+          <span class="bn">🎓 একাডেমিক রেফারেন্স</span>
+          <span class="en">🎓 Academic Reference</span>
+        </div>
+        <div class="ref-person-contact">
+          <a href="tel:+8801786469878" class="ref-contact-row"><span class="icon">📱</span><span class="text">01786469878</span></a>
+          <a href="mailto:hbaviationbd@gmail.com" class="ref-contact-row"><span class="icon">📧</span><span class="text">hbaviationbd@gmail.com</span></a>
+          <div class="ref-contact-row address"><span class="icon">📍</span><span class="text">Plot-9, Road-4, Section-7, Mirpur, Dhaka 1216</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="signature-section">
+    <div class="sig-pro-wrapper" id="sigProWrapper">
+
+      <!-- সাদা card — নতুন JPG সিগনেচার -->
+      <div class="sig-card" id="sigCard">
+        <div class="sig-shimmer" id="sigShimmer"></div>
+        <img
+          src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4RBmRXhpZgAATU0AKgAAAAgAAwESAAMAAAABAAEAAIdpAAQAAAABAAAIPuocAAcAAAgMAAAAMgAAAAAc6gAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB6hwABwAACAwAAAhQAAAAABzqAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/4QjdaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49J++7vycgaWQ9J1c1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCc/Pg0KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyI+PHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIi8+PC94OnhtcG1ldGE+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg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"
+          alt="Shaheduj Jaman Signature"
+          class="sig-pro-img"
+          id="signatureImg"
+        />
+      </div>
+
+      <div class="sig-underline" id="sigUnderline"></div>
+
+      <div class="sig-dots" id="sigDots">
+        <div class="pdot"></div>
+        <div class="pdot"></div>
+        <div class="pdot"></div>
+      </div>
+
+    </div>
+
+    <p class="signature-name bn">সাহেদুজ জামান</p>
+    <p class="signature-name en">Shaheduj Jaman</p>
+    <p class="signature-title bn">এয়ার টিকেটিং ও ভিসা এক্সিকিউটিভ</p>
+    <p class="signature-title en">Air Ticketing & Visa Executive</p>
+  </div>
+
+  <div class="footer-socials">
+    <a href="https://www.linkedin.com/in/shaheduj-jaman-2679b5248/" target="_blank" rel="noopener" class="social-icon linkedin" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/share/18ufgma2ka/" target="_blank" rel="noopener" class="social-icon facebook" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+  <div class="footer-rule"></div>
+
+</footer>
+
+<script src="script_p1.js"></script>
+<script>
+/* ══ Language Toggle ══ */
+function switchLanguage(lang, e) {
+  if (e) e.stopPropagation();
+  const body = document.body;
+  const isAlready = (lang==='en' && body.classList.contains('lang-en')) ||
+                    (lang==='bn' && body.classList.contains('lang-bn'));
+  if (isAlready) return;
+  if (lang==='bn') { body.classList.remove('lang-en'); body.classList.add('lang-bn'); }
+  else             { body.classList.remove('lang-bn'); body.classList.add('lang-en'); }
+  if (e) {
+    const t = document.getElementById('newLangToggle');
+    const rc = t.getBoundingClientRect();
+    const r = document.createElement('div');
+    r.className = 'lang-ripple-el';
+    r.style.cssText = `width:55px;height:55px;left:${e.clientX-rc.left-27}px;top:${e.clientY-rc.top-27}px`;
+    t.appendChild(r); setTimeout(()=>r.remove(),600);
+  }
+}
+
+/* ══ Certificate Lightbox ══ */
+window.openCertLightbox = function(title, id) {
+  const lightbox = document.getElementById('certLightbox');
+  const titleEl  = document.getElementById('certLightboxTitle');
+  const imgEl    = document.getElementById('certLightboxImg');
+  if (!lightbox||!titleEl||!imgEl) return;
+  titleEl.textContent = title;
+  imgEl.src = id + '.jpg';
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+window.closeCertLightbox = function() {
+  const lb = document.getElementById('certLightbox');
+  if (lb) lb.classList.remove('active');
+  document.body.style.overflow = '';
+};
+
+/* ══ SIGNATURE ANIMATION ══ */
+(function () {
+  const sigCard    = document.getElementById('sigCard');
+  const sigShimmer = document.getElementById('sigShimmer');
+  const sigLine    = document.getElementById('sigUnderline');
+  const sigDots    = document.getElementById('sigDots');
+  const sigNames   = document.querySelectorAll('.signature-name');
+  const sigTitles  = document.querySelectorAll('.signature-title');
+  if (!sigCard) return;
+  let triggered = false;
+  const sigImg = document.getElementById('signatureImg');
+  function runAnim() {
+    if (triggered) return;
+    triggered = true;
+    setTimeout(() => sigCard.classList.add('sig-visible'), 200);
+    setTimeout(() => { if (sigImg) sigImg.classList.add('sig-visible'); }, 400);
+    setTimeout(() => sigShimmer.classList.add('active'), 950);
+    setTimeout(() => sigLine.classList.add('sig-visible'), 1150);
+    setTimeout(() => sigDots.classList.add('sig-visible'), 1450);
+    setTimeout(() => sigNames.forEach((el,i) => setTimeout(()=>el.classList.add('visible'),i*150)), 1650);
+    setTimeout(() => sigTitles.forEach((el,i) => setTimeout(()=>el.classList.add('visible'),i*150)), 1900);
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { runAnim(); observer.unobserve(entry.target); } });
+  }, { threshold: 0.3 });
+  observer.observe(sigCard);
+
+  // ECA badges scroll animation
+  const ecaBadges = document.querySelectorAll('.eca-item');
+  if (ecaBadges.length) {
+    const ecaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('eca-visible');
+          ecaObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    ecaBadges.forEach(badge => ecaObserver.observe(badge));
+  }
+})();
+</script>
+
+</body>
+</html>
