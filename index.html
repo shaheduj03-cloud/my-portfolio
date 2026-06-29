@@ -526,66 +526,93 @@ h1:hover, h2:hover, h3:hover {
   font-family: var(--font-display, sans-serif);
 }
 
-.eca-badges {
+/* ECA Timeline */
+.eca-timeline {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  position: relative;
+  padding-left: 16px;
+  border-left: 2px solid rgba(255,255,255,0.07);
+  margin-left: 8px;
 }
 
-.eca-badge {
+.eca-item {
   display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 6px 14px;
-  border-radius: 7px;
-  background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(255,208,0,0.04) 100%);
-  border: 1px solid rgba(0,212,255,0.15);
-  cursor: default;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0 12px 20px;
+  position: relative;
   opacity: 0;
-  transform: translateX(-16px);
+  transform: translateY(14px);
   transition:
     opacity 0.55s ease var(--d, 0s),
-    transform 0.55s ease var(--d, 0s),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease;
+    transform 0.55s ease var(--d, 0s);
+  cursor: default;
 }
 
-.eca-badge.eca-visible {
+.eca-item.eca-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
-.eca-badge:hover {
-  border-color: rgba(255,165,0,0.45);
-  background: linear-gradient(135deg, rgba(255,149,0,0.08) 0%, rgba(255,208,0,0.06) 100%);
-  box-shadow: 0 4px 18px rgba(255,165,0,0.12);
+.eca-dot {
+  position: absolute;
+  left: -25px;
+  top: 17px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #00d4ff;
+  background: #0a0a0f;
+  box-shadow: 0 0 8px rgba(0,212,255,0.35);
+  flex-shrink: 0;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.eca-item:hover .eca-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 14px rgba(255,165,0,0.6);
 }
 
 .eca-icon {
-  font-size: 15px;
+  font-size: 18px;
   flex-shrink: 0;
+  margin-top: 1px;
   animation: ecaIconPulse 3s ease-in-out infinite;
 }
 
-.eca-badge:nth-child(2) .eca-icon { animation-delay: 0.5s; }
-.eca-badge:nth-child(3) .eca-icon { animation-delay: 1s; }
+.eca-item:nth-child(2) .eca-icon { animation-delay: 0.5s; }
+.eca-item:nth-child(3) .eca-icon { animation-delay: 1s; }
 
 @keyframes ecaIconPulse {
   0%, 100% { transform: scale(1); }
   50%       { transform: scale(1.15); }
 }
 
-.eca-text {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.78);
-  font-family: var(--font-sans, sans-serif);
-  transition: color 0.3s ease;
+.eca-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.eca-badge:hover .eca-text {
+.eca-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-sans, sans-serif);
+  transition: color 0.3s ease;
+  line-height: 1.4;
+}
+
+.eca-item:hover .eca-title {
   color: #ffd000;
+}
+
+.eca-org {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.38);
+  font-family: var(--font-sans, sans-serif);
+  letter-spacing: 0.04em;
 }
 </style>
 
@@ -732,21 +759,33 @@ h1:hover, h2:hover, h3:hover {
           <span class="eca-header-label en">Extra Curricular Activities</span>
           <span class="eca-header-line"></span>
         </div>
-        <div class="eca-badges">
-          <div class="eca-badge" style="--d:0.1s">
-            <span class="eca-icon">🏕️</span>
-            <span class="eca-text bn">বাংলাদেশ স্কাউটস, কুমিল্লা</span>
-            <span class="eca-text en">Bangladesh Scouts, Cumilla</span>
+        <div class="eca-timeline">
+          <div class="eca-item" style="--d:0.1s">
+            <div class="eca-dot" style="border-color:#00d4ff"></div>
+            <div class="eca-icon">🏕️</div>
+            <div class="eca-content">
+              <div class="eca-title bn">বাংলাদেশ স্কাউটস</div>
+              <div class="eca-title en">Bangladesh Scouts</div>
+              <div class="eca-org">Cumilla</div>
+            </div>
           </div>
-          <div class="eca-badge" style="--d:0.25s">
-            <span class="eca-icon">🎤</span>
-            <span class="eca-text bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</span>
-            <span class="eca-text en">Victoria College Debating Society (VCDS)</span>
+          <div class="eca-item" style="--d:0.25s">
+            <div class="eca-dot" style="border-color:#a855f7"></div>
+            <div class="eca-icon">🎤</div>
+            <div class="eca-content">
+              <div class="eca-title bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি</div>
+              <div class="eca-title en">Victoria College Debating Society</div>
+              <div class="eca-org">VCDS</div>
+            </div>
           </div>
-          <div class="eca-badge" style="--d:0.4s">
-            <span class="eca-icon">🩸</span>
-            <span class="eca-text bn">ব্লাড ডোনেশন ক্লাব (বাঁধন), কুমিল্লা</span>
-            <span class="eca-text en">Blood Donation Club (Badhon), Cumilla</span>
+          <div class="eca-item" style="--d:0.4s">
+            <div class="eca-dot" style="border-color:#f43f5e"></div>
+            <div class="eca-icon">🩸</div>
+            <div class="eca-content">
+              <div class="eca-title bn">ব্লাড ডোনেশন ক্লাব (বাঁধন)</div>
+              <div class="eca-title en">Blood Donation Club (Badhon)</div>
+              <div class="eca-org">Cumilla</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1318,7 +1357,7 @@ window.closeCertLightbox = function() {
   observer.observe(sigCard);
 
   // ECA badges scroll animation
-  const ecaBadges = document.querySelectorAll('.eca-badge');
+  const ecaBadges = document.querySelectorAll('.eca-item');
   if (ecaBadges.length) {
     const ecaObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
