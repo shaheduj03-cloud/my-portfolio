@@ -440,32 +440,42 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
 .nav-dropdown-menu {
   display: block;
   position: absolute;
-  top: calc(100% + 12px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-8px);
-  background: rgba(10,10,20,0.97);
-  border: 1px solid rgba(0,212,255,0.25);
-  border-radius: 12px;
-  padding: 8px 0;
-  min-width: 220px;
+  background: linear-gradient(135deg, #ffd000, #ff9d00);
+  border: 1px solid rgba(255,208,0,0.5);
+  border-radius: 14px;
+  padding: 16px 0;
+  margin-top: 12px;
+  min-width: 280px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
-  box-shadow: 0 8px 32px rgba(0,212,255,0.12), 0 2px 8px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 32px rgba(255,165,0,0.25), 0 2px 8px rgba(0,0,0,0.5);
   z-index: 9999;
   list-style: none;
 }
 .nav-dropdown-menu::before {
   content: '';
   position: absolute;
+  top: -18px;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: transparent;
+}
+.nav-dropdown-menu::after {
+  content: '';
+  position: absolute;
   top: -6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 10px;
-  height: 10px;
-  background: rgba(10,10,20,0.97);
-  border-left: 1px solid rgba(0,212,255,0.25);
-  border-top: 1px solid rgba(0,212,255,0.25);
+  width: 12px;
+  height: 12px;
+  background: #ffd000;
+  border-left: 1px solid rgba(255,208,0,0.5);
+  border-top: 1px solid rgba(255,208,0,0.5);
   rotate: 45deg;
 }
 .nav-dropdown:hover .nav-dropdown-menu {
@@ -485,17 +495,17 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
 .nav-dropdown:hover .nav-dropdown-menu li:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:0.20s; }
 .nav-dropdown-menu li a {
   display: block;
-  padding: 9px 18px;
-  font-size: 13px;
-  color: rgba(255,255,255,0.75) !important;
+  padding: 13px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a0a00 !important;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+  transition: background 0.2s ease, padding-left 0.2s ease;
   white-space: nowrap;
 }
 .nav-dropdown-menu li a:hover {
-  background: rgba(0,212,255,0.08);
-  color: #00d4ff !important;
-  padding-left: 24px;
+  background: rgba(0,0,0,0.1);
+  padding-left: 30px;
 }
 .nav-dropdown-arrow {
   display: inline-block;
