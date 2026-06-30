@@ -735,5 +735,88 @@
       .hero-stats { gap: 24px; }
       .contact-inner { padding: 32px 20px; }
       .divider { margin: 0 20px; }
-      .lang-bar { padding: 12px 20px; }
+      .lang-bar { padding: 12px 20px; flex-wrap: wrap; }
     }
+
+    /* MOBILE NAV — hamburger menu */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 200;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--white, #fff);
+      border-radius: 2px;
+      transition: transform 0.3s var(--ease-smooth, ease), opacity 0.3s ease;
+    }
+    .nav-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 880px) {
+      .nav-hamburger { display: flex; }
+
+      .nav-links {
+        position: fixed;
+        top: 0; right: 0;
+        width: min(78vw, 320px);
+        height: 100vh;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        background: rgba(10,10,15,0.98);
+        backdrop-filter: blur(14px);
+        padding: 90px 28px 28px;
+        transform: translateX(100%);
+        transition: transform 0.35s var(--ease-smooth, ease);
+        overflow-y: auto;
+        box-shadow: -8px 0 30px rgba(0,0,0,0.4);
+        z-index: 180;
+      }
+      .nav-links.mobile-open { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 12px 0;
+        font-size: 15px;
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .nav-dropdown-menu {
+        position: static;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: rgba(255,255,255,0.03);
+        border-radius: 10px;
+        margin: 4px 0 8px;
+        padding: 4px 14px;
+      }
+      .nav-dropdown.mobile-expanded .nav-dropdown-menu { display: block; }
+      .nav-dropdown-menu a { border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; }
+
+      .new-lang-toggle { order: -1; margin-bottom: 4px; }
+    }
+
+    /* dim backdrop behind open mobile menu */
+    .nav-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 170;
+    }
+    .nav-overlay.active { display: block; }
