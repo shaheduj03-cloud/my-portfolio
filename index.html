@@ -22,10 +22,16 @@
   border-radius: 60px;
   padding: 5px;
   width: 178px;
+  max-width: 42vw;
   overflow: hidden;
   cursor: pointer;
   backdrop-filter: blur(8px);
   flex-shrink: 0;
+}
+
+@media (max-width: 360px) {
+  .new-lang-toggle { max-width: 46vw; }
+  .new-lang-btn { font-size: 11px; padding: 10px 4px; }
 }
 
 .new-lang-glider {
@@ -1343,21 +1349,23 @@ h1:hover, h2:hover, h3:hover {
 
 <div class="divider"></div>
 
-  <div class="salary-card reveal-scale" style="padding-top:10px; padding-bottom:10px;">
-    <div class="salary-left">
-      <div class="salary-icon-wrap">💰</div>
-      <div>
-        <div class="salary-label bn">প্রত্যাশিত বেতন</div>
-        <div class="salary-label en">Expected Salary</div>
+  <section id="salary" aria-label="Expected Salary" style="padding: 0 20px;">
+    <div class="salary-card reveal-scale" style="padding-top:10px; padding-bottom:10px;">
+      <div class="salary-left">
+        <div class="salary-icon-wrap">💰</div>
+        <div>
+          <div class="salary-label bn">প্রত্যাশিত বেতন</div>
+          <div class="salary-label en">Expected Salary</div>
+        </div>
+      </div>
+      <div class="salary-right">
+        <span class="salary-currency">৳</span>
+        <span class="salary-amount" id="salaryCounter">0</span>
+        <span class="salary-period bn">/ মাস</span>
+        <span class="salary-period en">/ month</span>
       </div>
     </div>
-    <div class="salary-right">
-      <span class="salary-currency">৳</span>
-      <span class="salary-amount" id="salaryCounter">0</span>
-      <span class="salary-period bn">/ মাস</span>
-      <span class="salary-period en">/ month</span>
-    </div>
-  </div>
+  </section>
 
 <div class="divider"></div>
 
@@ -1560,6 +1568,7 @@ function switchLanguage(lang, e) {
   if (isAlready) return;
   if (lang==='bn') { body.classList.remove('lang-en'); body.classList.add('lang-bn'); }
   else             { body.classList.remove('lang-bn'); body.classList.add('lang-en'); }
+  document.documentElement.lang = lang;
   if (e) {
     const t = document.getElementById('newLangToggle');
     const rc = t.getBoundingClientRect();
