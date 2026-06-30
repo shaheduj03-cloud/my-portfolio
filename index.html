@@ -434,6 +434,84 @@ body.lang-bn .new-lang-btn[data-lang="bn"]:hover { color: #1a0a00; }
   color: #ffd000 !important;
 }
 
+/* Dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle { cursor: pointer; user-select: none; }
+.nav-dropdown-menu {
+  display: block;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: rgba(10,10,20,0.97);
+  border: 1px solid rgba(0,212,255,0.25);
+  border-radius: 12px;
+  padding: 8px 0;
+  min-width: 220px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 8px 32px rgba(0,212,255,0.12), 0 2px 8px rgba(0,0,0,0.5);
+  z-index: 9999;
+  list-style: none;
+}
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: rgba(10,10,20,0.97);
+  border-left: 1px solid rgba(0,212,255,0.25);
+  border-top: 1px solid rgba(0,212,255,0.25);
+  rotate: 45deg;
+}
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown-menu li {
+  padding: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.nav-dropdown:hover .nav-dropdown-menu li:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:0.05s; }
+.nav-dropdown:hover .nav-dropdown-menu li:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:0.10s; }
+.nav-dropdown:hover .nav-dropdown-menu li:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:0.15s; }
+.nav-dropdown:hover .nav-dropdown-menu li:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:0.20s; }
+.nav-dropdown-menu li a {
+  display: block;
+  padding: 9px 18px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75) !important;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+  white-space: nowrap;
+}
+.nav-dropdown-menu li a:hover {
+  background: rgba(0,212,255,0.08);
+  color: #00d4ff !important;
+  padding-left: 24px;
+}
+.nav-dropdown-arrow {
+  display: inline-block;
+  font-size: 10px;
+  margin-left: 3px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: rgba(0,212,255,0.7);
+}
+.nav-dropdown:hover .nav-dropdown-arrow {
+  transform: rotate(180deg);
+  color: #00d4ff;
+}
+.nav-dropdown-toggle {
+  position: relative;
+}
+
 /* Section titles & headings */
 h1:hover, h2:hover, h3:hover {
   color: #ffd000 !important;
@@ -631,7 +709,16 @@ h1:hover, h2:hover, h3:hover {
     <li><a href="#about" class="bn">আমার সম্পর্কে</a><a href="#about" class="en">About</a></li>
     <li><a href="#experience" class="bn">অভিজ্ঞতা</a><a href="#experience" class="en">Experience</a></li>
     <li><a href="#skills" class="bn">দক্ষতা</a><a href="#skills" class="en">Skills</a></li>
-    <li><a href="#training" class="bn">প্রশিক্ষণ</a><a href="#training" class="en">Training</a></li>
+    <li class="nav-dropdown">
+      <a href="#training" class="bn nav-dropdown-toggle">প্রশিক্ষণ <span class="nav-dropdown-arrow">▾</span></a>
+      <a href="#training" class="en nav-dropdown-toggle">Training <span class="nav-dropdown-arrow">▾</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="#training" class="bn">✈️ এয়ার টিকেটিং ও ভিসা</a><a href="#training" class="en">✈️ Air Ticketing & Visa</a></li>
+        <li><a href="#training-air" class="bn">🗣️ ইংরেজি ভাষা</a><a href="#training-air" class="en">🗣️ English Language</a></li>
+        <li><a href="#training-personal" class="bn">🏆 পার্সোনাল ডেভেলপমেন্ট</a><a href="#training-personal" class="en">🏆 Personal Development</a></li>
+        <li><a href="#training-computer" class="bn">💻 কম্পিউটার ও ডিজিটাল</a><a href="#training-computer" class="en">💻 Computer & Digital</a></li>
+      </ul>
+    </li>
     <li><a href="#education" class="bn">শিক্ষা</a><a href="#education" class="en">Education</a></li>
     <li><a href="#contact" class="bn">যোগাযোগ</a><a href="#contact" class="en">Contact</a></li>
   </ul>
@@ -1014,7 +1101,7 @@ h1:hover, h2:hover, h3:hover {
       <button class="cert-btn" onclick="openCertLightbox('Basics of Aviation Ground Operation','cert-aviation')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
     </div>
   </div>
-  <div class="support-divider reveal">
+  <div class="support-divider reveal" id="training-air">
     <span class="line"></span>
     <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">ইংরেজি ভাষা প্রশিক্ষণ</span>
     <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">English Language Training</span>
@@ -1040,7 +1127,7 @@ h1:hover, h2:hover, h3:hover {
       <button class="cert-btn" onclick="openCertLightbox('Spoken English','cert-spoken-english')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
     </div>
   </div>
-  <div class="support-divider reveal" style="margin-top: 56px;">
+  <div class="support-divider reveal" id="training-personal" style="margin-top: 56px;">
     <span class="line"></span>
     <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">পার্সোনাল ডেভেলপমেন্ট ট্রেনিং</span>
     <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">Personal Development Training</span>
@@ -1062,7 +1149,7 @@ h1:hover, h2:hover, h3:hover {
       <button class="cert-btn" onclick="openCertLightbox('Workplace Communication Essentials','cert-workplace-comm')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
     </div>
   </div>
-  <div class="support-divider reveal" style="margin-top: 56px;">
+  <div class="support-divider reveal" id="training-computer" style="margin-top: 56px;">
     <span class="line"></span>
     <span class="label bn" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">কম্পিউটার ও ডিজিটাল দক্ষতা</span>
     <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">Computer & Digital Skills</span>
