@@ -735,7 +735,7 @@
       .hero-stats { gap: 24px; }
       .contact-inner { padding: 32px 20px; }
       .divider { margin: 0 20px; }
-      .lang-bar { padding: 12px 20px; flex-wrap: wrap; }
+      .lang-bar { padding: 12px 20px; }
     }
 
     /* MOBILE NAV — hamburger menu */
@@ -765,6 +765,7 @@
     .nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     @media (max-width: 880px) {
+      .lang-bar { padding: 12px 20px; flex-wrap: wrap; }
       .nav-hamburger { display: flex; }
 
       .nav-links {
