@@ -832,7 +832,6 @@ h1:hover, h2:hover, h3:hover {
       <div class="info-row"><span class="ico">📞</span><span class="txt">01701093217</span></div>
       <div class="info-row"><span class="ico">✉️</span><span class="txt">shaheduj03@gmail.com</span></div>
       <div class="info-row"><span class="ico">🎂</span><span class="txt">December 1997</span></div>
-      <div class="info-row"><span class="ico">🩸</span><span class="txt">Blood Group: O+</span></div>
       <div class="info-row"><span class="ico">🌍</span><span class="txt">Bangladeshi</span></div>
     </div>
     <div class="about-text">
@@ -1422,23 +1421,6 @@ function switchLanguage(lang, e) {
     t.appendChild(r); setTimeout(()=>r.remove(),600);
   }
 }
-
-/* ══ Certificate Lightbox ══ */
-window.openCertLightbox = function(title, id) {
-  const lightbox = document.getElementById('certLightbox');
-  const titleEl  = document.getElementById('certLightboxTitle');
-  const imgEl    = document.getElementById('certLightboxImg');
-  if (!lightbox||!titleEl||!imgEl) return;
-  titleEl.textContent = title;
-  imgEl.src = id + '.jpg';
-  lightbox.classList.add('active');
-  document.body.style.overflow = 'hidden';
-};
-window.closeCertLightbox = function() {
-  const lb = document.getElementById('certLightbox');
-  if (lb) lb.classList.remove('active');
-  document.body.style.overflow = '';
-};
 
 /* ══ SIGNATURE ANIMATION ══ */
 (function () {

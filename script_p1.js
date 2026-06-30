@@ -10,7 +10,18 @@
     'cert-ssc': 'cert-ssc.jpg',
     'cert-ai-career': 'cert-ai-career.jpg',
     'cert-tesol': 'cert-tesol.jpg',
-    'cert-quantum': 'cert-quantum.jpg'
+    'cert-quantum-method': 'cert-quantum-method.jpg',
+    'cert-career-summit': 'cert-career-summit.jpg',
+    'cert-volunteer-career-summit': 'cert-volunteer-career-summit.jpg',
+    'cert-seller-sales': 'cert-seller-sales.jpg',
+    'cert-spoken-english': 'cert-spoken-english.jpg',
+    'cert-tesol-phonics': 'cert-tesol-phonics.jpg',
+    'cert-video-editing': 'cert-video-editing.jpg',
+    'cert-workplace-comm': 'cert-workplace-comm.jpg',
+    'cert-digital-marketing': 'cert-digital-marketing.jpg',
+    'cert-graphics-design': 'cert-graphics-design.jpg',
+    'cert-computer-basic': 'cert-computer-basic.jpg',
+    'cert-computer-merit': 'cert-computer-merit.jpg'
   };
   function openCertLightbox(title, key) {
     const src = certImages[key];
