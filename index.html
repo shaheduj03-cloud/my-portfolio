@@ -716,6 +716,7 @@ h1:hover, h2:hover, h3:hover {
     display: block;
     padding: 12px 0;
     font-size: 16px;
+    color: rgba(255,255,255,0.9) !important;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .nav-dropdown-menu {
@@ -894,8 +895,8 @@ h1:hover, h2:hover, h3:hover {
     <li><a href="#experience" class="bn">অভিজ্ঞতা</a><a href="#experience" class="en">Experience</a></li>
     <li><a href="#skills" class="bn">দক্ষতা</a><a href="#skills" class="en">Skills</a></li>
     <li class="nav-dropdown" id="navTrainingDropdown">
-      <a href="#training" class="bn nav-dropdown-toggle" onclick="return handleDropdownClick(event)">প্রশিক্ষণ <span class="nav-dropdown-arrow">▾</span></a>
-      <a href="#training" class="en nav-dropdown-toggle" onclick="return handleDropdownClick(event)">Training <span class="nav-dropdown-arrow">▾</span></a>
+      <a href="#training" class="bn nav-dropdown-toggle">প্রশিক্ষণ <span class="nav-dropdown-arrow">▾</span></a>
+      <a href="#training" class="en nav-dropdown-toggle">Training <span class="nav-dropdown-arrow">▾</span></a>
       <ul class="nav-dropdown-menu">
         <li><a href="#training" class="bn">✈️ এয়ার টিকেটিং ও ভিসা</a><a href="#training" class="en">✈️ Air Ticketing & Visa</a></li>
         <li><a href="#training-air" class="bn">🗣️ ইংরেজি ভাষা</a><a href="#training-air" class="en">🗣️ English Language</a></li>
@@ -1600,23 +1601,30 @@ function toggleMobileNav() {
   hamburger.classList.toggle('active', isOpen);
   overlay.classList.toggle('active', isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
+  if (!isOpen) {
+    const dropdown = document.getElementById('navTrainingDropdown');
+    if (dropdown) dropdown.classList.remove('mobile-expanded');
+  }
 }
 
-/* মোবাইলে প্রশিক্ষণ ড্রপডাউন ক্লিক করলে খোলা/বন্ধ হবে, ডেস্কটপে normal link হিসেবে কাজ করবে */
-function handleDropdownClick(e) {
-  if (window.innerWidth <= 880) {
-    e.preventDefault();
-    document.getElementById('navTrainingDropdown').classList.toggle('mobile-expanded');
-    return false;
-  }
-  toggleMobileNav();
-  return true;
-}
+/* প্রশিক্ষণ ড্রপডাউন — মোবাইলে ক্লিক করলে খুলবে/বন্ধ হবে, ডেস্কটপে normal hover/link হিসেবে কাজ করবে */
+document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
+  toggle.addEventListener('click', function (ev) {
+    if (window.innerWidth <= 880) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      document.getElementById('navTrainingDropdown').classList.toggle('mobile-expanded');
+    }
+  });
+});
 
 /* মোবাইল মেনুর সাধারণ লিংকে ক্লিক করলে মেনু বন্ধ হবে */
 document.querySelectorAll('#navLinks > li > a:not(.nav-dropdown-toggle), #navLinks .nav-dropdown-menu a').forEach(link => {
   link.addEventListener('click', () => {
-    if (window.innerWidth <= 880) toggleMobileNav();
+    if (window.innerWidth <= 880) {
+      document.getElementById('navTrainingDropdown').classList.remove('mobile-expanded');
+      toggleMobileNav();
+    }
   });
 });
 
