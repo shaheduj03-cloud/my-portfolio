@@ -662,9 +662,95 @@ h1:hover, h2:hover, h3:hover {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.eca-item:hover .eca-dot {
-  transform: scale(1.3);
-  box-shadow: 0 0 14px rgba(255,165,0,0.6);
+/* ══════════════════════════════════════
+   Mobile Hamburger Navigation
+══════════════════════════════════════ */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.active span:nth-child(2) { opacity: 0; }
+.nav-hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 880px) {
+  .nav-hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 78%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(8,8,14,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 90px 28px 28px;
+    gap: 4px;
+    transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  }
+  .nav-links.mobile-open { right: 0; }
+  .nav-links li { width: 100%; }
+  .nav-links li a {
+    display: block;
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    pointer-events: all;
+    display: none;
+    background: rgba(255,208,0,0.06);
+    border: none;
+    box-shadow: none;
+    min-width: 100%;
+    margin: 0 0 8px 0;
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid #ffd000;
+    border-radius: 0;
+  }
+  .nav-dropdown-menu::after { display: none; }
+  .nav-dropdown.mobile-expanded .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu li a {
+    color: rgba(255,255,255,0.8) !important;
+    font-size: 14px;
+    padding: 10px 0;
+    border-bottom: none;
+  }
+  .nav-dropdown-arrow { transition: transform 0.3s ease; }
+  .nav-dropdown.mobile-expanded .nav-dropdown-arrow { transform: rotate(180deg); }
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 999;
+  }
+  .nav-overlay.active { display: block; }
 }
 
 .eca-icon {
@@ -707,6 +793,80 @@ h1:hover, h2:hover, h3:hover {
   font-family: var(--font-sans, sans-serif);
   letter-spacing: 0.04em;
 }
+
+/* ══════════════════════════════════════
+   Extra Curricular (ECA) Section — clean classes
+══════════════════════════════════════ */
+.eca-section {
+  padding-top: 0;
+  margin-top: -20px;
+}
+.eca-section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+}
+.eca-section-inner .section-label {
+  font-size: 10px;
+}
+.eca-section-inner .section-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.eca-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+.eca-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px;
+  border-radius: 7px;
+}
+.eca-card-icon {
+  font-size: 14px;
+}
+.eca-card-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+.eca-card-sub {
+  font-size: 10px;
+  color: rgba(255,255,255,0.38);
+}
+.eca-card.c-scouts {
+  background: linear-gradient(135deg,rgba(0,212,255,0.05),rgba(255,208,0,0.03));
+  border: 1px solid rgba(0,212,255,0.15);
+}
+.eca-card.c-debate {
+  background: linear-gradient(135deg,rgba(168,85,247,0.05),rgba(255,208,0,0.03));
+  border: 1px solid rgba(168,85,247,0.15);
+}
+.eca-card.c-blood {
+  background: linear-gradient(135deg,rgba(244,63,94,0.05),rgba(255,208,0,0.03));
+  border: 1px solid rgba(244,63,94,0.15);
+}
+.eca-card.c-volunteer {
+  background: linear-gradient(135deg,rgba(255,165,0,0.05),rgba(255,208,0,0.03));
+  border: 1px solid rgba(255,165,0,0.15);
+}
+.eca-card-volunteer-body {
+  flex: 1;
+}
+.eca-card-volunteer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.eca-card-volunteer-row .cert-btn {
+  font-size: 10px;
+  padding: 3px 8px;
+  flex-shrink: 0;
+}
 </style>
 
 </head>
@@ -720,13 +880,13 @@ h1:hover, h2:hover, h3:hover {
 <!-- NAV -->
 <nav class="lang-bar">
   <div class="nav-logo">SJ <span>✈</span></div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about" class="bn">আমার সম্পর্কে</a><a href="#about" class="en">About</a></li>
     <li><a href="#experience" class="bn">অভিজ্ঞতা</a><a href="#experience" class="en">Experience</a></li>
     <li><a href="#skills" class="bn">দক্ষতা</a><a href="#skills" class="en">Skills</a></li>
-    <li class="nav-dropdown">
-      <a href="#training" class="bn nav-dropdown-toggle">প্রশিক্ষণ <span class="nav-dropdown-arrow">▾</span></a>
-      <a href="#training" class="en nav-dropdown-toggle">Training <span class="nav-dropdown-arrow">▾</span></a>
+    <li class="nav-dropdown" id="navTrainingDropdown">
+      <a href="#training" class="bn nav-dropdown-toggle" onclick="return handleDropdownClick(event)">প্রশিক্ষণ <span class="nav-dropdown-arrow">▾</span></a>
+      <a href="#training" class="en nav-dropdown-toggle" onclick="return handleDropdownClick(event)">Training <span class="nav-dropdown-arrow">▾</span></a>
       <ul class="nav-dropdown-menu">
         <li><a href="#training" class="bn">✈️ এয়ার টিকেটিং ও ভিসা</a><a href="#training" class="en">✈️ Air Ticketing & Visa</a></li>
         <li><a href="#training-air" class="bn">🗣️ ইংরেজি ভাষা</a><a href="#training-air" class="en">🗣️ English Language</a></li>
@@ -744,7 +904,12 @@ h1:hover, h2:hover, h3:hover {
     <button class="new-lang-btn" data-lang="en" onclick="switchLanguage('en', event)">English</button>
     <button class="new-lang-btn" data-lang="bn" onclick="switchLanguage('bn', event)">বাংলা</button>
   </div>
+
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-overlay" id="navOverlay" onclick="toggleMobileNav()"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -777,6 +942,8 @@ h1:hover, h2:hover, h3:hover {
       <div class="hero-cta">
         <a href="#contact" class="btn-primary bn">যোগাযোগ করুন →</a>
         <a href="#contact" class="btn-primary en">Get In Touch →</a>
+        <a href="Shaheduj-Jaman-CV.pdf" download class="btn-secondary bn">📄 সিভি ডাউনলোড করুন</a>
+        <a href="Shaheduj-Jaman-CV.pdf" download class="btn-secondary en">📄 Download CV</a>
         <a href="#training" class="btn-secondary bn">প্রশিক্ষণ দেখুন</a>
         <a href="#training" class="btn-secondary en">View Training</a>
       </div>
@@ -888,46 +1055,46 @@ h1:hover, h2:hover, h3:hover {
   </div>
 </section>
 
-<section class="experience reveal" style="padding-top: 0; margin-top: -20px;">
-  <div class="section-inner" style="max-width:900px; margin:0 auto; padding: 0 24px 24px;">
-    <div class="section-label bn" style="font-size:10px;">এক্সট্রা কারিকুলার</div>
-    <div class="section-label en" style="font-size:10px;">Extra Curricular</div>
-    <h2 class="section-title bn" style="font-size:16px; margin-bottom:10px;">অতিরিক্ত কার্যক্রম</h2>
-    <h2 class="section-title en" style="font-size:16px; margin-bottom:10px;">Extra Curricular Activities</h2>
-    <div style="display:flex; flex-direction:column; gap:5px; margin-top:10px;">
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(0,212,255,0.15);">
-        <span style="font-size:14px;">🏕️</span>
+<section class="experience reveal eca-section">
+  <div class="section-inner eca-section-inner">
+    <div class="section-label bn">এক্সট্রা কারিকুলার</div>
+    <div class="section-label en">Extra Curricular</div>
+    <h2 class="section-title bn">অতিরিক্ত কার্যক্রম</h2>
+    <h2 class="section-title en">Extra Curricular Activities</h2>
+    <div class="eca-list">
+      <div class="eca-card c-scouts">
+        <span class="eca-card-icon">🏕️</span>
         <div>
-          <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">বাংলাদেশ স্কাউটস</div>
-          <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Bangladesh Scouts</div>
-          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Cumilla</div>
+          <div class="bn eca-card-title">বাংলাদেশ স্কাউটস</div>
+          <div class="en eca-card-title">Bangladesh Scouts</div>
+          <div class="eca-card-sub">Cumilla</div>
         </div>
       </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(168,85,247,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(168,85,247,0.15);">
-        <span style="font-size:14px;">🎤</span>
+      <div class="eca-card c-debate">
+        <span class="eca-card-icon">🎤</span>
         <div>
-          <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</div>
-          <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Victoria College Debating Society (VCDS)</div>
-          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Cumilla</div>
+          <div class="bn eca-card-title">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</div>
+          <div class="en eca-card-title">Victoria College Debating Society (VCDS)</div>
+          <div class="eca-card-sub">Cumilla</div>
         </div>
       </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(244,63,94,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(244,63,94,0.15);">
-        <span style="font-size:14px;">🩸</span>
+      <div class="eca-card c-blood">
+        <span class="eca-card-icon">🩸</span>
         <div>
-          <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">ব্লাড ডোনেশন ক্লাব (বাঁধন)</div>
-          <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Blood Donation Club (Badhon)</div>
-          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Cumilla</div>
+          <div class="bn eca-card-title">ব্লাড ডোনেশন ক্লাব (বাঁধন)</div>
+          <div class="en eca-card-title">Blood Donation Club (Badhon)</div>
+          <div class="eca-card-sub">Cumilla</div>
         </div>
       </div>
-      <div style="display:flex; align-items:center; gap:10px; padding:5px 12px; border-radius:7px; background:linear-gradient(135deg,rgba(255,165,0,0.05),rgba(255,208,0,0.03)); border:1px solid rgba(255,165,0,0.15);">
-        <span style="font-size:14px;">🤝</span>
-        <div style="flex:1;">
-          <div style="display:flex; align-items:center; justify-content:space-between;">
-            <div class="bn" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</div>
-            <div class="en" style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);">Volunteer — Career Summit 2025</div>
-            <button class="cert-btn" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')" style="font-size:10px; padding:3px 8px; flex-shrink:0;"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+      <div class="eca-card c-volunteer">
+        <span class="eca-card-icon">🤝</span>
+        <div class="eca-card-volunteer-body">
+          <div class="eca-card-volunteer-row">
+            <div class="bn eca-card-title">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</div>
+            <div class="en eca-card-title">Volunteer — Career Summit 2025</div>
+            <button class="cert-btn" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
           </div>
-          <div style="font-size:10px; color:rgba(255,255,255,0.38);">Youth Skill Development Institute Trust · Dhaka</div>
+          <div class="eca-card-sub">Youth Skill Development Institute Trust · Dhaka</div>
         </div>
       </div>
     </div>
@@ -1295,6 +1462,13 @@ h1:hover, h2:hover, h3:hover {
           <div class="value">01701093217</div>
         </div>
       </a>
+      <a href="https://wa.me/8801701093217" target="_blank" rel="noopener" class="contact-link">
+        <span class="icon">💬</span>
+        <div class="info">
+          <div class="label bn">হোয়াটসঅ্যাপ</div><div class="label en">WhatsApp</div>
+          <div class="value">01701093217</div>
+        </div>
+      </a>
     </div>
     <div class="ref-note reveal" role="button" tabindex="0" onclick="openRefLightbox()" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); openRefLightbox(); }">
       <div class="ref-note-icowrap">📋</div>
@@ -1405,6 +1579,48 @@ h1:hover, h2:hover, h3:hover {
 
 <script src="script_p1.js"></script>
 <script>
+/* ══ Mobile Hamburger Navigation ══ */
+function toggleMobileNav() {
+  const navLinks = document.getElementById('navLinks');
+  const hamburger = document.getElementById('navHamburger');
+  const overlay = document.getElementById('navOverlay');
+  const isOpen = navLinks.classList.toggle('mobile-open');
+  hamburger.classList.toggle('active', isOpen);
+  overlay.classList.toggle('active', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+/* মোবাইলে প্রশিক্ষণ ড্রপডাউন ক্লিক করলে খোলা/বন্ধ হবে, ডেস্কটপে normal link হিসেবে কাজ করবে */
+function handleDropdownClick(e) {
+  if (window.innerWidth <= 880) {
+    e.preventDefault();
+    document.getElementById('navTrainingDropdown').classList.toggle('mobile-expanded');
+    return false;
+  }
+  toggleMobileNav();
+  return true;
+}
+
+/* মোবাইল মেনুর সাধারণ লিংকে ক্লিক করলে মেনু বন্ধ হবে */
+document.querySelectorAll('#navLinks > li > a:not(.nav-dropdown-toggle), #navLinks .nav-dropdown-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 880) toggleMobileNav();
+  });
+});
+
+/* স্ক্রিন বড় হলে মোবাইল মেনু অটো বন্ধ */
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 880) {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('navHamburger');
+    const overlay = document.getElementById('navOverlay');
+    navLinks.classList.remove('mobile-open');
+    hamburger.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
 /* ══ Language Toggle ══ */
 function switchLanguage(lang, e) {
   if (e) e.stopPropagation();
