@@ -72,28 +72,6 @@
   window.addEventListener('scroll', updateProgress);
   updateProgress();
 
-  // ── BACK TO TOP BUTTON ──
-  const backToTopBtn = document.getElementById('backToTop');
-  if (backToTopBtn) {
-    const SHOW_AFTER_PX = 480;
-    let btnTicking = false;
-    function updateBackToTopVisibility() {
-      backToTopBtn.classList.toggle('visible', window.scrollY > SHOW_AFTER_PX);
-      btnTicking = false;
-    }
-    window.addEventListener('scroll', () => {
-      if (!btnTicking) {
-        requestAnimationFrame(updateBackToTopVisibility);
-        btnTicking = true;
-      }
-    });
-    updateBackToTopVisibility();
-
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
   // ── SCROLL REVEAL ANIMATIONS ──
   const revealTargets = document.querySelectorAll('.reveal, .reveal-scale, .skill-row');
   const revealObserver = new IntersectionObserver((entries) => {
