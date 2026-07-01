@@ -120,16 +120,24 @@
     let pos = 0;
     let extra = 0; // arrow-click থেকে আসা এক্সট্রা মুভমেন্ট, ধীরে ধীরে যোগ হয়ে যায়
     let paused = false; // কার্ডের উপর হোভার করলে true হবে
-    function frame() {
+    let lastTime = null;
+    // speed = px প্রতি ~16.67ms (60fps বেসলাইন); dt দিয়ে normalize করলে 60Hz/90Hz/120Hz
+    // সব স্ক্রিনেই একই গতি ও মসৃণতা বজায় থাকে (frame-rate independent)
+    function frame(now) {
+      if (lastTime === null) lastTime = now;
+      const dt = Math.min(now - lastTime, 100); // ট্যাব ইনঅ্যাক্টিভ থাকলে বড় jump আটকাতে cap
+      lastTime = now;
+      const dtFactor = dt / 16.6667;
       const half = track.scrollWidth / 2;
       if (extra !== 0) {
-        const step = extra * 0.18; // smooth easing towards the nudged target
+        const easeFactor = 1 - Math.pow(1 - 0.18, dtFactor); // frame-rate independent easing
+        const step = extra * easeFactor;
         pos += step;
         extra -= step;
         if (Math.abs(extra) < 0.5) extra = 0;
       }
       if (!paused) {
-        pos += speed; // অটো-স্ক্রল, হোভার করলে থেমে যাবে
+        pos += speed * dtFactor; // অটো-স্ক্রল, হোভার করলে থেমে যাবে
       }
       if (pos >= half) pos -= half;
       if (pos < 0) pos += half;

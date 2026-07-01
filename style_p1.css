@@ -365,7 +365,7 @@
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
     }
     .training-track-wrap:hover .training-track { animation-play-state: paused; }
-    .training-track { display: flex; gap: 20px; width: max-content; animation: scrollTrack 34s linear infinite; }
+    .training-track { display: flex; gap: 20px; width: max-content; animation: scrollTrack 34s linear infinite; will-change: transform; }
     .training-track .training-card { flex: 0 0 300px; width: 300px; position: relative; display: flex; flex-direction: column; }
     .training-track .training-card .cert-btn { margin-top: auto; align-self: flex-start; }
 
