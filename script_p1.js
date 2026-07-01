@@ -103,11 +103,17 @@
     countryTrack.innerHTML += countryTrack.innerHTML;
   }
 
-  // ── DUPLICATE PERSONAL DEVELOPMENT TRAINING TRACK FOR SEAMLESS MARQUEE LOOP ──
-  const personalDevTrack = document.getElementById('personalDevTrack');
-  if (personalDevTrack) {
-    personalDevTrack.innerHTML += personalDevTrack.innerHTML;
+  // ── PERSONAL DEVELOPMENT TRAINING: MANUAL PREV/NEXT CAROUSEL SCROLL ──
+  function scrollTrainingTrack(trackId, direction) {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+    const wrap = track.parentElement; // scrollable .training-track-wrap.manual-scroll
+    const card = track.querySelector('.training-card');
+    const gap = 20;
+    const step = card ? card.offsetWidth + gap : 320;
+    wrap.scrollBy({ left: direction * step, behavior: 'smooth' });
   }
+  window.scrollTrainingTrack = scrollTrainingTrack;
 
   // ── SALARY COUNT-UP ANIMATION ──
   const salaryCounter = document.getElementById('salaryCounter');

@@ -366,7 +366,40 @@
     }
     .training-track-wrap:hover .training-track { animation-play-state: paused; }
     .training-track { display: flex; gap: 20px; width: max-content; animation: scrollTrack 34s linear infinite; }
-    .training-track .training-card { flex: 0 0 300px; width: 300px; }
+    .training-track .training-card { flex: 0 0 300px; width: 300px; position: relative; }
+
+    /* Manual scroll carousel (Personal Development Training) with prev/next arrows + numbering */
+    .training-carousel { display: flex; align-items: center; gap: 12px; max-width: 1180px; margin: 0 auto; }
+    .training-track-wrap.manual-scroll {
+      max-width: none; flex: 1; min-width: 0;
+      overflow-x: auto; scroll-behavior: smooth;
+      scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .training-track-wrap.manual-scroll::-webkit-scrollbar { display: none; }
+    .training-track.manual-scroll { animation: none; }
+    .training-track.manual-scroll .training-card { scroll-snap-align: start; }
+    .tc-nav {
+      flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(20,20,26,0.85); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.14); color: var(--white);
+      font-size: 20px; font-weight: 700; cursor: pointer; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease, color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .tc-nav:hover { background: rgba(0,229,255,0.14); border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 16px rgba(0,229,255,0.3); transform: scale(1.08); }
+    .tc-nav:active { transform: scale(0.94); }
+    @media (max-width: 640px) {
+      .training-carousel { gap: 8px; }
+      .tc-nav { width: 34px; height: 34px; font-size: 16px; }
+    }
+    .tc-num {
+      position: absolute; top: -10px; left: -10px; width: 30px; height: 30px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #06131a; font-family: var(--font-display); font-weight: 800; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4); z-index: 2;
+    }
 
     /* Flying plane motion graphic */
     .flying-plane {
