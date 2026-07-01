@@ -72,6 +72,19 @@
   window.addEventListener('scroll', updateProgress);
   updateProgress();
 
+  // ── BACK TO TOP BUTTON ──
+  const backToTopBtn = document.getElementById('backToTop');
+  if (backToTopBtn) {
+    const toggleBackToTop = () => {
+      backToTopBtn.classList.toggle('visible', window.scrollY > 480);
+    };
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    toggleBackToTop();
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   // ── SCROLL REVEAL ANIMATIONS ──
   const revealTargets = document.querySelectorAll('.reveal, .reveal-scale, .skill-row');
   const revealObserver = new IntersectionObserver((entries) => {
