@@ -715,13 +715,19 @@
       transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), background 0.25s, border-color 0.25s, box-shadow 0.25s;
       text-decoration: none;
     }
-    .social-icon svg { width: 20px; height: 20px; transition: fill 0.25s; }
-    .social-icon.linkedin svg { fill: var(--muted); }
-    .social-icon.linkedin:hover { background: rgba(0,229,255,0.12); border-color: var(--cyan); transform: translateY(-4px) scale(1.08); box-shadow: 0 8px 24px rgba(0,229,255,0.25); }
-    .social-icon.linkedin:hover svg { fill: var(--cyan); }
-    .social-icon.facebook svg { fill: var(--muted); }
-    .social-icon.facebook:hover { background: rgba(168,85,247,0.12); border-color: var(--purple); transform: translateY(-4px) scale(1.08); box-shadow: 0 8px 24px rgba(168,85,247,0.25); }
-    .social-icon.facebook:hover svg { fill: var(--purple); }
+    .social-icon svg { width: 20px; height: 20px; transition: fill 0.25s, stroke 0.25s; }
+    /* Brand colors — icons always show their own social media color */
+    .social-icon.whatsapp svg { fill: #25D366; }
+    .social-icon.linkedin svg { fill: #0A66C2; }
+    .social-icon.facebook svg { fill: #1877F2; }
+    /* Hover — unified golden glow (matches language toggle accent) */
+    .social-icon:hover {
+      background: linear-gradient(135deg, #ff9500 0%, #ffd000 100%);
+      border-color: #ffb020;
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 0 18px rgba(255,165,0,0.55), 0 8px 24px rgba(255,165,0,0.35);
+    }
+    .social-icon:hover svg { fill: #1a1a1a; }
     .footer-rule { width: 60px; height: 2px; background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan)); border-radius: 2px; margin: 0 auto 20px; }
 
     /* LANG */
