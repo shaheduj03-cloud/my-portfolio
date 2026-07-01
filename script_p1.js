@@ -61,23 +61,6 @@
     if (e.key === 'Escape') closeRefLightbox();
   });
 
-  let currentLang = 'bn';
-  function toggleLang() {
-    const body = document.body;
-    const btn = document.getElementById('langToggleBtn');
-    if (currentLang === 'bn') {
-      body.classList.replace('lang-bn', 'lang-en');
-      document.documentElement.lang = 'en';
-      btn.textContent = 'বাংলা';
-      currentLang = 'en';
-    } else {
-      body.classList.replace('lang-en', 'lang-bn');
-      document.documentElement.lang = 'bn';
-      btn.textContent = 'English';
-      currentLang = 'bn';
-    }
-  }
-
   // ── SCROLL PROGRESS BAR ──
   const progressBar = document.getElementById('scrollProgress');
   function updateProgress() {
