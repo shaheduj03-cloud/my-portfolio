@@ -858,6 +858,7 @@
         overflow: hidden;
         opacity: 1;
         visibility: visible;
+        pointer-events: auto !important;
         transform: none !important;
         box-shadow: none !important;
         background: rgba(255,255,255,0.03) !important;
@@ -868,32 +869,38 @@
         z-index: auto !important;
         transition: max-height 0.45s cubic-bezier(0.16,1,0.3,1), padding 0.35s ease, margin 0.35s ease;
       }
-      .nav-dropdown.mobile-expanded #navLinks .nav-dropdown-menu {
+      #navLinks .nav-dropdown-menu::before,
+      #navLinks .nav-dropdown-menu::after {
+        content: none !important;
+        display: none !important;
+      }
+      #navLinks .nav-dropdown.mobile-expanded .nav-dropdown-menu {
         max-height: 260px;
         margin: 4px 0 8px !important;
         padding: 4px 14px !important;
       }
       #navLinks .nav-dropdown-arrow { display: inline-block; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
-      .nav-dropdown.mobile-expanded #navLinks .nav-dropdown-arrow { transform: rotate(180deg) scale(1.15); }
+      #navLinks .nav-dropdown.mobile-expanded .nav-dropdown-arrow { transform: rotate(180deg) scale(1.15); }
       #navLinks .nav-dropdown-menu li {
         opacity: 0 !important;
         transform: translateY(-6px) !important;
         transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1) !important;
       }
-      .nav-dropdown.mobile-expanded #navLinks .nav-dropdown-menu li {
+      #navLinks .nav-dropdown.mobile-expanded .nav-dropdown-menu li {
         opacity: 1 !important;
         transform: translateY(0) !important;
       }
-      .nav-dropdown.mobile-expanded #navLinks .nav-dropdown-menu li:nth-child(1) { transition-delay: 0.05s !important; }
-      .nav-dropdown.mobile-expanded #navLinks .nav-dropdown-menu li:nth-child(2) { transition-delay: 0.10s !important; }
-      .nav-dropdown.mobile-expanded #navLinks .nav-dropdown-menu li:nth-child(3) { transition-delay: 0.15s !important; }
-      .nav-dropdown.mobile-expanded #navLinks .nav-dropdown-menu li:nth-child(4) { transition-delay: 0.20s !important; }
+      #navLinks .nav-dropdown.mobile-expanded .nav-dropdown-menu li:nth-child(1) { transition-delay: 0.05s !important; }
+      #navLinks .nav-dropdown.mobile-expanded .nav-dropdown-menu li:nth-child(2) { transition-delay: 0.10s !important; }
+      #navLinks .nav-dropdown.mobile-expanded .nav-dropdown-menu li:nth-child(3) { transition-delay: 0.15s !important; }
+      #navLinks .nav-dropdown.mobile-expanded .nav-dropdown-menu li:nth-child(4) { transition-delay: 0.20s !important; }
       #navLinks .nav-dropdown-menu a {
         border-bottom: 1px solid rgba(255,255,255,0.04) !important;
         font-size: 13px !important;
         color: var(--white, #fff) !important;
         background: none !important;
         padding: 10px 4px !important;
+        white-space: normal !important;
       }
 
       .new-lang-toggle { order: -1; margin-bottom: 4px; }
