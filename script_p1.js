@@ -103,11 +103,10 @@
     countryTrack.innerHTML += countryTrack.innerHTML;
   }
 
-  // ── PERSONAL DEVELOPMENT / COMPUTER SKILLS: CARD-BY-CARD AUTO-ADVANCE CAROUSEL + ARROWS ──
-  // প্রতিটা ধাপে ঠিক একটা সম্পূর্ণ card সরে যায় — কোনো card কখনো অর্ধেক-কাটা দেখা যায় না।
-  // hover করলে থামে, সরিয়ে ফেললে আবার চলতে থাকে।
+  // ── PERSONAL DEVELOPMENT / COMPUTER SKILLS: CONTINUOUS AUTO-SCROLL CAROUSEL (like country marquee) + ARROWS ──
+  // অটো-স্ক্রল কখনোই থামে না, শুধু কার্ডে হোভার করলে থামে — সরিয়ে ফেললে আবার চলে।
   const trainingCarousels = {};
-  function setupAutoTrainingCarousel(trackId, intervalMs) {
+  function setupAutoTrainingCarousel(trackId, speed) {
     const track = document.getElementById(trackId);
     if (!track) return;
     const wrap = track.parentElement;
@@ -116,70 +115,44 @@
       track.innerHTML += track.innerHTML;
       track.dataset.duplicated = 'true';
     }
-    const gap = 20;
-    let cardStep = 320;
-    let pos = 0;
-    let paused = false;
-    let animId = null;
-    let autoTimer = null;
-
-    function computeStep() {
-      const card = track.querySelector('.training-card');
-      cardStep = card ? card.offsetWidth + gap : 320;
-    }
-    function applyScroll() {
+    // scrollLeft ইন্টিজার-রাউন্ড করে, তাই sub-pixel speed সরাসরি scrollLeft-এ যোগ করলে
+    // প্রতি ফ্রেমেই রাউন্ড হয়ে ০-তে ফিরে যায় (কোনো নড়াচড়া বোঝা যায় না)। তাই আলাদা float accumulator রাখা হলো।
+    let pos = wrap.scrollLeft;
+    let extra = 0; // arrow-click থেকে আসা এক্সট্রা মুভমেন্ট, ধীরে ধীরে যোগ হয়ে যায়
+    let paused = false; // কার্ডের উপর হোভার করলে true হবে
+    function frame() {
       const half = track.scrollWidth / 2;
+      if (extra !== 0) {
+        const step = extra * 0.18; // smooth easing towards the nudged target
+        pos += step;
+        extra -= step;
+        if (Math.abs(extra) < 0.5) extra = 0;
+      }
+      if (!paused) {
+        pos += speed; // অটো-স্ক্রল, হোভার করলে থেমে যাবে
+      }
       if (pos >= half) pos -= half;
       if (pos < 0) pos += half;
       wrap.scrollLeft = pos;
+      requestAnimationFrame(frame);
     }
-    // pos-কে ঠিক এক card-সমান দূরত্ব মসৃণভাবে সরিয়ে নতুন card-এর শুরুতে align করে
-    function animateStep(direction) {
-      if (animId) cancelAnimationFrame(animId);
-      computeStep();
-      const start = pos;
-      const distance = cardStep * direction;
-      const target = start + distance;
-      const duration = 650;
-      const startTime = performance.now();
-      function tick(now) {
-        const t = Math.min((now - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
-        pos = start + distance * eased;
-        applyScroll();
-        if (t < 1) {
-          animId = requestAnimationFrame(tick);
-        } else {
-          pos = target;
-          applyScroll();
-          animId = null;
-        }
-      }
-      animId = requestAnimationFrame(tick);
-    }
-    function scheduleAuto() {
-      clearTimeout(autoTimer);
-      autoTimer = setTimeout(() => {
-        if (!paused) animateStep(1);
-        scheduleAuto();
-      }, intervalMs);
-    }
-    requestAnimationFrame(() => { computeStep(); applyScroll(); scheduleAuto(); });
-    // কার্ডের উপর হোভার করলে অটো-অ্যাডভান্স থামবে, সরিয়ে ফেললে আবার চলবে
+    requestAnimationFrame(frame);
+    // কার্ডের উপর হোভার করলে অটো-স্ক্রল থামবে, সরিয়ে ফেললে আবার চলবে
     track.querySelectorAll('.training-card').forEach(card => {
       card.addEventListener('mouseenter', () => { paused = true; });
       card.addEventListener('mouseleave', () => { paused = false; });
     });
     trainingCarousels[trackId] = {
       scrollBy(direction) {
-        clearTimeout(autoTimer);
-        animateStep(direction);
-        scheduleAuto();
+        const card = track.querySelector('.training-card');
+        const gap = 20;
+        const step = card ? card.offsetWidth + gap : 320;
+        extra += direction * step; // অটো-স্ক্রল চালু থেকেই এক্সট্রা মুভমেন্ট যোগ হয়, pause হয় না
       }
     };
   }
-  setupAutoTrainingCarousel('personalDevTrack', 3200);
-  setupAutoTrainingCarousel('computerSkillsTrack', 3200);
+  setupAutoTrainingCarousel('personalDevTrack', 0.45);
+  setupAutoTrainingCarousel('computerSkillsTrack', 0.45);
 
   function scrollTrainingTrack(trackId, direction) {
     const carousel = trainingCarousels[trackId];
