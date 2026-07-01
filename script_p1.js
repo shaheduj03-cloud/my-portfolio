@@ -105,6 +105,8 @@
 
   // ── PERSONAL DEVELOPMENT / COMPUTER SKILLS: CONTINUOUS AUTO-SCROLL CAROUSEL (like country marquee) + ARROWS ──
   // অটো-স্ক্রল কখনোই থামে না, শুধু কার্ডে হোভার করলে থামে — সরিয়ে ফেললে আবার চলে।
+  // scrollLeft শুধু পূর্ণ পিক্সেলে কাজ করে বলে ধীর গতিতে সামান্য কাঁপুনি দিত;
+  // এখন transform: translateX() ব্যবহার করা হচ্ছে (দেশের marquee-র মতোই) — sub-pixel ও GPU-smooth।
   const trainingCarousels = {};
   function setupAutoTrainingCarousel(trackId, speed) {
     const track = document.getElementById(trackId);
@@ -115,9 +117,7 @@
       track.innerHTML += track.innerHTML;
       track.dataset.duplicated = 'true';
     }
-    // scrollLeft ইন্টিজার-রাউন্ড করে, তাই sub-pixel speed সরাসরি scrollLeft-এ যোগ করলে
-    // প্রতি ফ্রেমেই রাউন্ড হয়ে ০-তে ফিরে যায় (কোনো নড়াচড়া বোঝা যায় না)। তাই আলাদা float accumulator রাখা হলো।
-    let pos = wrap.scrollLeft;
+    let pos = 0;
     let extra = 0; // arrow-click থেকে আসা এক্সট্রা মুভমেন্ট, ধীরে ধীরে যোগ হয়ে যায়
     let paused = false; // কার্ডের উপর হোভার করলে true হবে
     function frame() {
@@ -133,7 +133,7 @@
       }
       if (pos >= half) pos -= half;
       if (pos < 0) pos += half;
-      wrap.scrollLeft = pos;
+      track.style.transform = `translateX(${-pos}px)`;
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
