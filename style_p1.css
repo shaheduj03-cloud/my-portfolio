@@ -368,13 +368,16 @@
     .training-track { display: flex; gap: 20px; width: max-content; animation: scrollTrack 34s linear infinite; }
     .training-track .training-card { flex: 0 0 300px; width: 300px; position: relative; }
 
-    /* Manual scroll carousel (Personal Development Training) with prev/next arrows + numbering */
+    /* Manual + auto scroll carousel (Personal Development Training) with prev/next arrows + numbering */
     .training-carousel { display: flex; align-items: center; gap: 12px; max-width: 1180px; margin: 0 auto; }
     .training-track-wrap.manual-scroll {
       max-width: none; flex: 1; min-width: 0;
-      overflow-x: auto; scroll-behavior: smooth;
+      overflow-x: auto; overflow-y: hidden;
       scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      padding: 16px 10px 6px;
+      mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
     }
     .training-track-wrap.manual-scroll::-webkit-scrollbar { display: none; }
     .training-track.manual-scroll { animation: none; }
@@ -394,10 +397,11 @@
       .tc-nav { width: 34px; height: 34px; font-size: 16px; }
     }
     .tc-num {
-      position: absolute; top: -10px; left: -10px; width: 30px; height: 30px; border-radius: 50%;
+      position: absolute; top: -12px; left: -12px; width: 30px; height: 30px; border-radius: 50%;
       background: linear-gradient(135deg, var(--cyan), var(--purple));
       color: #06131a; font-family: var(--font-display); font-weight: 800; font-size: 13px;
       display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--bg, #0a0a0f);
       box-shadow: 0 4px 10px rgba(0,0,0,0.4); z-index: 2;
     }
 
