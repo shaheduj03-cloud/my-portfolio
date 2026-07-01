@@ -119,6 +119,7 @@
     // প্রতি ফ্রেমেই রাউন্ড হয়ে ০-তে ফিরে যায় (কোনো নড়াচড়া বোঝা যায় না)। তাই আলাদা float accumulator রাখা হলো।
     let pos = wrap.scrollLeft;
     let extra = 0; // arrow-click থেকে আসা এক্সট্রা মুভমেন্ট, ধীরে ধীরে যোগ হয়ে যায়
+    let paused = false; // কার্ডের উপর হোভার করলে true হবে
     function frame() {
       const half = track.scrollWidth / 2;
       if (extra !== 0) {
@@ -127,13 +128,20 @@
         extra -= step;
         if (Math.abs(extra) < 0.5) extra = 0;
       }
-      pos += speed; // continuous auto-scroll — কখনো থামে না
+      if (!paused) {
+        pos += speed; // অটো-স্ক্রল, হোভার করলে থেমে যাবে
+      }
       if (pos >= half) pos -= half;
       if (pos < 0) pos += half;
       wrap.scrollLeft = pos;
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
+    // কার্ডের উপর হোভার করলে অটো-স্ক্রল থামবে, সরিয়ে ফেললে আবার চলবে
+    track.querySelectorAll('.training-card').forEach(card => {
+      card.addEventListener('mouseenter', () => { paused = true; });
+      card.addEventListener('mouseleave', () => { paused = false; });
+    });
     trainingCarousels[trackId] = {
       scrollBy(direction) {
         const card = track.querySelector('.training-card');
