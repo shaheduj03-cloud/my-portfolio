@@ -333,6 +333,7 @@
       background: rgba(0,229,255,0.12); border-color: rgba(0,229,255,0.4);
       box-shadow: 0 8px 20px rgba(0,229,255,0.25);
     }
+    .country-flag { width: 18px; height: 13px; border-radius: 2px; flex-shrink: 0; background-size: cover; }
     @keyframes scrollTrack { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* Personal Development Training — horizontal auto-scrolling track (same mechanism as country marquee) */
