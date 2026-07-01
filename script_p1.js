@@ -152,6 +152,7 @@
     };
   }
   setupAutoTrainingCarousel('personalDevTrack', 0.45);
+  setupAutoTrainingCarousel('computerSkillsTrack', 0.45);
 
   function scrollTrainingTrack(trackId, direction) {
     const carousel = trainingCarousels[trackId];

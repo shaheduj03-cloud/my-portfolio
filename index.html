@@ -1290,22 +1290,30 @@ h1:hover, h2:hover, h3:hover {
     <span class="label en" style="font-size:15px; color:#00d4ff; letter-spacing:0.12em; font-weight:800;">Computer & Digital Skills</span>
     <span class="line"></span>
   </div>
-  <div class="training-grid stagger reveal">
-    <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">🎨 Graphics Design for Freelancing (Level-3)</div><div class="tc-org">NACTAR — Photoshop, Illustrator, Canva</div><button class="cert-btn" onclick="openCertLightbox('Graphics Design for Freelancing (Level-3)','cert-graphics-design')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
-    <div class="training-card"><div class="tc-year">2023 · 2 Months</div><div class="tc-title">📢 Digital Marketing (Level-3)</div><div class="tc-org">NACTAR — SEO, Facebook Ads, Email Marketing</div><button class="cert-btn" onclick="openCertLightbox('Digital Marketing (Level-3)','cert-digital-marketing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
-    <div class="training-card">
-      <div class="tc-year">2023 · 1 Month</div>
-      <div class="tc-title">🎬 Video Editing</div>
-      <div class="tc-org">NACTAR — Bogura, Bangladesh</div>
-      <button class="cert-btn" onclick="openCertLightbox('Video Editing','cert-video-editing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+  <div class="training-carousel reveal">
+    <button class="tc-nav tc-nav-prev" onclick="scrollTrainingTrack('computerSkillsTrack',-1)" aria-label="আগের ট্রেনিং">‹</button>
+    <div class="training-track-wrap manual-scroll">
+      <div class="training-track manual-scroll" id="computerSkillsTrack">
+        <div class="training-card"><span class="tc-num">1</span><div class="tc-year">2023 · 2 Months</div><div class="tc-title">🎨 Graphics Design for Freelancing (Level-3)</div><div class="tc-org">NACTAR — Photoshop, Illustrator, Canva</div><button class="cert-btn" onclick="openCertLightbox('Graphics Design for Freelancing (Level-3)','cert-graphics-design')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
+        <div class="training-card"><span class="tc-num">2</span><div class="tc-year">2023 · 2 Months</div><div class="tc-title">📢 Digital Marketing (Level-3)</div><div class="tc-org">NACTAR — SEO, Facebook Ads, Email Marketing</div><button class="cert-btn" onclick="openCertLightbox('Digital Marketing (Level-3)','cert-digital-marketing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button></div>
+        <div class="training-card">
+          <span class="tc-num">3</span>
+          <div class="tc-year">2023 · 1 Month</div>
+          <div class="tc-title">🎬 Video Editing</div>
+          <div class="tc-org">NACTAR — Bogura, Bangladesh</div>
+          <button class="cert-btn" onclick="openCertLightbox('Video Editing','cert-video-editing')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+        </div>
+        <div class="training-card">
+          <span class="tc-num">4</span>
+          <div class="tc-year">2025–2026 · 15 Days</div>
+          <div class="tc-title">🤖 AI For Career Development</div>
+          <div class="tc-org">CED Foundation — Claude, ChatGPT, Gemini, Notion</div>
+          <button class="cert-btn" onclick="openCertLightbox('AI For Career Development','cert-ai-career')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+        </div>
+        <div class="training-card"><span class="tc-num">5</span><div class="tc-year">2022 · 3 Months · 🏆 2nd Position</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div><div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;"><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application','cert-computer-basic')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button><button class="cert-btn" onclick="openCertLightbox('Certificate of Merit — 2nd Position','cert-computer-merit')"><span>🏆</span> <span class="bn">মেরিট সার্টিফিকেট</span><span class="en">Merit Certificate</span></button></div></div>
+      </div>
     </div>
-    <div class="training-card">
-      <div class="tc-year">2025–2026 · 15 Days</div>
-      <div class="tc-title">🤖 AI For Career Development</div>
-      <div class="tc-org">CED Foundation — Claude, ChatGPT, Gemini, Notion</div>
-      <button class="cert-btn" onclick="openCertLightbox('AI For Career Development','cert-ai-career')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-    </div>
-    <div class="training-card"><div class="tc-year">2022 · 3 Months · 🏆 2nd Position</div><div class="tc-title">💻 Basic Computer Application</div><div class="tc-org">NACTAR — MS Word, Excel, PowerPoint, Google Suite</div><div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;"><button class="cert-btn" onclick="openCertLightbox('Basic Computer Application','cert-computer-basic')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button><button class="cert-btn" onclick="openCertLightbox('Certificate of Merit — 2nd Position','cert-computer-merit')"><span>🏆</span> <span class="bn">মেরিট সার্টিফিকেট</span><span class="en">Merit Certificate</span></button></div></div>
+    <button class="tc-nav tc-nav-next" onclick="scrollTrainingTrack('computerSkillsTrack',1)" aria-label="পরবর্তী ট্রেনিং">›</button>
   </div>
 </section>
 
