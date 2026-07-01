@@ -103,11 +103,49 @@
     countryTrack.innerHTML += countryTrack.innerHTML;
   }
 
-  // ── PERSONAL DEVELOPMENT TRAINING: CONTINUOUS MARQUEE (same mechanism as country marquee) ──
-  const personalDevTrack = document.getElementById('personalDevTrack');
-  if (personalDevTrack) {
-    personalDevTrack.innerHTML += personalDevTrack.innerHTML;
+  // ── PERSONAL DEVELOPMENT TRAINING: CONTINUOUS AUTO-SCROLL CAROUSEL (like country marquee) + ARROWS ──
+  // অটো-স্ক্রল কখনোই থামে না — hover/touch/arrow ক্লিক কোনোকিছুতেই pause হয় না।
+  const trainingCarousels = {};
+  function setupAutoTrainingCarousel(trackId, speed) {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+    const wrap = track.parentElement;
+    // duplicate once for a seamless infinite loop (numbers repeat: 1,2,3,4,1,2,3,4…)
+    if (!track.dataset.duplicated) {
+      track.innerHTML += track.innerHTML;
+      track.dataset.duplicated = 'true';
+    }
+    let extra = 0; // arrow-click থেকে আসা এক্সট্রা মুভমেন্ট, ধীরে ধীরে যোগ হয়ে যায়
+    function frame() {
+      const half = track.scrollWidth / 2;
+      if (extra !== 0) {
+        const step = extra * 0.18; // smooth easing towards the nudged target
+        wrap.scrollLeft += step;
+        extra -= step;
+        if (Math.abs(extra) < 0.5) extra = 0;
+      }
+      wrap.scrollLeft += speed; // continuous auto-scroll — কখনো থামে না
+      if (wrap.scrollLeft >= half) wrap.scrollLeft -= half;
+      if (wrap.scrollLeft < 0) wrap.scrollLeft += half;
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    trainingCarousels[trackId] = {
+      scrollBy(direction) {
+        const card = track.querySelector('.training-card');
+        const gap = 20;
+        const step = card ? card.offsetWidth + gap : 320;
+        extra += direction * step; // অটো-স্ক্রল চালু থেকেই এক্সট্রা মুভমেন্ট যোগ হয়, pause হয় না
+      }
+    };
   }
+  setupAutoTrainingCarousel('personalDevTrack', 0.45);
+
+  function scrollTrainingTrack(trackId, direction) {
+    const carousel = trainingCarousels[trackId];
+    if (carousel) carousel.scrollBy(direction);
+  }
+  window.scrollTrainingTrack = scrollTrainingTrack;
 
   // ── SALARY COUNT-UP ANIMATION ──
   const salaryCounter = document.getElementById('salaryCounter');
