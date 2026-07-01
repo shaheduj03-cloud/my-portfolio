@@ -370,7 +370,7 @@
     .training-track .training-card .cert-btn { margin-top: auto; align-self: flex-start; }
 
     /* Manual + auto scroll carousel (Personal Development Training) with prev/next arrows + numbering */
-    .training-carousel { display: flex; align-items: center; gap: 12px; max-width: 1180px; margin: 0 auto; }
+    .training-carousel { display: flex; align-items: center; gap: 12px; max-width: 1100px; margin: 0 auto; }
     .training-track-wrap.manual-scroll {
       max-width: none; flex: 1; min-width: 0;
       overflow-x: auto; overflow-y: hidden;
