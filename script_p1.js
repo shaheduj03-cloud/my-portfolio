@@ -103,56 +103,11 @@
     countryTrack.innerHTML += countryTrack.innerHTML;
   }
 
-  // ── PERSONAL DEVELOPMENT TRAINING: CONTINUOUS AUTO-SCROLL CAROUSEL (like country marquee) + ARROWS ──
-  const trainingCarousels = {};
-  function setupAutoTrainingCarousel(trackId, speed) {
-    const track = document.getElementById(trackId);
-    if (!track) return;
-    const wrap = track.parentElement;
-    // duplicate once for a seamless infinite loop (numbers repeat: 1,2,3,4,1,2,3,4…)
-    if (!track.dataset.duplicated) {
-      track.innerHTML += track.innerHTML;
-      track.dataset.duplicated = 'true';
-    }
-    let paused = false;
-    let resumeTimer = null;
-    function frame() {
-      if (!paused) {
-        wrap.scrollLeft += speed;
-        const half = track.scrollWidth / 2;
-        if (wrap.scrollLeft >= half) {
-          wrap.scrollLeft -= half;
-        }
-      }
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-    wrap.addEventListener('mouseenter', () => { paused = true; });
-    wrap.addEventListener('mouseleave', () => { paused = false; });
-    wrap.addEventListener('touchstart', () => { paused = true; }, { passive: true });
-    wrap.addEventListener('touchend', () => {
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => { paused = false; }, 1800);
-    }, { passive: true });
-    trainingCarousels[trackId] = {
-      scrollBy(direction) {
-        paused = true;
-        const card = track.querySelector('.training-card');
-        const gap = 20;
-        const step = card ? card.offsetWidth + gap : 320;
-        wrap.scrollBy({ left: direction * step, behavior: 'smooth' });
-        clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(() => { paused = false; }, 2200);
-      }
-    };
+  // ── PERSONAL DEVELOPMENT TRAINING: CONTINUOUS MARQUEE (same mechanism as country marquee) ──
+  const personalDevTrack = document.getElementById('personalDevTrack');
+  if (personalDevTrack) {
+    personalDevTrack.innerHTML += personalDevTrack.innerHTML;
   }
-  setupAutoTrainingCarousel('personalDevTrack', 0.45);
-
-  function scrollTrainingTrack(trackId, direction) {
-    const carousel = trainingCarousels[trackId];
-    if (carousel) carousel.scrollBy(direction);
-  }
-  window.scrollTrainingTrack = scrollTrainingTrack;
 
   // ── SALARY COUNT-UP ANIMATION ──
   const salaryCounter = document.getElementById('salaryCounter');
