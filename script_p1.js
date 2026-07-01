@@ -115,18 +115,22 @@
       track.innerHTML += track.innerHTML;
       track.dataset.duplicated = 'true';
     }
+    // scrollLeft ইন্টিজার-রাউন্ড করে, তাই sub-pixel speed (0.45) সরাসরি scrollLeft-এ যোগ করলে
+    // প্রতি ফ্রেমেই রাউন্ড হয়ে ০-তে ফিরে যায় (কোনো নড়াচড়া বোঝা যায় না)। তাই আলাদা float accumulator রাখা হলো।
+    let pos = wrap.scrollLeft;
     let extra = 0; // arrow-click থেকে আসা এক্সট্রা মুভমেন্ট, ধীরে ধীরে যোগ হয়ে যায়
     function frame() {
       const half = track.scrollWidth / 2;
       if (extra !== 0) {
         const step = extra * 0.18; // smooth easing towards the nudged target
-        wrap.scrollLeft += step;
+        pos += step;
         extra -= step;
         if (Math.abs(extra) < 0.5) extra = 0;
       }
-      wrap.scrollLeft += speed; // continuous auto-scroll — কখনো থামে না
-      if (wrap.scrollLeft >= half) wrap.scrollLeft -= half;
-      if (wrap.scrollLeft < 0) wrap.scrollLeft += half;
+      pos += speed; // continuous auto-scroll — কখনো থামে না
+      if (pos >= half) pos -= half;
+      if (pos < 0) pos += half;
+      wrap.scrollLeft = pos;
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
