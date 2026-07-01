@@ -90,6 +90,12 @@
     countryTrack.innerHTML += countryTrack.innerHTML;
   }
 
+  // ── DUPLICATE PERSONAL DEVELOPMENT TRAINING TRACK FOR SEAMLESS MARQUEE LOOP ──
+  const personalDevTrack = document.getElementById('personalDevTrack');
+  if (personalDevTrack) {
+    personalDevTrack.innerHTML += personalDevTrack.innerHTML;
+  }
+
   // ── SALARY COUNT-UP ANIMATION ──
   const salaryCounter = document.getElementById('salaryCounter');
   if (salaryCounter) {

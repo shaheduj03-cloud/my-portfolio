@@ -335,6 +335,16 @@
     }
     @keyframes scrollTrack { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+    /* Personal Development Training — horizontal auto-scrolling track (same mechanism as country marquee) */
+    .training-track-wrap {
+      max-width: 1100px; overflow: hidden; position: relative;
+      mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    }
+    .training-track-wrap:hover .training-track { animation-play-state: paused; }
+    .training-track { display: flex; gap: 20px; width: max-content; animation: scrollTrack 34s linear infinite; }
+    .training-track .training-card { flex: 0 0 300px; width: 300px; }
+
     /* Flying plane motion graphic */
     .flying-plane {
       position: absolute; top: 14px; left: -40px; font-size: 18px; z-index: 2;
