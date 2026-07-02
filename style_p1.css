@@ -475,19 +475,45 @@
       .core-grid { grid-template-columns: 1fr; }
       .support-divider { gap: 10px; }
     }
-    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; }
-    .skill-row { margin-bottom: 4px; }
-    .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; }
-    .skill-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; }
-    .skill-pct { font-family: var(--font-display); font-size: 13px; color: var(--muted); }
-    .skill-track { height: 6px; background: rgba(255,255,255,0.08); border-radius: 100px; overflow: hidden; }
-    .skill-fill { height: 100%; border-radius: 100px; width: 0 !important; transition: width 1.3s cubic-bezier(.16,.84,.44,1); }
-    .skill-row.in-view .skill-fill { width: var(--fill-w) !important; }
-    .fill-pk { background: linear-gradient(90deg, var(--pink), var(--purple)); }
-    .fill-cy { background: linear-gradient(90deg, var(--cyan), var(--green)); }
-    .fill-ye { background: linear-gradient(90deg, var(--yellow), var(--pink)); }
-    .fill-pu { background: linear-gradient(90deg, var(--purple), var(--cyan)); }
-    .fill-gr { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    /* SKILLS — split-column showcase card */
+    .skills-showcase {
+      position: relative; max-width: 900px; background: linear-gradient(155deg, rgba(255,255,255,0.035), var(--card) 55%);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; padding: 34px 40px 38px;
+      overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skills-showcase::before {
+      content: ''; position: absolute; top: -35%; right: -20%; width: 55%; height: 55%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.10), transparent 70%); pointer-events: none;
+      animation: floatY 7s ease-in-out infinite;
+    }
+    .skills-showcase:hover { border-color: rgba(0,229,255,0.25); box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+    .skills-showcase-badge {
+      position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(247,226,51,0.10); border: 1px solid rgba(247,226,51,0.32); color: var(--yellow);
+      font-family: var(--font-display); font-size: 12.5px; font-weight: 700; letter-spacing: 0.03em;
+      padding: 6px 16px 6px 14px; border-radius: 100px; margin-bottom: 26px;
+    }
+    .skills-showcase-badge .dash { width: 14px; height: 1.5px; background: var(--yellow); flex-shrink: 0; }
+    .skills-cols { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .skills-col-title {
+      font-family: var(--font-display); font-size: 15px; font-weight: 700; letter-spacing: 0.01em;
+      margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .skills-col-title.cy { color: var(--cyan); }
+    .skills-col-title.ye { color: var(--yellow); }
+    .skills-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+    .skills-list li {
+      display: flex; align-items: center; gap: 12px; font-size: 14.5px; font-weight: 500; color: var(--white);
+      transition: transform 0.25s cubic-bezier(.16,.84,.44,1), color 0.25s ease;
+    }
+    .skills-list li:hover { transform: translateX(5px); color: var(--cyan); }
+    .skill-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px currentColor; }
+    .skill-dot.cy { background: var(--cyan); color: var(--cyan); }
+    .skill-dot.ye { background: var(--yellow); color: var(--yellow); }
+    @media (max-width: 560px) {
+      .skills-showcase { padding: 28px 22px 30px; }
+      .skills-cols { grid-template-columns: 1fr; gap: 30px; }
+    }
 
     /* TRAINING */
     .training-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; }
@@ -810,7 +836,6 @@
     @media (max-width: 800px) {
       section, .hero { padding: 80px 20px; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
-      .skills-grid { grid-template-columns: 1fr; }
       .hero-stats { gap: 24px; }
       .contact-inner { padding: 32px 20px; }
       .divider { margin: 0 20px; }
