@@ -611,131 +611,7 @@ h1:hover, h2:hover, h3:hover {
   -webkit-text-fill-color: #1a0a00 !important;
 }
 /* ══════════════════════════════════════
-   Extra Curricular Activities
-══════════════════════════════════════ */
-.eca-wrapper {
-  margin-top: 80px;
-  padding-top: 8px;
-}
-
-.eca-top-rule {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), rgba(255,208,0,0.2), transparent);
-  margin-bottom: 24px;
-}
-
-.eca-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.eca-header-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
-}
-
-.eca-header-label {
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(0,212,255,0.9);
-  white-space: nowrap;
-  font-family: var(--font-display, sans-serif);
-}
-
-/* ECA Timeline */
-.eca-timeline {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding-left: 16px;
-  border-left: 2px solid rgba(255,255,255,0.07);
-  margin-left: 8px;
-}
-
-.eca-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0 12px 20px;
-  position: relative;
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.55s ease var(--d, 0s),
-    transform 0.55s ease var(--d, 0s);
-  cursor: default;
-}
-
-.eca-item.eca-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.eca-dot {
-  position: absolute;
-  left: -25px;
-  top: 17px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid #00d4ff;
-  background: #0a0a0f;
-  box-shadow: 0 0 8px rgba(0,212,255,0.35);
-  flex-shrink: 0;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* Mobile Hamburger Navigation — সংজ্ঞা এখন শুধু style_p1.css-এ আছে (ডুপ্লিকেশন এড়াতে) */
-
-.eca-icon {
-  font-size: 18px;
-  flex-shrink: 0;
-  margin-top: 1px;
-  animation: ecaIconPulse 3s ease-in-out infinite;
-}
-
-.eca-item:nth-child(2) .eca-icon { animation-delay: 0.5s; }
-.eca-item:nth-child(3) .eca-icon { animation-delay: 1s; }
-
-@keyframes ecaIconPulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.15); }
-}
-
-.eca-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.eca-title {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  font-family: var(--font-sans, sans-serif);
-  transition: color 0.3s ease;
-  line-height: 1.4;
-}
-
-.eca-item:hover .eca-title {
-  color: #ffd000;
-}
-
-.eca-org {
-  font-size: 11.5px;
-  color: rgba(255,255,255,0.38);
-  font-family: var(--font-sans, sans-serif);
-  letter-spacing: 0.04em;
-}
-
-/* ══════════════════════════════════════
-   Extra Curricular (ECA) Section — clean classes
+   Extra Curricular Activities — matches Skills split-card style
 ══════════════════════════════════════ */
 .eca-section {
   padding-top: 0;
@@ -746,67 +622,14 @@ h1:hover, h2:hover, h3:hover {
   margin: 0 auto;
   padding: 0 24px 24px;
 }
-.eca-section-inner .section-label {
-  font-size: 10px;
-}
-.eca-section-inner .section-title {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-.eca-list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-top: 10px;
-}
-.eca-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 12px;
-  border-radius: 7px;
-}
-.eca-card-icon {
-  font-size: 14px;
-}
-.eca-card-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-}
-.eca-card-sub {
-  font-size: 10px;
-  color: rgba(255,255,255,0.38);
-}
-.eca-card.c-scouts {
-  background: linear-gradient(135deg,rgba(0,212,255,0.05),rgba(255,208,0,0.03));
-  border: 1px solid rgba(0,212,255,0.15);
-}
-.eca-card.c-debate {
-  background: linear-gradient(135deg,rgba(168,85,247,0.05),rgba(255,208,0,0.03));
-  border: 1px solid rgba(168,85,247,0.15);
-}
-.eca-card.c-blood {
-  background: linear-gradient(135deg,rgba(244,63,94,0.05),rgba(255,208,0,0.03));
-  border: 1px solid rgba(244,63,94,0.15);
-}
-.eca-card.c-volunteer {
-  background: linear-gradient(135deg,rgba(255,165,0,0.05),rgba(255,208,0,0.03));
-  border: 1px solid rgba(255,165,0,0.15);
-}
-.eca-card-volunteer-body {
-  flex: 1;
-}
-.eca-card-volunteer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.eca-card-volunteer-row .cert-btn {
-  font-size: 10px;
-  padding: 3px 8px;
-  flex-shrink: 0;
-}
+.eca-showcase .skills-cols { align-items: start; }
+.eca-rows { gap: 18px; }
+.eca-row { align-items: flex-start; gap: 10px; }
+.eca-row-dot { margin-top: 6px; }
+.eca-row-text { display: flex; flex-direction: column; }
+.eca-row-title { font-size: 14.5px; font-weight: 500; color: var(--white); line-height: 1.4; }
+.eca-row-org { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.eca-cert-btn { margin-top: 10px; }
 
 </style>
 
@@ -1007,40 +830,56 @@ h1:hover, h2:hover, h3:hover {
     <div class="section-label en">Extra Curricular</div>
     <h2 class="section-title bn">অতিরিক্ত কার্যক্রম</h2>
     <h2 class="section-title en">Extra Curricular Activities</h2>
-    <div class="eca-list">
-      <div class="eca-card c-scouts">
-        <span class="eca-card-icon">🏕️</span>
-        <div>
-          <div class="bn eca-card-title">বাংলাদেশ স্কাউটস</div>
-          <div class="en eca-card-title">Bangladesh Scouts</div>
-          <div class="eca-card-sub">Cumilla</div>
+    <div class="eca-showcase skills-showcase reveal-scale">
+      <div class="skills-cols">
+        <div class="skills-col">
+          <h3 class="skills-col-title cy">
+            <span class="bn">সংগঠন ও কার্যক্রম</span>
+            <span class="en">Organizations &amp; Clubs</span>
+          </h3>
+          <ul class="skills-list eca-rows">
+            <li class="eca-row">
+              <span class="skill-dot cy eca-row-dot"></span>
+              <span class="eca-row-text">
+                <span class="eca-row-title bn">বাংলাদেশ স্কাউটস</span>
+                <span class="eca-row-title en">Bangladesh Scouts</span>
+                <span class="eca-row-org">Cumilla</span>
+              </span>
+            </li>
+            <li class="eca-row">
+              <span class="skill-dot cy eca-row-dot"></span>
+              <span class="eca-row-text">
+                <span class="eca-row-title bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</span>
+                <span class="eca-row-title en">Victoria College Debating Society (VCDS)</span>
+                <span class="eca-row-org">Cumilla</span>
+              </span>
+            </li>
+            <li class="eca-row">
+              <span class="skill-dot cy eca-row-dot"></span>
+              <span class="eca-row-text">
+                <span class="eca-row-title bn">ব্লাড ডোনেশন ক্লাব (বাঁধন)</span>
+                <span class="eca-row-title en">Blood Donation Club (Badhon)</span>
+                <span class="eca-row-org">Cumilla</span>
+              </span>
+            </li>
+          </ul>
         </div>
-      </div>
-      <div class="eca-card c-debate">
-        <span class="eca-card-icon">🎤</span>
-        <div>
-          <div class="bn eca-card-title">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</div>
-          <div class="en eca-card-title">Victoria College Debating Society (VCDS)</div>
-          <div class="eca-card-sub">Cumilla</div>
-        </div>
-      </div>
-      <div class="eca-card c-blood">
-        <span class="eca-card-icon">🩸</span>
-        <div>
-          <div class="bn eca-card-title">ব্লাড ডোনেশন ক্লাব (বাঁধন)</div>
-          <div class="en eca-card-title">Blood Donation Club (Badhon)</div>
-          <div class="eca-card-sub">Cumilla</div>
-        </div>
-      </div>
-      <div class="eca-card c-volunteer">
-        <span class="eca-card-icon">🤝</span>
-        <div class="eca-card-volunteer-body">
-          <div class="eca-card-volunteer-row">
-            <div class="bn eca-card-title">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</div>
-            <div class="en eca-card-title">Volunteer — Career Summit 2025</div>
-            <button class="cert-btn" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
-          </div>
-          <div class="eca-card-sub">Youth Skill Development Institute Trust · Dhaka</div>
+        <div class="skills-col">
+          <h3 class="skills-col-title ye">
+            <span class="bn">স্বেচ্ছাসেবা</span>
+            <span class="en">Volunteering</span>
+          </h3>
+          <ul class="skills-list eca-rows">
+            <li class="eca-row">
+              <span class="skill-dot ye eca-row-dot"></span>
+              <span class="eca-row-text">
+                <span class="eca-row-title bn">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</span>
+                <span class="eca-row-title en">Volunteer — Career Summit 2025</span>
+                <span class="eca-row-org">Youth Skill Development Institute Trust · Dhaka</span>
+                <button class="cert-btn eca-cert-btn" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')"><span>📄</span> <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></button>
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
