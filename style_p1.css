@@ -92,8 +92,11 @@
     .nav-logo span { display: inline-block; transition: transform 0.4s cubic-bezier(.34,1.56,.64,1); }
     .nav-logo:hover span { transform: translateX(4px) translateY(-2px) rotate(15deg); }
     .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-family: var(--font-display); font-size: 13px; font-weight: 600; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
+    .nav-links a { color: var(--muted); text-decoration: none; font-family: var(--font-display); font-size: 13px; font-weight: 600; transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease; }
+    @media (min-width: 881px) {
+      .nav-links a { padding: 7px 14px; border-radius: 8px; }
+      .nav-links a:hover { color: var(--bg); background: linear-gradient(135deg, var(--cyan), var(--purple)); box-shadow: 0 4px 16px rgba(0,229,255,0.3); }
+    }
     .lang-btn { background: none; border: 1.5px solid var(--yellow); color: var(--yellow); font-family: var(--font-display); font-size: 13px; font-weight: 700; padding: 6px 18px; border-radius: 100px; cursor: pointer; transition: background 0.2s, color 0.2s; }
     .lang-btn:hover { background: var(--yellow); color: var(--bg); }
 
@@ -945,7 +948,15 @@
         background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
         transition: width 0.35s cubic-bezier(0.16,1,0.3,1);
       }
-      .nav-links a:active { transform: scale(0.97); opacity: 0.7; padding-left: 8px; }
+      .nav-links a:hover,
+      .nav-links a:active {
+        color: var(--bg);
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        border-radius: 8px;
+        padding-left: 12px;
+        transform: scale(0.98);
+        opacity: 1;
+      }
       .nav-links a:active::after { width: 100%; }
       .nav-hamburger { transition: transform 0.15s ease; }
       .nav-hamburger:active { transform: scale(0.88); }
