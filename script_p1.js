@@ -103,6 +103,12 @@
     countryTrack.innerHTML += countryTrack.innerHTML;
   }
 
+  // ── DUPLICATE ECA PILL TRACKS FOR SEAMLESS MARQUEE LOOP ──
+  ['ecaOrgTrack', 'ecaVolTrack'].forEach(id => {
+    const track = document.getElementById(id);
+    if (track) track.innerHTML += track.innerHTML;
+  });
+
   // ── PERSONAL DEVELOPMENT / COMPUTER SKILLS: CONTINUOUS AUTO-SCROLL CAROUSEL (like country marquee) + ARROWS ──
   // অটো-স্ক্রল কখনোই থামে না, শুধু কার্ডে হোভার করলে থামে — সরিয়ে ফেললে আবার চলে।
   // scrollLeft শুধু পূর্ণ পিক্সেলে কাজ করে বলে ধীর গতিতে সামান্য কাঁপুনি দিত;

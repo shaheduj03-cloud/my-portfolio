@@ -675,12 +675,25 @@ h1:hover, h2:hover, h3:hover {
 .eca-label.ye { color: var(--yellow); }
 .eca-sub { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 
-.eca-pills {
+.eca-pills-wrap {
   position: relative; z-index: 1;
-  display: flex; flex-wrap: wrap; gap: 10px;
   flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.eca-pills-wrap:hover .eca-pills-track {
+  animation-play-state: paused;
+}
+.eca-pills-track {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  animation: scrollTrack 18s linear infinite;
 }
 .eca-pill {
+  flex-shrink: 0;
+  white-space: nowrap;
   display: inline-flex; flex-direction: column; gap: 2px;
   font-family: var(--font-display); font-size: 12.5px; font-weight: 600;
   color: var(--white);
@@ -932,19 +945,21 @@ h1:hover, h2:hover, h3:hover {
           <div class="eca-sub bn">যেসব সংগঠনে সক্রিয়ভাবে যুক্ত ছিলাম</div>
           <div class="eca-sub en">Clubs &amp; societies I've been part of</div>
         </div>
-        <div class="eca-pills">
-          <span class="eca-pill">
-            <span><span class="bn">বাংলাদেশ স্কাউটস</span><span class="en">Bangladesh Scouts</span></span>
-            <small>Cumilla</small>
-          </span>
-          <span class="eca-pill">
-            <span><span class="bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</span><span class="en">Victoria College Debating Society (VCDS)</span></span>
-            <small>Cumilla</small>
-          </span>
-          <span class="eca-pill">
-            <span><span class="bn">ব্লাড ডোনেশন ক্লাব (বাঁধন)</span><span class="en">Blood Donation Club (Badhon)</span></span>
-            <small>Cumilla</small>
-          </span>
+        <div class="eca-pills-wrap">
+          <div class="eca-pills-track" id="ecaOrgTrack">
+            <span class="eca-pill">
+              <span><span class="bn">বাংলাদেশ স্কাউটস</span><span class="en">Bangladesh Scouts</span></span>
+              <small>Cumilla</small>
+            </span>
+            <span class="eca-pill">
+              <span><span class="bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</span><span class="en">Victoria College Debating Society (VCDS)</span></span>
+              <small>Cumilla</small>
+            </span>
+            <span class="eca-pill">
+              <span><span class="bn">ব্লাড ডোনেশন ক্লাব (বাঁধন)</span><span class="en">Blood Donation Club (Badhon)</span></span>
+              <small>Cumilla</small>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -956,11 +971,13 @@ h1:hover, h2:hover, h3:hover {
           <div class="eca-sub bn">সামাজিক ও পেশাদার আয়োজনে অংশগ্রহণ</div>
           <div class="eca-sub en">Community &amp; professional event participation</div>
         </div>
-        <div class="eca-pills">
-          <button class="eca-pill eca-pill-cert" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')">
-            <span><span class="bn">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</span><span class="en">Volunteer — Career Summit 2025</span></span>
-            <small>Youth Skill Development Institute Trust · Dhaka &nbsp;·&nbsp; 📄 <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></small>
-          </button>
+        <div class="eca-pills-wrap">
+          <div class="eca-pills-track" id="ecaVolTrack">
+            <button class="eca-pill eca-pill-cert" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')">
+              <span><span class="bn">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</span><span class="en">Volunteer — Career Summit 2025</span></span>
+              <small>Youth Skill Development Institute Trust · Dhaka &nbsp;·&nbsp; 📄 <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></small>
+            </button>
+          </div>
         </div>
       </div>
     </div>
