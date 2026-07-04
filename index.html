@@ -691,10 +691,17 @@ h1:hover, h2:hover, h3:hover {
   width: max-content;
   animation: scrollTrack 18s linear infinite;
 }
+.eca-pill-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  margin-top: 5px;
+}
+.eca-pill-dot.cy { background: var(--cyan); }
+.eca-pill-dot.ye { background: var(--yellow); }
+.eca-pill-body { display: flex; flex-direction: column; gap: 2px; }
 .eca-pill {
   flex-shrink: 0;
   white-space: nowrap;
-  display: inline-flex; flex-direction: column; gap: 2px;
+  display: inline-flex; align-items: flex-start; gap: 8px;
   font-family: var(--font-display); font-size: 12.5px; font-weight: 600;
   color: var(--white);
   padding: 8px 16px;
@@ -938,44 +945,42 @@ h1:hover, h2:hover, h3:hover {
 
     <div class="eca-card reveal-scale">
       <div class="eca-strip">
-        <div class="eca-icon cy">🎯</div>
+        <div class="eca-icon cy">🏆</div>
         <div class="eca-strip-text">
-          <div class="eca-label cy bn">সংগঠন ও কার্যক্রম</div>
-          <div class="eca-label cy en">Organizations &amp; Clubs</div>
-          <div class="eca-sub bn">যেসব সংগঠনে সক্রিয়ভাবে যুক্ত ছিলাম</div>
-          <div class="eca-sub en">Clubs &amp; societies I've been part of</div>
+          <div class="eca-label cy bn">সংগঠন ও স্বেচ্ছাসেবা</div>
+          <div class="eca-label cy en">Organizations &amp; Volunteering</div>
+          <div class="eca-sub bn">যেসব কার্যক্রমে সক্রিয়ভাবে যুক্ত ছিলাম</div>
+          <div class="eca-sub en">Activities I've been part of</div>
         </div>
         <div class="eca-pills-wrap">
-          <div class="eca-pills-track" id="ecaOrgTrack">
+          <div class="eca-pills-track" id="ecaTrack">
             <span class="eca-pill">
-              <span><span class="bn">বাংলাদেশ স্কাউটস</span><span class="en">Bangladesh Scouts</span></span>
-              <small>Cumilla</small>
+              <span class="eca-pill-dot cy"></span>
+              <span class="eca-pill-body">
+                <span><span class="bn">বাংলাদেশ স্কাউটস</span><span class="en">Bangladesh Scouts</span></span>
+                <small>Cumilla</small>
+              </span>
             </span>
             <span class="eca-pill">
-              <span><span class="bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</span><span class="en">Victoria College Debating Society (VCDS)</span></span>
-              <small>Cumilla</small>
+              <span class="eca-pill-dot cy"></span>
+              <span class="eca-pill-body">
+                <span><span class="bn">ভিক্টোরিয়া কলেজ ডিবেটিং সোসাইটি (VCDS)</span><span class="en">Victoria College Debating Society (VCDS)</span></span>
+                <small>Cumilla</small>
+              </span>
             </span>
             <span class="eca-pill">
-              <span><span class="bn">ব্লাড ডোনেশন ক্লাব (বাঁধন)</span><span class="en">Blood Donation Club (Badhon)</span></span>
-              <small>Cumilla</small>
+              <span class="eca-pill-dot cy"></span>
+              <span class="eca-pill-body">
+                <span><span class="bn">ব্লাড ডোনেশন ক্লাব (বাঁধন)</span><span class="en">Blood Donation Club (Badhon)</span></span>
+                <small>Cumilla</small>
+              </span>
             </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="eca-strip">
-        <div class="eca-icon ye">🤝</div>
-        <div class="eca-strip-text">
-          <div class="eca-label ye bn">স্বেচ্ছাসেবা</div>
-          <div class="eca-label ye en">Volunteering</div>
-          <div class="eca-sub bn">সামাজিক ও পেশাদার আয়োজনে অংশগ্রহণ</div>
-          <div class="eca-sub en">Community &amp; professional event participation</div>
-        </div>
-        <div class="eca-pills-wrap">
-          <div class="eca-pills-track" id="ecaVolTrack">
             <button class="eca-pill eca-pill-cert" onclick="openCertLightbox('Volunteer — Career Summit 2025','cert-volunteer-career-summit')">
-              <span><span class="bn">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</span><span class="en">Volunteer — Career Summit 2025</span></span>
-              <small>Youth Skill Development Institute Trust · Dhaka &nbsp;·&nbsp; 📄 <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></small>
+              <span class="eca-pill-dot ye"></span>
+              <span class="eca-pill-body">
+                <span><span class="bn">স্বেচ্ছাসেবক — ক্যারিয়ার সামিট ২০২৫</span><span class="en">Volunteer — Career Summit 2025</span></span>
+                <small>Youth Skill Development Institute Trust · Dhaka &nbsp;·&nbsp; 📄 <span class="bn">সার্টিফিকেট দেখুন</span><span class="en">View Certificate</span></small>
+              </span>
             </button>
           </div>
         </div>

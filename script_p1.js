@@ -103,11 +103,11 @@
     countryTrack.innerHTML += countryTrack.innerHTML;
   }
 
-  // ── DUPLICATE ECA PILL TRACKS FOR SEAMLESS MARQUEE LOOP ──
-  ['ecaOrgTrack', 'ecaVolTrack'].forEach(id => {
-    const track = document.getElementById(id);
-    if (track) track.innerHTML += track.innerHTML;
-  });
+  // ── DUPLICATE ECA PILL TRACK FOR SEAMLESS MARQUEE LOOP ──
+  const ecaTrack = document.getElementById('ecaTrack');
+  if (ecaTrack) {
+    ecaTrack.innerHTML += ecaTrack.innerHTML;
+  }
 
   // ── PERSONAL DEVELOPMENT / COMPUTER SKILLS: CONTINUOUS AUTO-SCROLL CAROUSEL (like country marquee) + ARROWS ──
   // অটো-স্ক্রল কখনোই থামে না, শুধু কার্ডে হোভার করলে থামে — সরিয়ে ফেললে আবার চলে।
