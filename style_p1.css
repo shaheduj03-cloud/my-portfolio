@@ -94,8 +94,8 @@
     .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-family: var(--font-display); font-size: 13px; font-weight: 600; transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease; }
     @media (min-width: 881px) {
-      .nav-links a { padding: 7px 14px; border-radius: 8px; }
-      .nav-links a:hover { color: var(--bg); background: linear-gradient(135deg, var(--cyan), var(--purple)); box-shadow: 0 4px 16px rgba(0,229,255,0.3); }
+      .nav-links > li > a { padding: 7px 14px; border-radius: 8px; }
+      .nav-links > li > a:hover { color: var(--bg); background: linear-gradient(135deg, var(--cyan), var(--purple)); box-shadow: 0 4px 16px rgba(0,229,255,0.3); }
     }
     .lang-btn { background: none; border: 1.5px solid var(--yellow); color: var(--yellow); font-family: var(--font-display); font-size: 13px; font-weight: 700; padding: 6px 18px; border-radius: 100px; cursor: pointer; transition: background 0.2s, color 0.2s; }
     .lang-btn:hover { background: var(--yellow); color: var(--bg); }
@@ -930,7 +930,7 @@
       .nav-links.mobile-open li:nth-child(4) { transition-delay: 0.28s; }
       .nav-links.mobile-open li:nth-child(5) { transition-delay: 0.34s; }
       .nav-links.mobile-open li:nth-child(6) { transition-delay: 0.40s; }
-      .nav-links a {
+      .nav-links > li > a {
         position: relative;
         display: block;
         padding: 12px 0;
@@ -939,7 +939,7 @@
         border-bottom: 1px solid rgba(255,255,255,0.06);
         transition: color 0.25s ease, transform 0.15s ease, opacity 0.15s ease, padding-left 0.3s cubic-bezier(0.16,1,0.3,1);
       }
-      .nav-links a::after {
+      .nav-links > li > a::after {
         content: '';
         position: absolute;
         left: 0; bottom: -1px;
@@ -948,8 +948,8 @@
         background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
         transition: width 0.35s cubic-bezier(0.16,1,0.3,1);
       }
-      .nav-links a:hover,
-      .nav-links a:active {
+      .nav-links > li > a:hover,
+      .nav-links > li > a:active {
         color: var(--bg);
         background: linear-gradient(135deg, var(--cyan), var(--purple));
         border-radius: 8px;
@@ -957,7 +957,7 @@
         transform: scale(0.98);
         opacity: 1;
       }
-      .nav-links a:active::after { width: 100%; }
+      .nav-links > li > a:active::after { width: 100%; }
       .nav-hamburger { transition: transform 0.15s ease; }
       .nav-hamburger:active { transform: scale(0.88); }
 
