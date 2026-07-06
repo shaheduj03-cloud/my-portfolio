@@ -152,14 +152,14 @@
     }
     requestAnimationFrame(frame);
     // কার্ডের উপর হোভার করলে অটো-স্ক্রল থামবে, সরিয়ে ফেললে আবার চলবে
-    track.querySelectorAll('.training-card').forEach(card => {
+    track.querySelectorAll('.training-card, .eca-pill-cert').forEach(card => {
       card.addEventListener('mouseenter', () => { paused = true; });
       card.addEventListener('mouseleave', () => { paused = false; });
     });
     trainingCarousels[trackId] = {
       scrollBy(direction) {
-        const card = track.querySelector('.training-card');
-        const gap = 20;
+        const card = track.querySelector('.training-card, .eca-pill-cert');
+        const gap = parseFloat(getComputedStyle(track).gap) || 20;
         const step = card ? card.offsetWidth + gap : 320;
         extra += direction * step; // অটো-স্ক্রল চালু থেকেই এক্সট্রা মুভমেন্ট যোগ হয়, pause হয় না
       }
