@@ -277,54 +277,28 @@
     /* SKILLS */
     .skills-section { background: var(--surface); }
 
-    /* PREFERRED SECTORS */
-    .pref-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin-bottom: 64px; }
-    .pref-grid.stagger.in-view > *:nth-child(1) { animation: prefSlideUp 0.7s cubic-bezier(.16,.84,.44,1) backwards; animation-delay: 0.05s; }
-    .pref-grid.stagger.in-view > *:nth-child(2) { animation: prefSlideUp 0.7s cubic-bezier(.16,.84,.44,1) backwards; animation-delay: 0.20s; }
-    .pref-grid.stagger.in-view > *:nth-child(3) { animation: prefSlideUp 0.7s cubic-bezier(.16,.84,.44,1) backwards; animation-delay: 0.35s; }
-    @keyframes prefSlideUp {
-      from { opacity: 0; transform: translateY(36px) scale(0.96); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+    /* PREFERRED SECTORS — horizontal summary bar */
+    .pref-bar {
+      display: flex; max-width: 1100px; margin-bottom: 64px;
+      background: var(--card); border: 1px solid rgba(255,255,255,0.07); border-radius: 18px;
+      transition: border-color 0.3s;
     }
-    .pref-card {
-      position: relative; background: var(--card); border-radius: 18px; padding: 28px;
-      border: 1px solid rgba(255,255,255,0.07); overflow: hidden;
-      transition: transform 0.3s cubic-bezier(.16,.84,.44,1), border-color 0.3s, box-shadow 0.3s;
+    .pref-bar-cell { flex: 1; padding: 26px 28px; }
+    .pref-bar-cell + .pref-bar-cell { border-left: 1px solid rgba(255,255,255,0.07); }
+    .pref-bar-label {
+      font-family: var(--font-display); font-size: 11.5px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;
     }
-    .pref-card::before {
-      content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s;
-      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 60%);
+    .pref-bar-cell.c1 .pref-bar-label { color: var(--cyan); }
+    .pref-bar-cell.c2 .pref-bar-label { color: var(--pink); }
+    .pref-bar-cell.c3 .pref-bar-label { color: var(--yellow); }
+    .pref-bar-value { display: block; font-size: 13.5px; line-height: 1.85; }
+    .pbv-primary { display: block; font-weight: 700; color: var(--white); }
+    .pbv-more { display: block; color: var(--muted); margin-top: 2px; }
+    @media (max-width: 760px) {
+      .pref-bar { flex-direction: column; }
+      .pref-bar-cell + .pref-bar-cell { border-left: none; border-top: 1px solid rgba(255,255,255,0.07); }
     }
-    .pref-card:hover { transform: translateY(-8px) perspective(700px) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg)); box-shadow: 0 20px 50px rgba(0,0,0,0.4); transition: transform 0.1s linear, box-shadow 0.3s; }
-    .pref-card:hover::before { opacity: 1; }
-    .pref-card.c1:hover { border-color: rgba(0,229,255,0.35); }
-    .pref-card.c2:hover { border-color: rgba(255,77,141,0.35); }
-    .pref-card.c3:hover { border-color: rgba(247,226,51,0.35); }
-    .pref-icon-wrap {
-      width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
-      font-size: 24px; margin-bottom: 18px; position: relative; z-index: 1;
-      animation: floatY 4.5s ease-in-out infinite;
-    }
-    .pref-card.c1 .pref-icon-wrap { background: rgba(0,229,255,0.12); }
-    .pref-card.c2 .pref-icon-wrap { background: rgba(255,77,141,0.12); }
-    .pref-card.c3 .pref-icon-wrap { background: rgba(247,226,51,0.12); }
-    .pref-card.c2 .pref-icon-wrap { animation-delay: 0.4s; }
-    .pref-card.c3 .pref-icon-wrap { animation-delay: 0.8s; }
-    .pref-card-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 6px; position: relative; z-index: 1; }
-    .pref-card-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; position: relative; z-index: 1; }
-    .pref-tags { display: flex; flex-wrap: wrap; gap: 8px; position: relative; z-index: 1; }
-    .pref-tag {
-      font-family: var(--font-display); font-size: 11.5px; font-weight: 700; letter-spacing: 0.02em;
-      padding: 5px 12px; border-radius: 100px; border: 1.5px solid;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .pref-tag:hover { transform: translateY(-2px) scale(1.05); }
-    .pref-card.c1 .pref-tag { border-color: rgba(0,229,255,0.35); color: var(--cyan); background: rgba(0,229,255,0.06); }
-    .pref-card.c1 .pref-tag:hover { background: rgba(0,229,255,0.16); }
-    .pref-card.c2 .pref-tag { border-color: rgba(255,77,141,0.35); color: var(--pink); background: rgba(255,77,141,0.06); }
-    .pref-card.c2 .pref-tag:hover { background: rgba(255,77,141,0.16); }
-    .pref-card.c3 .pref-tag { border-color: rgba(247,226,51,0.4); color: var(--yellow); background: rgba(247,226,51,0.06); }
-    .pref-card.c3 .pref-tag:hover { background: rgba(247,226,51,0.16); }
 
     /* World map travel strip */
     .pref-globe-strip {
