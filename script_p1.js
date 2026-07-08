@@ -165,6 +165,7 @@
       }
     };
   }
+  setupAutoTrainingCarousel('coreTrainingTrack', 0.45);
   setupAutoTrainingCarousel('personalDevTrack', 0.45);
   setupAutoTrainingCarousel('computerSkillsTrack', 0.45);
 
