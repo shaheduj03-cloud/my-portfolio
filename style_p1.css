@@ -547,15 +547,15 @@
 
     /* EDUCATION */
     .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; max-width: 1100px; }
-    .edu-card { background: linear-gradient(165deg, rgba(255,255,255,0.03), var(--card) 40%); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.07); transition: transform 0.3s var(--ease-smooth), border-color 0.3s, box-shadow 0.3s; transform-style: preserve-3d; perspective: 600px; box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset; display: flex; flex-direction: column; }
+    .edu-card { background: linear-gradient(165deg, rgba(255,255,255,0.03), var(--card) 40%); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,0.07); transition: transform 0.3s var(--ease-smooth), border-color 0.3s, box-shadow 0.3s; transform-style: preserve-3d; perspective: 600px; box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset; }
     .edu-card:hover { transform: translateY(-6px) rotateX(4deg) rotateY(3deg); border-color: rgba(0,229,255,0.3); box-shadow: 0 16px 40px rgba(0,229,255,0.12); }
     .edu-icon { font-size: 32px; margin-bottom: 12px; }
     .edu-degree { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 4px; }
     .edu-major { font-size: 13px; color: var(--cyan); font-weight: 600; margin-bottom: 8px; }
     .edu-inst { font-size: 13px; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
-    .edu-year { font-family: var(--font-display); font-size: 12px; font-weight: 700; color: var(--yellow); margin-bottom: 14px; }
+    .edu-year { font-family: var(--font-display); font-size: 12px; font-weight: 700; color: var(--yellow); }
     .edu-cert-btn {
-      margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 14px; display: inline-flex; align-items: center; gap: 7px;
       padding: 8px 16px; border-radius: 100px; border: 1.5px solid rgba(0,229,255,0.35);
       background: linear-gradient(135deg, rgba(0,229,255,0.10), rgba(168,85,247,0.08));
       color: var(--cyan); font-family: var(--font-display); font-size: 12px; font-weight: 700;
