@@ -175,36 +175,6 @@
   }
   window.scrollTrainingTrack = scrollTrainingTrack;
 
-  // ── SALARY COUNT-UP ANIMATION ──
-  const salaryCounter = document.getElementById('salaryCounter');
-  if (salaryCounter) {
-    const targetValue = 25000;
-    let hasCounted = false;
-    const salaryObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !hasCounted) {
-          hasCounted = true;
-          const duration = 1400;
-          const startTime = performance.now();
-          function tick(now) {
-            const progress = Math.min((now - startTime) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = Math.round(eased * targetValue);
-            salaryCounter.textContent = current.toLocaleString('en-US');
-            if (progress < 1) {
-              requestAnimationFrame(tick);
-            } else {
-              salaryCounter.textContent = targetValue.toLocaleString('en-US');
-            }
-          }
-          requestAnimationFrame(tick);
-          salaryObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.4 });
-    salaryObserver.observe(salaryCounter.closest('.salary-card'));
-  }
-
   // ── CURSOR-FOLLOWING AMBIENT GLOW (desktop only) ──
   const cursorGlow = document.getElementById('cursorGlow');
   const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
