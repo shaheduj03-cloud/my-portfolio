@@ -1,7 +1,6 @@
   // ── CERTIFICATE LIGHTBOX DATA & LOGIC ──
   const certImages = {
     'cert-sabre': 'cert-sabre.jpg',
-    'cert-nsda-l2': 'cert-nsda-l2.jpg',
     'cert-visa-processing': 'cert-visa-processing.jpg',
     'cert-hb-ticketing': 'cert-hb-ticketing.jpg',
     'cert-aviation': 'cert-aviation.jpg',
