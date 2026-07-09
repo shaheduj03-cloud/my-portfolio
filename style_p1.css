@@ -200,7 +200,6 @@
     .role-badge:hover { transform: translateY(-2px) scale(1.05); }
     .rb1 { background: rgba(0,229,255,0.12); color: var(--cyan); border: 1px solid rgba(0,229,255,0.3); }
     .rb2 { background: rgba(255,77,141,0.12); color: var(--pink); border: 1px solid rgba(255,77,141,0.3); }
-    .rb3 { background: rgba(57,255,142,0.12); color: var(--green); border: 1px solid rgba(57,255,142,0.3); }
     .hero-tagline { margin-top: 24px; font-size: 17px; color: var(--muted); max-width: 580px; line-height: 1.7; animation: fadeUp 0.8s cubic-bezier(.16,.84,.44,1) 0.42s backwards; }
     .hero-cta { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; animation: fadeUp 0.8s cubic-bezier(.16,.84,.44,1) 0.55s backwards; }
     .btn-primary { background: linear-gradient(135deg, var(--pink), var(--purple)); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 15px; padding: 14px 32px; border: none; border-radius: 100px; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 30px rgba(255,77,141,0.3); display: inline-block; animation: btnGlowPulse 3s ease-in-out infinite; }
