@@ -286,6 +286,29 @@
     .pref-bar-cell { flex: 1; padding: 26px 28px; position: relative; transition: transform 0.1s linear, background 0.3s; }
     .pref-bar-cell:hover { transform: perspective(700px) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg)); background: rgba(255,255,255,0.02); z-index: 1; }
     .pref-bar-cell + .pref-bar-cell { border-left: 1px solid rgba(255,255,255,0.07); }
+    .pref-bar-cell::before {
+      content: ''; position: absolute; top: 0; left: 28px; right: 28px; height: 2px;
+      transform-origin: left; transform: scaleX(0);
+      transition: transform 0.8s cubic-bezier(.16,.84,.44,1);
+    }
+    .pref-bar-cell.c1::before { background: var(--cyan); }
+    .pref-bar-cell.c2::before { background: var(--pink); }
+    .pref-bar-cell.c3::before { background: var(--yellow); }
+    .pref-bar.in-view .pref-bar-cell::before { transform: scaleX(1); }
+    .pref-bar.in-view .pref-bar-cell:nth-child(1)::before { transition-delay: 0.15s; }
+    .pref-bar.in-view .pref-bar-cell:nth-child(2)::before { transition-delay: 0.35s; }
+    .pref-bar.in-view .pref-bar-cell:nth-child(3)::before { transition-delay: 0.55s; }
+    .pref-bar-cell .pref-bar-label,
+    .pref-bar-cell .pref-bar-value {
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.16,.84,.44,1);
+    }
+    .pref-bar.in-view .pref-bar-cell:nth-child(1) .pref-bar-label,
+    .pref-bar.in-view .pref-bar-cell:nth-child(1) .pref-bar-value { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+    .pref-bar.in-view .pref-bar-cell:nth-child(2) .pref-bar-label,
+    .pref-bar.in-view .pref-bar-cell:nth-child(2) .pref-bar-value { opacity: 1; transform: translateY(0); transition-delay: 0.45s; }
+    .pref-bar.in-view .pref-bar-cell:nth-child(3) .pref-bar-label,
+    .pref-bar.in-view .pref-bar-cell:nth-child(3) .pref-bar-value { opacity: 1; transform: translateY(0); transition-delay: 0.65s; }
     .pref-bar-label {
       font-family: var(--font-display); font-size: 11.5px; font-weight: 700;
       letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px;
