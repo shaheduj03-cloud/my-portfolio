@@ -212,7 +212,7 @@
 
   // ── SUBTLE CARD TILT ON MOUSEMOVE (cards with .tilt-3d) ──
   if (isFinePointer) {
-    document.querySelectorAll('.core-card, .pref-bar-cell, .about-card').forEach(card => {
+    document.querySelectorAll('.pref-bar-cell, .about-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const relX = (e.clientX - rect.left) / rect.width - 0.5;
